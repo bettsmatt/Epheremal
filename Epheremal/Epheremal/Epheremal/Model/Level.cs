@@ -126,15 +126,15 @@ namespace Epheremal.Model
             _blocks = new LinkedList<Block>();
             _characters = new LinkedList<Character>();
             _entities = new LinkedList<Entity>();
-            
+            /*
             for (int i = 0; i < 10; i++)
             {
                 Block _block = new Block(game, tileMap, rawLevel.State1[0]) { GridX = i, GridY = 15 };
                 _block.Behaviours[EntityState.GOOD].Add(new Harmless());
                 _blocks.AddFirst(_block);
                 _entities.AddFirst(_block);
-            }
-            /*
+            }*/
+            
             for (int y = 0; y < rawLevel.height; y++)
             {
                 // Debug.WriteLine("");
@@ -163,9 +163,10 @@ namespace Epheremal.Model
                     }
                     
                     _blocks.AddLast(b);
+                    _entities.AddLast(b);
                 }
             }
-            */
+            
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
