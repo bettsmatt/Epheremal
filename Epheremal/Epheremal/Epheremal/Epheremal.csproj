@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TextureProvider.cs" />
+    <Compile Include="LevelParser.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
     <Compile Include="Model\Block.cs" />
     <Compile Include="Model\Character.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="RawLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

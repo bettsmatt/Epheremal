@@ -37,6 +37,7 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             bounds = GraphicsDevice.Viewport.Bounds;
+            LevelParser.ParseTextFile("test.level");
             base.Initialize();
         }
 

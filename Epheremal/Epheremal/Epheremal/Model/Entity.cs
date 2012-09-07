@@ -38,5 +38,11 @@ namespace Epheremal.Model
         {
             return new Rectangle(x, y, this._width, this._height);
         }
+
+        public SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
+        {
+            sprites.Draw(this._texture, this.GetBoundingRectangle(offsetX + _width, offsetY + _height), Color.White);
+            return sprites;
+        } 
     }
 }
