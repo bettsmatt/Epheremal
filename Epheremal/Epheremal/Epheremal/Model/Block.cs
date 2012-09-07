@@ -27,7 +27,7 @@ namespace Epheremal.Model
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
         }
 
-        public SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
+        public override SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
         {
             int xPosition = (GridX * _width) - offsetX, yPosition = (GridY * _height) - offsetY;
             sprites.Draw(this._texture, this.GetBoundingRectangle(xPosition + _width, yPosition + _height), Color.White);

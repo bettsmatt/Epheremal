@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework;
 
 namespace Epheremal.Model
 {
-    enum EntityState
+    public enum EntityState
     {
         GOOD,
         BAD,
     }
 
-    abstract class Entity
+    public abstract class Entity
     {
         public Dictionary<EntityState, List<Interaction>> Interactions {get; set;}
         public Dictionary<EntityState, List<Behaviour>> Behaviours {get; set;}
@@ -31,18 +31,14 @@ namespace Epheremal.Model
 
         public Entity()
         {
-            this._bounds = Engine.bounds;
+            this._bounds = Engine.Bounds;
         }
 
-        public Rectangle GetBoundingRectangle(int x, int y)
+        public Rectangle GetBoundingRectangle(double x, double y)
         {
-            return new Rectangle(x, y, this._width, this._height);
+            return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), this._width, this._height);
         }
 
-        public SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
-        {
-            sprites.Draw(this._texture, this.GetBoundingRectangle(offsetX + _width, offsetY + _height), Color.White);
-            return sprites;
-        } 
+        public abstract SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY);
     }
 }

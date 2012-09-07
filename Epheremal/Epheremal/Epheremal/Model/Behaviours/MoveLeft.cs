@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Epheremal.Model.Behaviours
 {
-    public interface Behaviour
+    class MoveLeft : Move
     {
-        void apply(Character toChar);
+        public new void apply(Character character)
+        {
+
+        }
     }
 }

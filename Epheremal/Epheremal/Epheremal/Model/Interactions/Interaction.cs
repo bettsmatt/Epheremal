@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Epheremal.Model.Interactions
 {
-    interface Interaction
+    public interface Interaction
     {
     }
 }

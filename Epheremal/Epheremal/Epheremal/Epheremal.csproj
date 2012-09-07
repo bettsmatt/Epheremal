@@ -117,7 +117,9 @@
     <Compile Include="Model\Behaviours\Jumps.cs" />
     <Compile Include="Model\Behaviours\Move.cs" />
     <Compile Include="Model\Behaviours\MoveAway.cs" />
+    <Compile Include="Model\Behaviours\MoveLeft.cs" />
     <Compile Include="Model\Behaviours\MovePatrol.cs" />
+    <Compile Include="Model\Behaviours\MoveRight.cs" />
     <Compile Include="Model\Behaviours\MoveToward.cs" />
     <Compile Include="Model\Block.cs" />
     <Compile Include="Model\Character.cs" />

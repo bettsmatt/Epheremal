@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Epheremal.Model
 {
-    class Player : Character
+    public class Player : Character
     {
      
     }

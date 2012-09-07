@@ -19,7 +19,9 @@ namespace Epheremal
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public static Rectangle bounds;
+        public static Rectangle Bounds;
+        public static Player Player;
+        private Level _currentLevel;
 
         public Engine()
         {
@@ -36,8 +38,11 @@ namespace Epheremal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            bounds = GraphicsDevice.Viewport.Bounds;
-            LevelParser.ParseTextFile("test.level");
+            Bounds = GraphicsDevice.Viewport.Bounds;
+            Player = new Player();
+            //LevelParser.ParseTextFile("test.level");
+            _currentLevel = new Level(1);
+            _currentLevel.LoadLevel(this);
             base.Initialize();
         }
 
@@ -74,8 +79,9 @@ namespace Epheremal
 
             // TODO: Add your update logic here
             getInput();
-            interact();
-            behaviour();
+            _currentLevel.movement();
+            _currentLevel.interact();
+            _currentLevel.behaviour();
 
             base.Update(gameTime);
         }
@@ -88,23 +94,12 @@ namespace Epheremal
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             //TEST THINGS
-            Level level = new Level(1);
-            level.LoadLevel(this);
             spriteBatch.Begin();
-            spriteBatch = level.RenderLevel(ref spriteBatch);
+            spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        protected void interact()
-        {
-
-        }
-
-        protected void behaviour()
-        {
-
-        }
 
         private void getInput()
         {
