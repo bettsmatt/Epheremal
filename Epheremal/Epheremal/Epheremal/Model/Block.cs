@@ -42,7 +42,8 @@ namespace Epheremal.Model
             List<Interaction> retVal = new List<Interaction>();
             foreach (Behaviour b in this.Behaviours[this.State])
             {
-                retVal.Add(b.GetAppropriateInteractionFor(interactor,this));
+                Interaction i = b.GetAppropriateInteractionFor(interactor,this);
+                if (i != null) retVal.Add(i);
             }
             return retVal.ToArray<Interaction>();
         }
