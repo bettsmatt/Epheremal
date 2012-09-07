@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
+using Epheremal.Model.Levels;
 
 namespace Epheremal
 {
@@ -50,7 +51,14 @@ namespace Epheremal
             };
             //LevelParser.ParseTextFile("test.level");
             _currentLevel = new Level(1);
-            _currentLevel.LoadLevel(this);
+
+            TileMap tileMap = LevelParser.ParseTileMap(this, "generic_platformer_tiles", 32);
+            RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
+            _currentLevel.LoadLevel(this, rawLevel, tileMap);
+
+
+            _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
 
