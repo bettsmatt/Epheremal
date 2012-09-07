@@ -71,7 +71,7 @@ namespace Epheremal
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -96,6 +96,10 @@ namespace Epheremal
 
             // TODO: Add your update logic here
             getInput();
+            if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
+                    xOffset += Convert.ToInt32(Player.XVel);
+            if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
+                    xOffset += Convert.ToInt32(Player.XVel);
             _currentLevel.movement();
             _currentLevel.interact();
             _currentLevel.behaviour();

@@ -28,6 +28,8 @@ namespace Epheremal.Model
         public int GridX {get; set;}
         public int GridY {get; set;}
 
+        public const int BLOCK_WIDTH = 20; //magic!
+
         public TileMap _tileMap;
         public int _tileID;
 
@@ -57,12 +59,6 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            foreach (Behaviour b in this.Behaviours[EntityState.GOOD]){
-                if(b is Harmless){
-                    //Debug.WriteLine("HArmless");
-                }
-            
-            }
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
         }
