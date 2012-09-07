@@ -69,12 +69,12 @@ namespace Epheremal.Model
 
         public override double GetX()
         {
-            return (GridX * _width) - Engine.xOffset;
+            return ((GridX * _width) + (_width / 2)) - Engine.xOffset;
         }
 
         public override double GetY()
         {
-            return (GridY * _height) - Engine.yOffset;
+            return ((GridY * _height) + (_height / 2)) - Engine.yOffset;
         }
     }
 }
