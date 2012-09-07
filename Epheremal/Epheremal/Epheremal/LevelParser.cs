@@ -80,7 +80,7 @@ namespace Epheremal
             }
             catch (Exception e) 
             {
-                Debug.WriteLine("Could not reade file:" +e);
+                Debug.WriteLine("Could not read file:" +e);
             }
 
             return null;

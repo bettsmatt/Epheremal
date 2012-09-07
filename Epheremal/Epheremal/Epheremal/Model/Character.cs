@@ -9,7 +9,15 @@ namespace Epheremal.Model
     abstract class Character : Entity
     {
         // Absolute values from the top left corner of the map
-        private int _posX { get; set; }
-        private int _posY { get; set; }
+        protected int _posX { get; set; }
+        protected int _posY { get; set; }
+
+        public void DoBehaviour()
+        {
+            foreach (Behaviour behaviour in this.Behaviours[this.State])
+            {
+                behaviour.apply(this);
+            }
+        }
     }
 }

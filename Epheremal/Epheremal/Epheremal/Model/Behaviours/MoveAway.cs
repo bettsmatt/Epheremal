@@ -7,5 +7,9 @@ namespace Epheremal.Model.Behaviours
 {
     class MoveAway : Move
     {
+        public void apply(Character character)
+        {
+
+        }
     }
 }

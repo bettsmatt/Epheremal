@@ -7,5 +7,6 @@ namespace Epheremal.Model.Behaviours
 {
     interface Behaviour
     {
+        void apply(Character toChar);
     }
 }

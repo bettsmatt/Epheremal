@@ -7,6 +7,5 @@ namespace Epheremal.Model
 {
     class NPC : Character
     {
-
     }
 }

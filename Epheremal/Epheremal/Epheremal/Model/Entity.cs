@@ -17,8 +17,8 @@ namespace Epheremal.Model
 
     abstract class Entity
     {
-        public Interaction Interaction {get; set;}
-        public List<Behaviour> Behaviours {get; set;}
+        public Dictionary<EntityState, List<Interaction>> Interactions {get; set;}
+        public Dictionary<EntityState, List<Behaviour>> Behaviours {get; set;}
 
         private EntityState _state = EntityState.GOOD;
         public EntityState State { get { return _state; } set { _state = value; } }

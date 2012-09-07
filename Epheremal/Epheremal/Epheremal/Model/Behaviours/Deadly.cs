@@ -7,5 +7,9 @@ namespace Epheremal.Model.Behaviours
 {
     class Deadly : Behaviour
     {
+        public void apply(Character character)
+        {
+
+        }
     }
 }

@@ -7,5 +7,9 @@ namespace Epheremal.Model.Behaviours
 {
     class Invisible : Behaviour
     {
+        public void apply(Character character)
+        {
+
+        }
     }
 }

@@ -7,6 +7,9 @@ namespace Epheremal.Model.Behaviours
 {
     class Ethreal : Behaviour
     {
+        public void apply(Character character)
+        {
 
+        }
     }
 }
