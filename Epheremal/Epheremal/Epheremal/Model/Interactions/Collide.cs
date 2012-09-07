@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Epheremal.Model.Interactions
 {
-    class PlayerDie : InteractionBase
+    class Collide : InteractionBase
     {
-        public PlayerDie(Entity a, Entity b)
+        public Collide(Entity a, Entity b)
             : base(a, b)
         {
 

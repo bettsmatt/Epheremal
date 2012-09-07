@@ -27,10 +27,20 @@ namespace Epheremal.Model
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
         }
 
-        public override SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
+        public override Interactions.Interaction GetInteractionFor(Entity interactor)
         {
-            int xPosition = (GridX * _width) - offsetX, yPosition = (GridY * _height) - offsetY;
-            sprites.Draw(this._texture, this.GetBoundingRectangle(xPosition + _width, yPosition + _height), Color.White);
+            throw new NotImplementedException();
+        }
+
+        public override Rectangle GetBoundingRectangle()
+        {
+            int xPosition = (GridX * _width) - Engine.xOffset, yPosition = (GridY * _height) - Engine.yOffset;
+            return new Rectangle(xPosition, yPosition, this._width, this._height);
+        }
+
+        public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
+        {
+            sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
             return sprites;
         }
     }

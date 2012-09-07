@@ -17,7 +17,8 @@ namespace Epheremal.Model
 
     public abstract class Entity
     {
-        public Dictionary<EntityState, List<Interaction>> Interactions {get; set;}
+        private Queue<Interaction> _interactions = new Queue<Interaction>();
+        protected Queue<Interaction> Interactions { get { return _interactions; } set { _interactions = value; } }
         public Dictionary<EntityState, List<Behaviour>> Behaviours {get; set;}
 
         private EntityState _state = EntityState.GOOD;
@@ -34,11 +35,10 @@ namespace Epheremal.Model
             this._bounds = Engine.Bounds;
         }
 
-        public Rectangle GetBoundingRectangle(double x, double y)
-        {
-            return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), this._width, this._height);
-        }
+        public abstract Interaction GetInteractionFor(Entity interactor);
 
-        public abstract SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY);
+        public abstract Rectangle GetBoundingRectangle();
+
+        public abstract SpriteBatch RenderSelf(ref SpriteBatch sprites);
     }
 }

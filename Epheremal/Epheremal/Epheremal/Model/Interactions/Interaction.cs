@@ -7,5 +7,6 @@ namespace Epheremal.Model.Interactions
 {
     public interface Interaction
     {
+        void Interact();
     }
 }
