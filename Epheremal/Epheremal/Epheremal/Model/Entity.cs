@@ -54,7 +54,7 @@ namespace Epheremal.Model
 
         public abstract SpriteBatch RenderSelf(ref SpriteBatch sprites);
 
-        public double GetX();
-        public double GetY();
+        public abstract double GetX();
+        public abstract double GetY();
     }
 }
