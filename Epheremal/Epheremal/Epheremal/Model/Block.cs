@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Behaviours;
+using Microsoft.Xna.Framework.Graphics;
+using Epheremal.Model.Levels;
+
 
 namespace Epheremal.Model
 {
@@ -24,8 +27,13 @@ namespace Epheremal.Model
         public int GridX {get; set;}
         public int GridY {get; set;}
 
-        public Block(Engine game) : base()
+        public TileMap _tileMap;
+        public int _tileID;
+
+        public Block(Engine game, TileMap tileMap, int tileID)
         {
+            this._tileID = tileID;
+            this._tileMap = tileMap;
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
         }
 
@@ -47,7 +55,7 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
+            sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
         }
     }

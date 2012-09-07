@@ -9,6 +9,8 @@ using Epheremal.Assets;
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Behaviours;
+using Epheremal.Model.Interactions;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
@@ -116,10 +118,12 @@ namespace Epheremal.Model
             }
         }
 
-        public Boolean LoadLevel(Engine game)
+        public Boolean LoadLevel(Engine game, RawLevel rawLevel, TileMap tileMap)
         {
             _blocks = new LinkedList<Block>();
-            _characters = new LinkedList<Character>();            
+            _characters = new LinkedList<Character>(); 
+           
+            /*
             for (int i = 0; i < 10; i++)
             {
                 Block _block = new Block(game) { GridX = i, GridY = 15 };
@@ -127,6 +131,18 @@ namespace Epheremal.Model
                 _blocks.AddFirst(_block);   
                 
             }
+             */
+
+            for (int y = 0; y < rawLevel.height; y++)
+            {
+                // Debug.WriteLine("");
+                for (int x = 0; x < rawLevel.width; x++)
+                {
+                    // Debug.Write("|" + rawLevel.State1[y * rawLevel.width + x]);
+                    _blocks.AddLast(new Block(game, tileMap, rawLevel.State1[y * rawLevel.width + x]) { GridX = x, GridY = y });
+                }
+            }
+
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });

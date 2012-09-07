@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epheremal", "Epheremal\Epheremal\Epheremal.csproj", "{4612100E-42A2-48F2-830B-8C2C58C4D547}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "EpheremalContent", "Epheremal\EpheremalContent\EpheremalContent.contentproj", "{F36FB8C8-EEE2-45EA-81D4-BD5BA725BAD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpheremalContent", "Epheremal\EpheremalContent\EpheremalContent.contentproj", "{F36FB8C8-EEE2-45EA-81D4-BD5BA725BAD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
