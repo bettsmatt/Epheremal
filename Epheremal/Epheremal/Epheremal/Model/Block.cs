@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Epheremal.Model
 {
-    enum BlockType
+    public enum BlockType
     {
         TEST,
     }
 
 
-    class Block : Entity
+    public class Block : Entity
     {
         public BlockType Type { get; set; }
         public Dictionary<Block, Block> Adjacencies { get; set; }

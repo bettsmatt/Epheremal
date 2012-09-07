@@ -7,7 +7,7 @@ namespace Epheremal.Model.Interactions
 {
     class Collide : InteractionBase
     {
-        public Collide(Entity a, Entity b)
+        public Collide(Character a, Entity b)
             : base(a, b)
         {
 
@@ -15,7 +15,8 @@ namespace Epheremal.Model.Interactions
 
         public override void Interact()
         {
-
+            this.Interactor.YVel = 0;
+            this.Interactor.YAcc = -0.3* this.Interactor.YAcc; //bounce a little
         }
     }
 }

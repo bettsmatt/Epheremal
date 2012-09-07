@@ -38,9 +38,9 @@ namespace Epheremal.Model
 
         public void PollInteractions()
         {
-            foreach (Interaction i in Interactions)
+            while (Interactions.Count > 0)
             {
-                i.Interact();
+                Interactions.Dequeue().Interact();
             }
         }
 

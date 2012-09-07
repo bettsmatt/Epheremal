@@ -102,7 +102,9 @@ namespace Epheremal.Model
                         c.QueueInteraction(new Collide(c, b));
                     }
                 }
+                c.PollInteractions();
             }
+
         }
 
         public void behaviour()
