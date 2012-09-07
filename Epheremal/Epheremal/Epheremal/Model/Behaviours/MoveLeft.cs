@@ -7,7 +7,7 @@ namespace Epheremal.Model.Behaviours
 {
     class MoveLeft : Move
     {
-        public new void apply(Character character)
+        public override void apply(Character character)
         {
 
         }
