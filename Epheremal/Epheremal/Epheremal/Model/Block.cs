@@ -40,7 +40,7 @@ namespace Epheremal.Model
         public override Interaction[] GetInteractionsFor(Character interactor)
         {
             List<Interaction> retVal = new List<Interaction>();
-            foreach (Behaviour b in this.Behaviours[this.State])
+            foreach (Behaviour b in this.Behaviours[Entity.State])
             {
                 Interaction i = b.GetAppropriateInteractionFor(interactor,this);
                 if (i != null) retVal.Add(i);
