@@ -11,10 +11,9 @@ namespace Epheremal.Model.Behaviours
         {
             double dx = character.PosX - Engine.Player.PosX;
             double dy = character.PosY - Engine.Player.PosY;
-            Console.WriteLine(1 / dx);
-            Console.WriteLine(1 / dy);
-            character.XAcc += 1 / dx;
-            character.YAcc += 1 / dy;
+
+            character.XAcc += (1 / (7*dx));
+            character.YAcc += (1 / (7*dy));
 
         }
     }

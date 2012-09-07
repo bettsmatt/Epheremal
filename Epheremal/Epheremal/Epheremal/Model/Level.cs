@@ -44,7 +44,14 @@ namespace Epheremal.Model
         {
             foreach (Character c in _characters)
             {
-                c.XVel += c.XAcc; c.YVel += c.YAcc;
+                //Add acceleration if less than terminal velocity as defined by vector product
+                if (Math.Sqrt(c.XVel * c.XVel + c.YVel * c.YVel) < Character.ABS_TERMINAL_VELOCITY)
+                {
+                    c.XVel += c.XAcc; c.YVel += c.YAcc;
+                }
+                //Remove residual friction from acceleration while greater than nothing
+                if (c.XAcc > 0) c.XAcc -= 0.05 * c.XAcc;
+                if (c.YAcc > 0) c.YAcc -= 0.05 * c.YAcc;
                 c.PosX += c.XVel; c.PosY += c.YVel;
             }
         }
