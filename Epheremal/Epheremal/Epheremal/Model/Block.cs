@@ -9,6 +9,7 @@ using Epheremal.Model.Interactions;
 using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Epheremal.Model.Levels;
+using System.Diagnostics;
 
 
 namespace Epheremal.Model
@@ -56,6 +57,12 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
+            foreach (Behaviour b in this.Behaviours[EntityState.GOOD]){
+                if(b is Harmless){
+                    //Debug.WriteLine("HArmless");
+                }
+            
+            }
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
         }

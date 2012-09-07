@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epheremal.Model.Interactions;
+using System.Diagnostics;
 
 namespace Epheremal.Model.Behaviours
 {
@@ -15,6 +16,7 @@ namespace Epheremal.Model.Behaviours
 
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
+            Debug.WriteLine("Colligning");
             if (interactor is Player)
                 return new Collide(interactor, interactee);
             else return null;
