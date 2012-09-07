@@ -128,6 +128,7 @@
     <Compile Include="Model\Interactions\Interaction.cs" />
     <Compile Include="Model\Interactions\PlayerDie.cs" />
     <Compile Include="Model\Level.cs" />
+    <Compile Include="Model\NonPlayables\Charger.cs" />
     <Compile Include="Model\NonPlayables\Goomba.cs" />
     <Compile Include="Model\NPC.cs" />
     <Compile Include="Model\Player.cs" />
