@@ -60,5 +60,15 @@ namespace Epheremal.Model
             sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
             return sprites;
         }
+
+        public override double GetX()
+        {
+            return PosX;
+        }
+
+        public override double GetY()
+        {
+            return PosY;
+        }
     }
 }

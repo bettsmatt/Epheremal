@@ -59,5 +59,15 @@ namespace Epheremal.Model
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
         }
+
+        public override double GetX()
+        {
+            return (GridX * _width) - Engine.xOffset;
+        }
+
+        public override double GetY()
+        {
+            return (GridY * _height) - Engine.yOffset;
+        }
     }
 }
