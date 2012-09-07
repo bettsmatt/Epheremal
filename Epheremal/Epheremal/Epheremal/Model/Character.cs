@@ -5,6 +5,7 @@ using System.Text;
 using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model
 {
@@ -35,10 +36,29 @@ namespace Epheremal.Model
             }
         }
 
-        public override SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
+        public void PollInteractions()
+        {
+            foreach (Interaction i in Interactions)
+            {
+                i.Interact();
+            }
+        }
+
+        public void QueueInteraction(Interaction toInteract)
+        {
+            this.Interactions.Enqueue(toInteract);
+        }
+
+        public override Rectangle GetBoundingRectangle()
+        {
+            int xPosition = Convert.ToInt32(PosX - Engine.xOffset), yPosition = Convert.ToInt32(PosY - Engine.yOffset);
+            return new Rectangle(xPosition, yPosition, this._width, this._height);
+        }
+
+        public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
             if (_texture == null) return sprites;
-            sprites.Draw(this._texture, this.GetBoundingRectangle(PosX + _width, PosY + _height), Color.White);
+            sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
             return sprites;
         }
     }

@@ -13,6 +13,11 @@ namespace Epheremal.Model
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
+        public override Interactions.Interaction GetInteractionFor(Entity interactor)
+        {
+            throw new NotImplementedException();
+        }
+
         public Player()
         {
             Behaviours = new Dictionary<EntityState, List<Behaviour>>();

@@ -12,8 +12,17 @@ namespace Epheremal.Model.Behaviours
             double dx = character.PosX - Engine.Player.PosX;
             double dy = character.PosY - Engine.Player.PosY;
 
-            character.XAcc += (1 / (7*dx));
-            character.YAcc += (1 / (7*dy));
+            double xDelta = (1 / (7 * dx));
+            double yDelta = (1 / (7 * dy));
+
+            if (xDelta > 0.3) xDelta = 0.3;
+            if (xDelta < -0.3) xDelta = -0.3;
+
+            if (yDelta > 0.3) yDelta = 0.3;
+            if (yDelta < -0.3) yDelta = -0.3;
+
+            character.XAcc += xDelta;
+            character.YAcc += yDelta;
 
         }
     }

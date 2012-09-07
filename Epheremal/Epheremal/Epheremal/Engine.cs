@@ -22,7 +22,11 @@ namespace Epheremal
         SpriteBatch spriteBatch;
         public static Rectangle Bounds;
         public static Player Player;
+        public static int xOffset {get; set;}
+        public static int yOffset {get; set;}
+
         private Level _currentLevel;
+
 
         public Engine()
         {

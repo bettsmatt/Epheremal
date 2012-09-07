@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Epheremal.Model.NonPlayables;
 using Epheremal.Assets;
+using System.Diagnostics;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model
 {
@@ -29,11 +31,11 @@ namespace Epheremal.Model
             foreach (Block block in _blocks)
             {
                 //accurately compute abs x and y from a grid position
-                block.RenderSelf(ref sprite, 0, 0);
+                block.RenderSelf(ref sprite);
             }
             foreach (Character character in _characters)
             {
-                character.RenderSelf(ref sprite, 0, 0);
+                character.RenderSelf(ref sprite);
             }
             return sprite;
 
@@ -44,24 +46,43 @@ namespace Epheremal.Model
         {
             foreach (Character c in _characters)
             {
+                //Remove residual friction from acceleration while greater than nothing
+                double resFriction = 0.25;
+                if (c.XAcc > 0)
+                {
+                    c.XAcc -= resFriction * c.XAcc;
+                    c.XVel += -0.01 * c.XVel;
+                }
+                else
+                {
+                    c.XAcc += resFriction * -1 * c.XAcc;
+                    c.XVel -= 0.01 * c.XVel;
+                }
+                if (c.YAcc > 0)
+                {
+                    c.YAcc -= resFriction * c.YAcc;
+                    c.YVel += -0.01 * c.YVel;
+                }
+                else
+                {
+                    c.YAcc += resFriction * -1 * c.YAcc;
+                    c.YVel -= 0.01 * c.YVel;
+                }
+
                 //Add acceleration if less than terminal velocity as defined by vector product
                 bool belowTerminal = Math.Sqrt(c.XVel * c.XVel + c.YVel * c.YVel) < Character.ABS_TERMINAL_VELOCITY;
-                if (belowTerminal && !(c.XVel < 0 ^ c.XAcc < 0))
+                
+                if (belowTerminal || (!belowTerminal && (c.XVel < 0 ^ c.XAcc < 0)))
                 {
                     c.XVel += c.XAcc;
                 }
-                if (belowTerminal && !(c.YVel < 0 ^ c.YAcc < 0))
+                if (belowTerminal || (!belowTerminal && (c.YVel < 0 ^ c.YAcc < 0)))
                 {
                     c.YVel += c.YAcc;
                 }
-                //Remove residual friction from acceleration while greater than nothing
-                if (c.XAcc > 0) c.XAcc -= 0.05 * c.XAcc;
-                else
-                    if (c.XAcc < 0) c.XAcc -= 0.05 * c.XAcc;
 
-                if (c.YAcc > 0) c.YAcc -= 0.05 * c.YAcc;
-                else
-                    if (c.YAcc < 0) c.YAcc -= 0.05 * c.YAcc;
+                //Constant gravity
+                c.YAcc += 0.01; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
             }
@@ -69,7 +90,19 @@ namespace Epheremal.Model
 
         public void interact()
         {
-
+            //Detect collisions, and create appropriate interactions
+            foreach (Character c in _characters)
+            {
+                foreach (Block b in _blocks)
+                {
+                    Rectangle cBounds = c.GetBoundingRectangle();
+                    Rectangle bBounds = b.GetBoundingRectangle();
+                    if (cBounds.Intersects(bBounds))
+                    {
+                        c.QueueInteraction(new Collide(c, b));
+                    }
+                }
+            }
         }
 
         public void behaviour()
@@ -83,11 +116,10 @@ namespace Epheremal.Model
         public Boolean LoadLevel(Engine game)
         {
             _blocks = new LinkedList<Block>();
-            _characters = new LinkedList<Character>();
-            int closure = 0;
+            _characters = new LinkedList<Character>();            
             for (int i = 0; i < 10; i++)
             {
-                _blocks.AddLast(new Block(game) { GridX = closure + i, GridY = closure + i });
+                _blocks.AddLast(new Block(game) { GridX = i, GridY = 15 });   
             }
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });

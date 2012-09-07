@@ -5,8 +5,18 @@ using System.Text;
 
 namespace Epheremal.Model.Interactions
 {
-    class Die : Interaction
+    class Die : InteractionBase
     {
+        public Die(Entity a, Entity b)
+            : base(a, b)
+        {
 
+        }
+
+
+        public override void Interact()
+        {
+
+        }
     }
 }

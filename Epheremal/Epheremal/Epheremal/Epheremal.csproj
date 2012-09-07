@@ -124,8 +124,10 @@
     <Compile Include="Model\Block.cs" />
     <Compile Include="Model\Character.cs" />
     <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Interactions\Collide.cs" />
     <Compile Include="Model\Interactions\Die.cs" />
     <Compile Include="Model\Interactions\Interaction.cs" />
+    <Compile Include="Model\Interactions\InteractionBase.cs" />
     <Compile Include="Model\Interactions\PlayerDie.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Charger.cs" />
