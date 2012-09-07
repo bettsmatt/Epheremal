@@ -35,6 +35,13 @@ namespace Epheremal.Model
             this._bounds = Engine.Bounds;
         }
 
+        /*
+         * Set the behaviours of an enity {GOOD, BAD}
+         */
+        public void AssignBehaviour(Dictionary<EntityState, List<Behaviour>> behaviours) {
+            this.Behaviours = behaviours;
+        }
+
         public abstract Interaction GetInteractionFor(Entity interactor);
 
         public abstract Rectangle GetBoundingRectangle();

@@ -9,6 +9,7 @@ using Epheremal.Assets;
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
+using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
@@ -134,7 +135,29 @@ namespace Epheremal.Model
                 for (int x = 0; x < rawLevel.width; x++)
                 {
                     // Debug.Write("|" + rawLevel.State1[y * rawLevel.width + x]);
-                    _blocks.AddLast(new Block(game, tileMap, rawLevel.State1[y * rawLevel.width + x]) { GridX = x, GridY = y });
+
+                    int blockID = rawLevel.State1[y * rawLevel.width + x];
+
+                    Block b = new Block(game, tileMap, blockID) { GridX = x, GridY = y };
+
+                    switch (blockID){
+                        case 1:
+                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
+                                {EntityState.GOOD, new List<Behaviour>()},
+                                {EntityState.BAD, new List<Behaviour>()}
+                        });
+                            break;
+                        default:
+                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
+                                {EntityState.GOOD, new List<Behaviour>(){new Harmless()}},
+                                {EntityState.BAD, new List<Behaviour>(){new Harmless()}}
+                        });
+                            break;
+
+                    }
+                    
+                    _blocks.AddLast(b);
+                    
                 }
             }
 
