@@ -21,8 +21,7 @@ namespace Epheremal.Model
         protected Queue<Interaction> Interactions { get { return _interactions; } set { _interactions = value; } }
         public Dictionary<EntityState, List<Behaviour>> Behaviours {get; set;}
 
-        private EntityState _state = EntityState.GOOD;
-        public EntityState State { get { return _state; } set { _state = value; } }
+        public static EntityState State = EntityState.GOOD;
 
         protected int _width = 20;
         protected int _height = 20;

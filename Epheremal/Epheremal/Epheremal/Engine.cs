@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
+using System.Diagnostics;
 
 namespace Epheremal
 {
@@ -144,7 +145,8 @@ namespace Epheremal
             // Change world state
             if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
             {
-
+                if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
+                else Entity.State = EntityState.GOOD;
             }
         }
     }

@@ -28,24 +28,24 @@ namespace Epheremal.Model
 
         public void movingLeft()
         {
-            Behaviours[this.State].Clear();
-            Behaviours[this.State].Add(moveLeft);
+            Behaviours[Entity.State].Clear();
+            Behaviours[Entity.State].Add(moveLeft);
         }
 
         public void movingRight()
         {
-            Behaviours[this.State].Clear();
-            Behaviours[this.State].Add(moveRight);
+            Behaviours[Entity.State].Clear();
+            Behaviours[Entity.State].Add(moveRight);
         }
 
         public void notMoving()
         {
-            Behaviours[this.State].Clear();
+            Behaviours[Entity.State].Clear();
         }
 
         public void jumping()
         {
-            Behaviours[this.State].Add(jump);
+            Behaviours[Entity.State].Add(jump);
         }
     }
 }

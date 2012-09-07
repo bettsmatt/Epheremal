@@ -30,7 +30,7 @@ namespace Epheremal.Model
         {
             this._tileID = tileID;
             this._tileMap = tileMap;
-            this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
+            this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, Entity.State);
         }
 
         public override Interactions.Interaction GetInteractionFor(Entity interactor)
