@@ -38,7 +38,7 @@ namespace Epheremal.Model
                 character.RenderSelf(ref sprite);
             }
             return sprite;
-           
+
             throw new NotSupportedException();
         }
 
@@ -74,7 +74,7 @@ namespace Epheremal.Model
                 
                 if (belowTerminal || (!belowTerminal && (c.XVel < 0 ^ c.XAcc < 0)))
                 {
-                    c.XVel += c.XAcc; 
+                    c.XVel += c.XAcc;
                 }
                 if (belowTerminal || (!belowTerminal && (c.YVel < 0 ^ c.YAcc < 0)))
                 {
@@ -124,8 +124,10 @@ namespace Epheremal.Model
                 _blocks.AddLast(new Block(game) { GridX = i, GridY = 15 });   
             }
             _characters.AddFirst(Engine.Player);
-            _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD)});
-            
+            _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+
             return true;
         }
     }
