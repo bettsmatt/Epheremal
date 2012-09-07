@@ -24,11 +24,11 @@ namespace Epheremal.Model
 
         public void DoBehaviour()
         {
+
             //null protection
             if (this.Behaviours == null) return;
-            if (!this.Behaviours.ContainsKey(this.State)) return;
             if (this.Behaviours[this.State] == null) return;
-
+            
             foreach (Behaviour behaviour in this.Behaviours[this.State])
             {
                 behaviour.apply(this);

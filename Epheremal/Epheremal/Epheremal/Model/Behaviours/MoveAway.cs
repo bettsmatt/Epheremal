@@ -7,11 +7,12 @@ namespace Epheremal.Model.Behaviours
 {
     class MoveAway : Move
     {
-        public new void apply(Character character)
+        public override void apply(Character character)
         {
             double dx = character.PosX - Engine.Player.PosX;
             double dy = character.PosY - Engine.Player.PosY;
-
+            Console.WriteLine(1 / dx);
+            Console.WriteLine(1 / dy);
             character.XAcc += 1 / dx;
             character.YAcc += 1 / dy;
 

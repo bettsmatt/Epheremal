@@ -7,7 +7,7 @@ namespace Epheremal.Model.Behaviours
 {
     class MoveRight : Move
     {
-        public new void apply(Character character)
+        public override void apply(Character character)
         {
             character.XAcc += accelerationSpeed;
         }
