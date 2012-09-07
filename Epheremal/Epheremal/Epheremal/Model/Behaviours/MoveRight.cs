@@ -9,7 +9,7 @@ namespace Epheremal.Model.Behaviours
     {
         public new void apply(Character character)
         {
-
+            character.XAcc += accelerationSpeed;
         }
     }
 }

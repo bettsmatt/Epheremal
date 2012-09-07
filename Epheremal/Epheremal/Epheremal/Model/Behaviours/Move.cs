@@ -7,6 +7,8 @@ namespace Epheremal.Model.Behaviours
 {
     abstract class Move : Behaviour
     {
+        protected double accelerationSpeed = 0.1;
+
         public void apply(Character character)
         {
 
