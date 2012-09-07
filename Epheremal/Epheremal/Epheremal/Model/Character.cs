@@ -28,9 +28,9 @@ namespace Epheremal.Model
 
             //null protection
             if (this.Behaviours == null) return;
-            if (this.Behaviours[this.State] == null) return;
-            
-            foreach (Behaviour behaviour in this.Behaviours[this.State])
+            if (this.Behaviours[Entity.State] == null) return;
+
+            foreach (Behaviour behaviour in this.Behaviours[Entity.State])
             {
                 behaviour.apply(this);
             }
@@ -39,14 +39,13 @@ namespace Epheremal.Model
         public void PollInteractions()
         {
             while (Interactions.Count > 0)
-            {
                 Interactions.Dequeue().Interact();
-            }
         }
 
-        public void QueueInteraction(Interaction toInteract)
+        public void QueueInteractions(Interaction[] toInteract)
         {
-            this.Interactions.Enqueue(toInteract);
+            foreach(Interaction i in toInteract)
+                this.Interactions.Enqueue(i);
         }
 
         public override Rectangle GetBoundingRectangle()
