@@ -15,7 +15,10 @@ namespace Epheremal.Model
 
         public Player()
         {
+            Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             currentBehaviours = new List<Behaviour>();
+            Behaviours[EntityState.GOOD] = currentBehaviours;
+            Behaviours[EntityState.BAD] = currentBehaviours;
         }
 
         public void movingLeft()

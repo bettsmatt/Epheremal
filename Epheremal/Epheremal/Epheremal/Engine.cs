@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
+using Epheremal.Assets;
 
 namespace Epheremal
 {
@@ -39,7 +40,10 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            Player = new Player();
+            Player = new Player()
+            {
+                _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
+            };
             //LevelParser.ParseTextFile("test.level");
             _currentLevel = new Level(1);
             _currentLevel.LoadLevel(this);
