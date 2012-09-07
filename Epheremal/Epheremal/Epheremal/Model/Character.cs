@@ -28,9 +28,9 @@ namespace Epheremal.Model
 
             //null protection
             if (this.Behaviours == null) return;
-            if (this.Behaviours[this.State] == null) return;
-            
-            foreach (Behaviour behaviour in this.Behaviours[this.State])
+            if (this.Behaviours[Entity.State] == null) return;
+
+            foreach (Behaviour behaviour in this.Behaviours[Entity.State])
             {
                 behaviour.apply(this);
             }
@@ -59,6 +59,16 @@ namespace Epheremal.Model
             if (_texture == null) return sprites;
             sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
             return sprites;
+        }
+
+        public override double GetX()
+        {
+            return PosX;
+        }
+
+        public override double GetY()
+        {
+            return PosY;
         }
     }
 }

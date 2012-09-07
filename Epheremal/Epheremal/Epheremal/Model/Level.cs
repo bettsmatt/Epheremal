@@ -8,8 +8,8 @@ using Epheremal.Model.NonPlayables;
 using Epheremal.Assets;
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
+using Epheremal.Model.Levels;
 using Epheremal.Model.Behaviours;
-using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
@@ -18,6 +18,7 @@ namespace Epheremal.Model
     {
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
+        private LinkedList<Entity> _entities;
         private int _level;
 
         public Level(int level)
@@ -97,10 +98,12 @@ namespace Epheremal.Model
         public void interact()
         {
             //Detect collisions, and create appropriate interactions
+            
             foreach (Character c in _characters)
             {
-                foreach (Block b in _blocks)
+                foreach (Entity b in _entities)
                 {
+                    if (c == b) continue;
                     Rectangle cBounds = c.GetBoundingRectangle();
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
@@ -124,33 +127,55 @@ namespace Epheremal.Model
         public Boolean LoadLevel(Engine game, RawLevel rawLevel, TileMap tileMap)
         {
             _blocks = new LinkedList<Block>();
-            _characters = new LinkedList<Character>(); 
-           
-            /*
+            _characters = new LinkedList<Character>();
+            _entities = new LinkedList<Entity>();
+            
             for (int i = 0; i < 10; i++)
             {
-                Block _block = new Block(game) { GridX = i, GridY = 15 };
+                Block _block = new Block(game, tileMap, rawLevel.State1[0]) { GridX = i, GridY = 15 };
                 _block.Behaviours[EntityState.GOOD].Add(new Harmless());
-                _blocks.AddFirst(_block);   
-                
+                _blocks.AddFirst(_block);
+                _entities.AddFirst(_block);
             }
-             */
-
+            /*
             for (int y = 0; y < rawLevel.height; y++)
             {
                 // Debug.WriteLine("");
                 for (int x = 0; x < rawLevel.width; x++)
                 {
                     // Debug.Write("|" + rawLevel.State1[y * rawLevel.width + x]);
-                    _blocks.AddLast(new Block(game, tileMap, rawLevel.State1[y * rawLevel.width + x]) { GridX = x, GridY = y });
+
+                    int blockID = rawLevel.State1[y * rawLevel.width + x];
+
+                    Block b = new Block(game, tileMap, blockID) { GridX = x, GridY = y };
+
+                    switch (blockID){
+                        case 1:
+                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
+                                {EntityState.GOOD, new List<Behaviour>()},
+                                {EntityState.BAD, new List<Behaviour>()}
+                        });
+                            break;
+                        default:
+                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
+                                {EntityState.GOOD, new List<Behaviour>(){new Harmless()}},
+                                {EntityState.BAD, new List<Behaviour>(){new Harmless()}}
+                        });
+                            break;
+
+                    }
+                    
+                    _blocks.AddLast(b);
                 }
             }
-
+            */
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Birdie() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+
+            foreach (Character c in _characters) _entities.AddFirst(c);
 
             return true;
         }

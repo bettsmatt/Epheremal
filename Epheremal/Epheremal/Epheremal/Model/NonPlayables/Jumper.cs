@@ -10,7 +10,6 @@ namespace Epheremal.Model.NonPlayables
     {
         public Jumper()
         {
-            this.State = EntityState.GOOD;
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,
                                 new List<Behaviour>()

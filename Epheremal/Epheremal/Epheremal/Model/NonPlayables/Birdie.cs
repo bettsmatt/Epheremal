@@ -17,6 +17,7 @@ namespace Epheremal.Model.NonPlayables
                                     new Harmless(),
                                     new Flies(),
                                     new MoveToward(),
+                                    new MovePatrol( 50,  50)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
