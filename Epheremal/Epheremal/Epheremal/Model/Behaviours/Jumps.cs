@@ -8,7 +8,7 @@ namespace Epheremal.Model.Behaviours
     class Jumps : Behaviour
     {
         //jump vlocity magic number
-        int jumpVelocity = 20;
+        double jumpAcceleration = Character.ABS_TERMINAL_VELOCITY/5;
 
         public void apply(Character character)
         {
@@ -17,7 +17,7 @@ namespace Epheremal.Model.Behaviours
             if (character.YVel == 0)
             {
                 //add a positive vertical velocity
-                character.YVel += jumpVelocity;
+                character.YAcc -= jumpAcceleration;
             }
                 
             //else do nothing
