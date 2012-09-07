@@ -5,7 +5,11 @@ using System.Text;
 using Epheremal.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Epheremal.Model.Interactions;
+using Epheremal.Model.Behaviours;
+using Microsoft.Xna.Framework.Graphics;
 using Epheremal.Model.Levels;
+
 
 namespace Epheremal.Model
 {
@@ -33,9 +37,15 @@ namespace Epheremal.Model
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
         }
 
-        public override Interactions.Interaction GetInteractionFor(Entity interactor)
+        public override Interaction[] GetInteractionsFor(Character interactor)
         {
-            throw new NotImplementedException();
+            List<Interaction> retVal = new List<Interaction>();
+            foreach (Behaviour b in this.Behaviours[this.State])
+            {
+                Interaction i = b.GetAppropriateInteractionFor(interactor,this);
+                if (i != null) retVal.Add(i);
+            }
+            return retVal.ToArray<Interaction>();
         }
 
         public override Rectangle GetBoundingRectangle()
