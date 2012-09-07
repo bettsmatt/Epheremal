@@ -10,6 +10,7 @@ namespace Epheremal.Model.NonPlayables
     {
         public Goomba()
         {
+            this.State = EntityState.GOOD;
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,
                                 new List<Behaviour>()
