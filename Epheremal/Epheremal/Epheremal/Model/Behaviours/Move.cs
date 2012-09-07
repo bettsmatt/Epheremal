@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
@@ -9,5 +10,9 @@ namespace Epheremal.Model.Behaviours
     {
         protected double accelerationSpeed = 0.05;
         public abstract void apply(Character character);
+        public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
+        {
+            return null;
+        }
     }
 }

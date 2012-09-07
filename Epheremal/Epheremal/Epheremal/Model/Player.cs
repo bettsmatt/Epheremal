@@ -13,7 +13,7 @@ namespace Epheremal.Model
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
-        public override Interactions.Interaction GetInteractionFor(Entity interactor)
+        public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
             throw new NotImplementedException();
         }

@@ -32,9 +32,14 @@ namespace Epheremal.Model
         public Entity()
         {
             this._bounds = Engine.Bounds;
+            Behaviours = new Dictionary<EntityState, List<Behaviour>>()
+            {
+                {EntityState.GOOD, new List<Behaviour>()},
+                {EntityState.BAD, new List<Behaviour>()},
+            };
         }
 
-        public abstract Interaction GetInteractionFor(Entity interactor);
+        public abstract Interaction[] GetInteractionsFor(Character interactor);
 
         public abstract Rectangle GetBoundingRectangle();
 

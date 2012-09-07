@@ -7,7 +7,7 @@ namespace Epheremal.Model
 {
     class NPC : Character
     {
-        public override Interactions.Interaction GetInteractionFor(Entity interactor)
+        public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
             throw new NotImplementedException();
         }

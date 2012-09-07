@@ -39,14 +39,13 @@ namespace Epheremal.Model
         public void PollInteractions()
         {
             while (Interactions.Count > 0)
-            {
                 Interactions.Dequeue().Interact();
-            }
         }
 
-        public void QueueInteraction(Interaction toInteract)
+        public void QueueInteractions(Interaction[] toInteract)
         {
-            this.Interactions.Enqueue(toInteract);
+            foreach(Interaction i in toInteract)
+                this.Interactions.Enqueue(i);
         }
 
         public override Rectangle GetBoundingRectangle()
