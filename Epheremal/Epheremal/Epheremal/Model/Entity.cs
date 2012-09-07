@@ -21,8 +21,7 @@ namespace Epheremal.Model
         protected Queue<Interaction> Interactions { get { return _interactions; } set { _interactions = value; } }
         public Dictionary<EntityState, List<Behaviour>> Behaviours {get; set;}
 
-        private EntityState _state = EntityState.GOOD;
-        public EntityState State { get { return _state; } set { _state = value; } }
+        public static EntityState State = EntityState.GOOD;
 
         protected int _width = 20;
         protected int _height = 20;
@@ -33,11 +32,20 @@ namespace Epheremal.Model
         public Entity()
         {
             this._bounds = Engine.Bounds;
+        }
+
+        /*
+         * Set the behaviours of an enity {GOOD, BAD}
+         */
+        public void AssignBehaviour(Dictionary<EntityState, List<Behaviour>> behaviours) {
+            this.Behaviours = behaviours;
+            /*
             Behaviours = new Dictionary<EntityState, List<Behaviour>>()
             {
                 {EntityState.GOOD, new List<Behaviour>()},
                 {EntityState.BAD, new List<Behaviour>()},
             };
+             */
         }
 
         public abstract Interaction[] GetInteractionsFor(Character interactor);
