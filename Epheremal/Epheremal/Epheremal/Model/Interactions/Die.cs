@@ -7,7 +7,7 @@ namespace Epheremal.Model.Interactions
 {
     class Die : InteractionBase
     {
-        public Die(Entity a, Entity b)
+        public Die(Character a, Entity b)
             : base(a, b)
         {
 
