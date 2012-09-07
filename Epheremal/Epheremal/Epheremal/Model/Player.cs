@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epheremal.Model.Behaviours;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model
 {
@@ -15,7 +16,13 @@ namespace Epheremal.Model
 
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
-            throw new NotImplementedException();
+            List<Interaction> retVal = new List<Interaction>();
+            foreach (Behaviour b in this.Behaviours[this.State])
+            {
+                Interaction i = b.GetAppropriateInteractionFor(interactor, this);
+                if (i != null) retVal.Add(i);
+            }
+            return retVal.ToArray();
         }
 
         public Player()

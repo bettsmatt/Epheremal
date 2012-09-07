@@ -18,6 +18,7 @@ namespace Epheremal.Model
     {
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
+        private LinkedList<Entity> _entities;
         private int _level;
 
         public Level(int level)
@@ -94,10 +95,12 @@ namespace Epheremal.Model
         public void interact()
         {
             //Detect collisions, and create appropriate interactions
+            
             foreach (Character c in _characters)
             {
-                foreach (Block b in _blocks)
+                foreach (Entity b in _entities)
                 {
+                    if (c == b) continue;
                     Rectangle cBounds = c.GetBoundingRectangle();
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
@@ -121,18 +124,18 @@ namespace Epheremal.Model
         public Boolean LoadLevel(Engine game, RawLevel rawLevel, TileMap tileMap)
         {
             _blocks = new LinkedList<Block>();
-            _characters = new LinkedList<Character>(); 
-           
-            /*
+            _characters = new LinkedList<Character>();
+            _entities = new LinkedList<Entity>();
+            
             for (int i = 0; i < 10; i++)
             {
-                Block _block = new Block(game) { GridX = i, GridY = 15 };
+                Block _block = new Block(game, tileMap, rawLevel.State1[0]) { GridX = i, GridY = 15 };
                 _block.Behaviours[EntityState.GOOD].Add(new Harmless());
-                _blocks.AddFirst(_block);   
-                
+                _blocks.AddFirst(_block);
+                _entities.AddFirst(_block);
             }
-             */
-
+             
+            /*
             for (int y = 0; y < rawLevel.height; y++)
             {
                 // Debug.WriteLine("");
@@ -142,12 +145,12 @@ namespace Epheremal.Model
                     _blocks.AddLast(new Block(game, tileMap, rawLevel.State1[y * rawLevel.width + x]) { GridX = x, GridY = y });
                 }
             }
-
+            */
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-
+            foreach (Character c in _characters) _entities.AddFirst(c);
             return true;
         }
     }

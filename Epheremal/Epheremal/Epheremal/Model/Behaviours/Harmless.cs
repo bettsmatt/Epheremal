@@ -15,9 +15,9 @@ namespace Epheremal.Model.Behaviours
 
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            if (interactor is Player)
-                return new Collide(interactor, interactee);
-            else return null;
+            
+            return new Collide(interactor, interactee);
+            
         }
     }
 }
