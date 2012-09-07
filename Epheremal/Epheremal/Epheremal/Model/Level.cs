@@ -47,6 +47,9 @@ namespace Epheremal.Model
 
         public void movement()
         {
+
+            double gravity = 0.015;
+
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
@@ -85,7 +88,7 @@ namespace Epheremal.Model
                 }
 
                 //Constant gravity
-                c.YAcc += 0.015; 
+                c.YAcc += gravity; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
             }
@@ -147,6 +150,7 @@ namespace Epheremal.Model
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Birdie() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
 
             return true;
         }

@@ -110,6 +110,7 @@
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
+    <Compile Include="Model\Behaviours\Flies.cs" />
     <Compile Include="Model\Behaviours\Deadly.cs" />
     <Compile Include="Model\Behaviours\Ethreal.cs" />
     <Compile Include="Model\Behaviours\Harmless.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Model\Interactions\PlayerDie.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Charger.cs" />
+    <Compile Include="Model\NonPlayables\Birdie.cs" />
     <Compile Include="Model\NonPlayables\Jumper.cs" />
     <Compile Include="Model\NonPlayables\Goomba.cs" />
     <Compile Include="Model\NPC.cs" />
