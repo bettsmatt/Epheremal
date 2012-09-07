@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
@@ -21,6 +22,11 @@ namespace Epheremal.Model.Behaviours
             }
                 
             //else do nothing
+        }
+
+        public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
+        {
+            return null;
         }
     }
 }

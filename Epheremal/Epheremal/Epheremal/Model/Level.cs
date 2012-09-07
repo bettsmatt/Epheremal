@@ -8,6 +8,7 @@ using Epheremal.Model.NonPlayables;
 using Epheremal.Assets;
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
+using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
@@ -99,7 +100,7 @@ namespace Epheremal.Model
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
                     {
-                        c.QueueInteraction(new Collide(c, b));
+                        c.QueueInteractions(b.GetInteractionsFor(c));
                     }
                 }
                 c.PollInteractions();
@@ -121,7 +122,10 @@ namespace Epheremal.Model
             _characters = new LinkedList<Character>();            
             for (int i = 0; i < 10; i++)
             {
-                _blocks.AddLast(new Block(game) { GridX = i, GridY = 15 });   
+                Block _block = new Block(game) { GridX = i, GridY = 15 };
+                _block.Behaviours[EntityState.GOOD].Add(new Harmless());
+                _blocks.AddFirst(_block);   
+                
             }
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });

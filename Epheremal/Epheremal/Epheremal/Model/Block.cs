@@ -5,6 +5,8 @@ using System.Text;
 using Epheremal.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Epheremal.Model.Interactions;
+using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
@@ -22,14 +24,19 @@ namespace Epheremal.Model
         public int GridX {get; set;}
         public int GridY {get; set;}
 
-        public Block(Engine game)
+        public Block(Engine game) : base()
         {
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, this.State);
         }
 
-        public override Interactions.Interaction GetInteractionFor(Entity interactor)
+        public override Interaction[] GetInteractionsFor(Character interactor)
         {
-            throw new NotImplementedException();
+            List<Interaction> retVal = new List<Interaction>();
+            foreach (Behaviour b in this.Behaviours[this.State])
+            {
+                retVal.Add(b.GetAppropriateInteractionFor(interactor,this));
+            }
+            return retVal.ToArray<Interaction>();
         }
 
         public override Rectangle GetBoundingRectangle()
