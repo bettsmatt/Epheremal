@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>b7b95f78-5a1c-40f7-b099-aea036f18f2a</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -129,6 +129,7 @@
     <Compile Include="Model\Interactions\PlayerDie.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Charger.cs" />
+    <Compile Include="Model\NonPlayables\Jumper.cs" />
     <Compile Include="Model\NonPlayables\Goomba.cs" />
     <Compile Include="Model\NPC.cs" />
     <Compile Include="Model\Player.cs" />

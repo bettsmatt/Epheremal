@@ -36,7 +36,7 @@ namespace Epheremal.Model
                 character.RenderSelf(ref sprite, 0, 0);
             }
             return sprite;
-           
+
             throw new NotSupportedException();
         }
 
@@ -48,7 +48,7 @@ namespace Epheremal.Model
                 bool belowTerminal = Math.Sqrt(c.XVel * c.XVel + c.YVel * c.YVel) < Character.ABS_TERMINAL_VELOCITY;
                 if (belowTerminal && !(c.XVel < 0 ^ c.XAcc < 0))
                 {
-                    c.XVel += c.XAcc; 
+                    c.XVel += c.XAcc;
                 }
                 if (belowTerminal && !(c.YVel < 0 ^ c.YAcc < 0))
                 {
@@ -57,11 +57,11 @@ namespace Epheremal.Model
                 //Remove residual friction from acceleration while greater than nothing
                 if (c.XAcc > 0) c.XAcc -= 0.05 * c.XAcc;
                 else
-                if (c.XAcc < 0) c.XAcc -= 0.05 * c.XAcc;
-                
+                    if (c.XAcc < 0) c.XAcc -= 0.05 * c.XAcc;
+
                 if (c.YAcc > 0) c.YAcc -= 0.05 * c.YAcc;
                 else
-                if (c.YAcc < 0) c.YAcc -= 0.05 * c.YAcc;
+                    if (c.YAcc < 0) c.YAcc -= 0.05 * c.YAcc;
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
             }
@@ -87,11 +87,13 @@ namespace Epheremal.Model
             int closure = 0;
             for (int i = 0; i < 10; i++)
             {
-                _blocks.AddLast(new Block(game) { GridX = closure+i, GridY = closure+i });   
+                _blocks.AddLast(new Block(game) { GridX = closure + i, GridY = closure + i });
             }
             _characters.AddFirst(Engine.Player);
-            _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD)});
-            
+            _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+
             return true;
         }
     }
