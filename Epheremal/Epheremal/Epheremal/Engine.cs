@@ -35,8 +35,8 @@ namespace Epheremal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            base.Initialize();
+            LevelParser.ParseTextFile("test.level");
+;            base.Initialize();
         }
 
         /// <summary>

@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Epheremal
 {
+
+    /*
+     * Model object for holding raw details
+     */
     class RawLevel
     {
         public int[] State1;

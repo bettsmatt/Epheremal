@@ -7,6 +7,10 @@ using System.Diagnostics;
 
 namespace Epheremal
 {
+
+    /*
+     * Responsible for parsing raw level data exported from Tiled in json format
+     */
     class LevelParser
     {
 
@@ -46,26 +50,14 @@ namespace Epheremal
                         lineNum++;
                     }
 
-                    Debug.WriteLine("State1:" +state1Line);
-                    Debug.WriteLine("State2:" + state2Line);
-                    Debug.WriteLine("Width:" + widthLine);
-                    Debug.WriteLine("Height:" + heightLine);
-
                     /*
                      * Extract values from lines
                      * */
                     string[] state1Data = state1Line.Split( new[] { '[', ']' })[1].Split(new[] { ',' });
                     string[] state2Data = state2Line.Split( new[] { '[', ']' })[1].Split(new[] { ',' });
-                    Debug.WriteLine("heightLine" +heightLine);
-                    Debug.WriteLine("heightLine.Split( new[] { ':' }" + heightLine.Split(new[] { ':',',' })[1]);
 
-                      
-
-                    int height = int.Parse( heightLine.Split( new[] { ':' } )[1]) ;
-                    int width = int.Parse(heightLine.Split(new[] { ':' })[1]);
-
-                    foreach (string s in state1Data)
-                        Debug.WriteLine(s);
+                    int height = int.Parse( heightLine.Split(new[] { ':',',' })[1]) ;
+                    int width = int.Parse( heightLine.Split(new[] { ':',',' })[1]);
 
                     int[] state1Values = new int[width * height];
                     int[] state2Values = new int[width * height];
