@@ -82,7 +82,7 @@ namespace Epheremal.Model
                 }
 
                 //Constant gravity
-                c.YAcc += 0.01; 
+                c.YAcc += 0.015; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
             }
