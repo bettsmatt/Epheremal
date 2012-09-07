@@ -24,12 +24,10 @@ namespace Epheremal.Model
         /// <returns>The spritebatch object. unnecessary as pass by ref, but good for testing</returns>
         public SpriteBatch RenderLevel(ref SpriteBatch sprite)
         {
-            int x = 0;
-            int y = 0;
             foreach (Block block in _blocks)
             {
                 //accurately compute abs x and y from a grid position
-                block.RenderSelf(ref sprite, x+=20, y+=20);
+                block.RenderSelf(ref sprite, 0, 0);
             }
             return sprite;
            
@@ -39,9 +37,10 @@ namespace Epheremal.Model
         public Boolean LoadLevel(Engine game)
         {
             _blocks = new LinkedList<Block>();
+            int closure = 0;
             for (int i = 0; i < 10; i++)
             {
-                _blocks.AddLast(new Block(game));   
+                _blocks.AddLast(new Block(game) { GridX = closure+i, GridY = closure+i });   
             }
             return true;
         }

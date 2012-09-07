@@ -7,5 +7,6 @@ namespace Epheremal.Model
 {
     class Player : Character
     {
+     
     }
 }

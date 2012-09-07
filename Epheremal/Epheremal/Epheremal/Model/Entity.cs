@@ -25,9 +25,15 @@ namespace Epheremal.Model
 
         protected int _width = 20;
         protected int _height = 20;
+        protected Rectangle _bounds;
 
         internal Texture2D _texture;
-        
+
+        public Entity()
+        {
+            this._bounds = Engine.bounds;
+        }
+
         public Rectangle GetBoundingRectangle(int x, int y)
         {
             return new Rectangle(x, y, this._width, this._height);

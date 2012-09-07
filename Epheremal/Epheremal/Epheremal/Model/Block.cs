@@ -29,7 +29,8 @@ namespace Epheremal.Model
 
         public SpriteBatch RenderSelf(ref SpriteBatch sprites, int offsetX, int offsetY)
         {
-            sprites.Draw(this._texture, this.GetBoundingRectangle(offsetX + _width, offsetY + _height), Color.White);
+            int xPosition = (GridX * _width) - offsetX, yPosition = (GridY * _height) - offsetY;
+            sprites.Draw(this._texture, this.GetBoundingRectangle(xPosition + _width, yPosition + _height), Color.White);
             return sprites;
         }
     }

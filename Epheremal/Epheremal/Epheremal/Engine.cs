@@ -19,6 +19,7 @@ namespace Epheremal
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static Rectangle bounds;
 
         public Engine()
         {
@@ -35,7 +36,7 @@ namespace Epheremal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            bounds = GraphicsDevice.Viewport.Bounds;
             base.Initialize();
         }
 
