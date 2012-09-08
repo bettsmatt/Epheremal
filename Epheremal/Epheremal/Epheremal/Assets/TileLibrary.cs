@@ -55,6 +55,7 @@ namespace Epheremal.Assets
                 new Pair{y = 3, x = 3},
                 new Pair{y = 3, x = 4},
                 new Pair{y = 3, x = 5},
+                new Pair{y = 3, x = 6},
 
                 // Dark Land
                 new Pair{y = 4, x = 2},
@@ -80,6 +81,7 @@ namespace Epheremal.Assets
                 new Pair{y = 7, x = 3},
                 new Pair{y = 7, x = 4},
                 new Pair{y = 7, x = 5},
+                new Pair{y = 7, x = 6},
 
                 // Bad Platform
                 new Pair{y = 0, x = 12},
@@ -249,10 +251,10 @@ namespace Epheremal.Assets
             Behaviours.Add(getIDFor(5, 19), new List<Behaviour>() { new Harmless(), new Adhesive() });
 
             Pair BoostLeft = new Pair { y = 20, x = 4 };
-            Behaviours.Add(getIDFor(4, 20), new List<Behaviour>() { new Harmless(), new Boosts() });
+            Behaviours.Add(getIDFor(4, 20), new List<Behaviour>() { new Harmless(), new BoostsLeft() });
 
             Pair BoostRight = new Pair { y = 20, x = 5 };
-            Behaviours.Add(getIDFor(5, 20), new List<Behaviour>() { new Harmless(), new Boosts() });
+            Behaviours.Add(getIDFor(5, 20), new List<Behaviour>() { new Harmless(), new BoostsRight() });
         }
 
         public List<Behaviour> get(int id) {

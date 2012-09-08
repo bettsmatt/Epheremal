@@ -118,8 +118,9 @@ namespace Epheremal
              * Add Levels
              */
             levels = new List<RawLevel>();
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
-            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/test.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level"));
             loadedLevel = false;
 
@@ -267,7 +268,8 @@ namespace Epheremal
             Player.XAcc = 0;
             Player.YAcc = 0;
             Engine.xOffset = 0;
-            //Entity.State = EntityState.GOOD;
+            Engine.yOffset = 0;
+                //Entity.State = EntityState.GOOD;
             loadedLevel = _currentLevel.LoadLevel(this, level, tileMap);
            
         }

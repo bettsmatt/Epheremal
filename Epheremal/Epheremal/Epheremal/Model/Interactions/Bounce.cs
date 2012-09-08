@@ -29,7 +29,7 @@ namespace Epheremal.Model.Interactions
             double minimumReboundVelocity = 0.75;
             double friction = Engine.MarioControl ? 0.8 : 0.75;
 
-            double bounceFactor = 5;
+            double bounceFactor = 10;
 
             if (Math.Abs(dx) > Math.Abs(dy))
             {
