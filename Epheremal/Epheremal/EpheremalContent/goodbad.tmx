@@ -3,19 +3,19 @@
  <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
   <image source="tilemap.png" width="1024" height="1024"/>
  </tileset>
- <layer name="Good" width="50" height="20">
+ <layer name="Good" width="50" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt1n0OwTAYBvDW9znYuIePuYdkLuIjDsI4CJtzMOMYniYaLDXVrS2JP36VSNb1Wd+3GyWE0L+f0CwR0gIHXGiXfvP+XVzXgz4MwDOcw/b9bTlQ+2vIqwo1qENDw/zvajwu6D4utKGj6TmZqnFRjgDDGjbUfr3kyRFiiGCvkGOLYWchfzoH6/kEznBRWE+M4XS7rmLwnJzBPON38cFcZbZ2ov/sEFllWCvM5wj22FSOQCCESGG+PgzAg6GmNbPaL6dqNs9evHo3+DDWlGECU3Kve060F4FkDt3vBv6dcaTP/y8znn8RvVEkfmbIEvWHam8UjfeaKyG9DyxD8gUZOF8yC1//Y1+M6HdxJHJcAe0bYik=
   </data>
  </layer>
- <layer name="Bad" width="50" height="20">
+ <layer name="Bad" width="50" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt07sNgDAMBFBnACAFYRKcNdmMmXATCQkjgYLgIq54/Z0/UUQiERFRo+YgoiaH77PQe7vpTH9iAOiODvFvRpPMBJClarZGTQbI8uce5Z5a71Hy73skB/rfeD3UUbOnJRytD7vTw8tzxQbgf12d
   </data>
  </layer>
- <layer name="Characters" width="50" height="20">
+ <layer name="Chara" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0rkNACAQA7ATPd/+y9JQQ8cj2RNESSKAlZxuJ4C94qdH1dl31/v3mg0BeMgADG8AVg==
+   eJxjYBgFwwk8ZBpoF9AfNI5AP1MCGJkH2gX0A6NpY2SA0XjGBAeJDBNi6oyFwzh8R2KdOdxBIhXidDRdjIJRMAoGEgAAPisG4w==
   </data>
  </layer>
 </map>

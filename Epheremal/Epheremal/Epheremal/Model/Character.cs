@@ -6,6 +6,7 @@ using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Epheremal.Model.Interactions;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
@@ -24,6 +25,11 @@ namespace Epheremal.Model
         public double YVel {get; set;}
 
         public Boolean Jumping = false;
+
+        public Character(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
+        {
+        }
+
 
         public void DoBehaviour()
         {
@@ -60,6 +66,14 @@ namespace Epheremal.Model
         {
             if (_texture == null) return sprites;
             sprites.Draw(this._texture, this.GetBoundingRectangle(), Color.White);
+            return sprites;
+
+            if (Entity.State == EntityState.GOOD)
+                sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), Color.White);
+
+            else
+                sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), Color.White);
+
             return sprites;
         }
 

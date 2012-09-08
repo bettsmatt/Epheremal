@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,7 @@ namespace Epheremal.Model
 {
     class Level
     {
+        public const double gravity = 0.025;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -53,7 +54,6 @@ namespace Epheremal.Model
         public void movement()
         {
 
-            double gravity = 0.025;
 
             foreach (Character c in _characters)
             {
@@ -167,7 +167,7 @@ namespace Epheremal.Model
                     int blockIDGood = rawLevel.State1[y * rawLevel.width + x];
                     int blockIDBad = rawLevel.State2[y * rawLevel.width + x];
 
-                    Block b = new Block(game, tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
+                    Block b = new Block(tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
 
                     b.AssignBehaviour(
                         new Dictionary<EntityState, List<Behaviour>>() {
@@ -196,7 +196,7 @@ namespace Epheremal.Model
             _characters.AddFirst(Engine.Player);
 
             //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            //_characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+           // _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
 
@@ -210,7 +210,6 @@ namespace Epheremal.Model
             if (_raw == null) return 0;
             return _raw.width * Block.BLOCK_WIDTH;
         }
-
         public Double GetLevelHeightInPixels()
         {
             if (_raw == null) return 0;
@@ -218,3 +217,4 @@ namespace Epheremal.Model
         }
     }
 }
+

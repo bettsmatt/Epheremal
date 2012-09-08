@@ -40,6 +40,9 @@ namespace Epheremal
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Set device frame rate to 30 fps.
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
         }
 
         /// <summary>
@@ -52,17 +55,18 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            Player = new Player()
+            
+            //LevelParser.ParseTextFile("test.level");
+           
+            _currentLevel = new Level(1);
+
+            Player = new Player(tileMap, 10, 10)
             {
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
-            //LevelParser.ParseTextFile("test.level");
-
-            _currentLevel = new Level(1);
 
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
-
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
@@ -99,6 +103,7 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();

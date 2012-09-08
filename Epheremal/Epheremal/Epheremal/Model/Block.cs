@@ -30,17 +30,8 @@ namespace Epheremal.Model
 
         public const int BLOCK_WIDTH = 20; //magic!
 
-        public TileMap _tileMap;
-        public int _tileIDGood;
-        public int _tileIDBad;
-
-        public Block(Engine game, TileMap tileMap, int tileIDGood, int tileIDBad)
+        public Block(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
         {
-            this._tileIDGood = tileIDGood;
-            this._tileIDBad = tileIDBad;
-
-            this._tileMap = tileMap;
-            this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, Entity.State);
         }
 
         public override Interaction[] GetInteractionsFor(Character interactor)

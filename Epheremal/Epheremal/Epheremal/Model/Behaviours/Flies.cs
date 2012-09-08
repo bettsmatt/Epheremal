@@ -9,19 +9,20 @@ namespace Epheremal.Model.Behaviours
 {
     class Flies : Behaviour
     {
-        double bobEffect = 0.015;
+        double bobEffect = Level.gravity;
         string bobDirection = "up";
 
         public void apply(Character character)
         {
             //anti gravity
-            character.YAcc -= 0.025;
+            character.YAcc -= Level.gravity;
 
-            if (bobEffect >= 0.015)
+            if (bobEffect >= Level.gravity)
             {
                 bobDirection = "down";
                 }
-            else if(bobEffect <= -0.015){
+            else if (bobEffect <= -Level.gravity)
+            {
                 bobDirection = "up";
             }
 
