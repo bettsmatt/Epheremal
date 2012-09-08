@@ -24,6 +24,8 @@ namespace Epheremal.Model.NonPlayables
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
+                                    new Inanimate(),
+                                    new Harmless()
                                 });
         }
 

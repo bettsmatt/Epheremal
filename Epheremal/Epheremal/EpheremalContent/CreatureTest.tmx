@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="50" height="20" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
   <image source="tilemap.png" width="1024" height="1024"/>
  </tileset>
- <layer name="Good" width="30" height="20">
+ <layer name="Good" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1E0KwjAQhuFJrBexrQfR6kkKHqQV9R5qPYio9xCqx/AVuqgQuzGdgHTxTCBZfGHyY0TEBDSxIjESpJhandwZOXNkWGCplDvoh/V4frl8v5cMMkKEcYuvbNe9zJs9vdczrFpC9z2Uu9HNW2ODLXaKuQdUjvkjpcLJcx8KlB25F8oVtx76v+/IrSkPPH/MjRz/xFk+37KmdPDXXg+aKtE=
+   eJzt02sOwUAUhuGp+zpc96Et+0DYh7t9oBZSl3WIYhneJm0iEz/aqRqkP56ZRBw93+lhCCGMP1LNCVFDHQ00c/p7UumxzWcmLNjofGGOX+gxk45f+J9Fke1wJqkth4Odob8XX54dPiv0cuA44vThHGNMMMUM8+BeYIlVjN/yc19xw13T+1j7OxHYwIlRK88hnIHyLqCAIkoooxKx1sUNeymHy7GPMNuw3nd8w1wt2Oigq1DvSTkuHF4KOzKI8J06WgmeUZTEea/vpJqjFtwNSZKZ6Mhhvsihup86c/SDe/RkqClDkhyhnvEdwhyq9Q9FA0Q5
   </data>
  </layer>
- <layer name="Bad" width="30" height="20">
+ <layer name="Bad" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJwTYGBgEBjFo3gUDxpsCMTGg8Ado35EYFNGCDZjpK8/vwPxFzr60wTqT1LtpUZ8fgNicUb6+hdmrygBfJ4RFRNSTyw2HcXDGgMAmzdCdw==
+   eJztz0EKgkAUh/GZA5R2ktIOYp1M7SLqRbLAukYJ6roPajGLBMNgnvAWPx6zGb5/aIwJlVJKKaUEWGGNQEDLmBQZcgEtcxQoUf3hrwh7TztqXHBdYLvrgSfaic3xh4R2V2C52Fj/LXNs6d8hWvCOlPYEBxzt++276Vc5zQ335rjj9GXL2crW0dg7hpHmF0EMdN4=
   </data>
  </layer>
- <layer name="Enemies" width="30" height="20">
+ <layer name="Char" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFAwEEBtoBQww0MuGWY2SmnztGweAED/Gkj1EwCg5SmD740PAoGAXEAACCJQJ2
+   eJzt1EkNACAQBEEOJUhFKk5wwIfAElKloDOPSQmAE3qJLgB25BpdsDY++Zj2+M4AN01RzwGP
   </data>
  </layer>
 </map>

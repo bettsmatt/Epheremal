@@ -164,7 +164,6 @@ namespace Epheremal
                     xOffset += Convert.ToInt32(Player.XVel);
                 if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
                     xOffset += Convert.ToInt32(Player.XVel);
-
                 if ((Player.PosY - Engine.yOffset) > (3 * Bounds.Height / 4) && (Engine.yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) && Player.YVel > 0)
                     yOffset += Convert.ToInt32(Player.YVel);
                 if ((Player.PosY - Engine.yOffset) < (Bounds.Height / 4) && Engine.yOffset > 0 && Player.YVel < 0)

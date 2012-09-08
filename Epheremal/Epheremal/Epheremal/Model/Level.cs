@@ -181,7 +181,6 @@ namespace Epheremal.Model
                                 {EntityState.GOOD, tileLibrary.get(blockIDGood)},
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
-
                     _blocks.AddLast(b);
                     _entities.AddLast(b);
 
@@ -191,8 +190,8 @@ namespace Epheremal.Model
                     int characterId = rawLevel.Characters[y * rawLevel.width + x];
                     if(characterId != 0){
                         Character c = characterLibrary.get(characterId);
-                        c.PosX = x * 20;
-                        c.PosY = y * 20;
+                        c.PosX = x * Block.BLOCK_WIDTH;
+                        c.PosY = y * Block.BLOCK_WIDTH;
 
                         _characters.AddFirst(c);
                         _entities.AddFirst(c);
