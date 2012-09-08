@@ -35,14 +35,17 @@ namespace Epheremal
 
         TileMap tileMap;
         RawLevel rawLevel;
+        AnimatedTexture animatedTexture;
 
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            animatedTexture = new AnimatedTexture( 4, 2);
+
             // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
         }
 
         /// <summary>
@@ -103,7 +106,6 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -135,6 +137,12 @@ namespace Epheremal
             {
                 Player.isDead = true;
             }
+
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // TODO: Add your game logic here.
+            animatedTexture.UpdateFrame(elapsed);
+            Debug.WriteLine(animatedTexture.GetFrame());
 
             base.Update(gameTime);
         }
