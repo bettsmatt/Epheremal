@@ -10,10 +10,6 @@ namespace Epheremal.Model.Behaviours
     {
         public void apply(Character character)
         {
-            // AntiGrav
-
-
-
             character.XVel = 0;
             character.YVel = 0;
 

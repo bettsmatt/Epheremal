@@ -53,8 +53,8 @@ namespace Epheremal.Model
             {
                 if (oldDirection != -1)
                 {
-                    //XVel = 0;
-                    //XAcc = 0;
+                    XVel = 0;
+                    XAcc = 0;
                 }
                 oldDirection = -1;
             }

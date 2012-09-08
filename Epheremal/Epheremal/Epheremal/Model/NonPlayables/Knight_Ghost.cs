@@ -23,7 +23,7 @@ namespace Epheremal.Model.NonPlayables
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
-                                    new Harmless(),
+                                    new Adhesive(),
                                     new MovePatrol(3,3,1)
                                 });
         }

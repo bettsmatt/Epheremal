@@ -13,12 +13,13 @@ using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
-    class Level
+    public class Level
     {
         public const double gravity = 0.0981;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
+        private Queue<Character> _toKill = new Queue<Character>();
         private RawLevel _raw;
         private int _level;
 
@@ -118,7 +119,6 @@ namespace Epheremal.Model
         public void interact()
         {
             //Detect collisions, and create appropriate interactions
-            
             foreach (Character c in _characters)
             {
                 foreach (Entity b in _entities)
@@ -133,7 +133,12 @@ namespace Epheremal.Model
                 }
                 c.PollInteractions();
             }
-
+            while (_toKill.Count > 0)
+            {
+                Character c = _toKill.Dequeue();
+                _entities.Remove(c);
+                _characters.Remove(c);
+            }
         }
 
         public void behaviour()
@@ -199,7 +204,7 @@ namespace Epheremal.Model
 
                  }
             }
-
+            foreach (Entity e in _entities) e.SetLevel(this);
             _characters.AddFirst(Engine.Player);
             _entities.AddFirst(Engine.Player);
 
@@ -227,6 +232,11 @@ namespace Epheremal.Model
         {
             if (_raw == null) return 0;
             return _raw.height * Block.BLOCK_WIDTH;
+        }
+
+        public void Kill(Character c)
+        {
+            _toKill.Enqueue(c);
         }
     }
 }
