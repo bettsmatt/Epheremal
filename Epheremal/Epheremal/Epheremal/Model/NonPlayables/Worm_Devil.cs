@@ -7,23 +7,23 @@ using Epheremal.Model.Levels;
 
 namespace Epheremal.Model.NonPlayables
 {
-    class Ghost : NPC
+    class Worm_Devil : NPC
     {
-        public Ghost(TileMap tileMap, int tileIDGood, int tileIDBad)
+        public Worm_Devil(TileMap tileMap, int tileIDGood, int tileIDBad)
             : base(tileMap, tileIDGood, tileIDBad)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,
                                 new List<Behaviour>()
                                 {
-                                    new Ethreal(),
-                                    new MovePatrol()
+                                    new Harmless(),
+                                    new MoveToward(0.25,100,true,false),
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
                                     new Deadly(),
-                                    new MovePatrol()
+                                    new MoveToward(0.5,100,true,false),
                                 }); 
         }
 

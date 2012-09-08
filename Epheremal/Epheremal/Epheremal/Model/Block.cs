@@ -55,9 +55,8 @@ namespace Epheremal.Model
         {
             if(Entity.State == EntityState.GOOD)
                 sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileIDGood), Color.White);
-            
             else
-            sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), Color.White);
+                sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), Color.White);
 
             return sprites;
         }

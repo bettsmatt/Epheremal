@@ -17,7 +17,7 @@ namespace Epheremal.Model.Behaviours
         public void apply(Character character)
         {
             
-            //if charaters current vertical velocity is 0 do jump
+            //if charaters current vertical velocity is 0 do jumpgit st
             if (Math.Abs(character.YVel) < 0.3 && !character.Jumping)
             {
                 character.Jumping = !character.Jumping;

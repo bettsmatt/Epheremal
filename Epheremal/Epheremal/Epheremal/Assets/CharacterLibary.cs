@@ -37,39 +37,59 @@ namespace Epheremal.Assets
         public Character get(int id)
         {
 
-            // Knight / Ghostr
+            /* Knight / Ghost
+             * GOOD: A night that patrols +\-3 and kills
+             * BAD: Turns into a harmless ghost that parrols +\-3
+             */
             if (id == getIDFor(0, 19)) {
-                return new Birdie(tileMap, getIDFor(0, 19), getIDFor(2, 19));
+                return new Knight_Ghost(tileMap, getIDFor(0, 19), getIDFor(2, 19));
             }
 
-            // Fly / Wasp
+            /*
+             * Fly / Wasp 
+             * GOOD: Flys around between +2 and -2 from its spawn, harmless
+             * BAD: Tracks and kills player
+             */
             else if (id == getIDFor(0, 20))
             {
-                return new Jumper(tileMap, getIDFor(0, 20), getIDFor(2, 20));
+                return new Fly_Wasp(tileMap, getIDFor(0, 20), getIDFor(2, 20));
             }
             
-            // Worm / Devil
+            /*
+             * Worm / Devil
+             * GOOD: harmless worm, will move towards to player
+             * BAD: devil will move towards player slowly and hurt
+             */
             else if (id == getIDFor(0, 21))
             {
-                return new Goomba(tileMap, getIDFor(0, 21), getIDFor(2, 21));
+                return new Worm_Devil(tileMap, getIDFor(0, 21), getIDFor(2, 21));
             }
             
-            // Snail / Bull
+            /* Snail / Bull
+             * GOOD: slow snail, will patrol +\- 3 will hurt
+             * BAD: fast bull, tracks player and kills
+             */
             else if (id == getIDFor(0, 22))
             {
-                return new Charger(tileMap, getIDFor(0, 22), getIDFor(2, 22));
+                return new Snail_Bull(tileMap, getIDFor(0, 22), getIDFor(2, 22));
             }
 
-            //Bird /Block
+            /* Bird / Block
+             * GOOD: flys around patroling +/-3 , kills
+             * BAD: turns into block 
+             */
             else if (id == getIDFor(0, 23))
             {
-                return new Birdie(tileMap, getIDFor(0, 23), getIDFor(2, 23));
+                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23));
             }
 
-            // Mrushroom /Man
+            /* Shrom_Man
+             * GOOD: A mushroom, harmless
+             * BAD: A Mushrrom and that kills you and patrols +\- 3
+             */ 
             else if (id == getIDFor(0, 24))
             {
-                return new Birdie(tileMap, getIDFor(0, 24), getIDFor(2, 24));
+                return new Shrom_Man(tileMap, getIDFor(0, 24), getIDFor(2, 24));
             }
 
             else
