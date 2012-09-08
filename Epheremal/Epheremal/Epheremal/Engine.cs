@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
+
 using System.Diagnostics;
 
 namespace Epheremal
@@ -51,10 +52,12 @@ namespace Epheremal
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
             //LevelParser.ParseTextFile("test.level");
+
             _currentLevel = new Level(1);
 
             TileMap tileMap = LevelParser.ParseTileMap(this, "generic_platformer_tiles", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
@@ -71,7 +74,7 @@ namespace Epheremal
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
         }
 
         /// <summary>
@@ -150,6 +153,7 @@ namespace Epheremal
             }
             // Change world state
             if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
+
             {
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
