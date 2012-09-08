@@ -91,6 +91,8 @@ namespace Epheremal.Model
                 c.YAcc += 0.015; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
+                if (c.PosX < 0) c.PosX = 0;
+                if (c.PosX+c.GetBoundingRectangle().Width > GetLevelWidthInPixels()) c.PosX = GetLevelWidthInPixels()-c.GetBoundingRectangle().Width;
             }
         }
 
