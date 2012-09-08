@@ -144,7 +144,7 @@ namespace Epheremal
 
             // TODO: Add your game logic here.
             animatedTexture.UpdateFrame(elapsed);
-            Debug.WriteLine(animatedTexture.GetFrame());
+            //Debug.WriteLine(animatedTexture.GetFrame());
 
             base.Update(gameTime);
         }
