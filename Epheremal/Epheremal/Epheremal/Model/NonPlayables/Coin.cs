@@ -31,7 +31,6 @@ namespace Epheremal.Model.NonPlayables
         
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            Debug.WriteLine(AnimatedTexture.Frame);
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame), Color.White);
             return sprites;
         }

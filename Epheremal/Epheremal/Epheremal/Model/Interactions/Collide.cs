@@ -30,11 +30,12 @@ namespace Epheremal.Model.Interactions
 
             double interactorAngle = Math.Atan2(yVel, xVel);
             double minimumReboundVelocity = 0.75;
+            double friction = Engine.MarioControl ? 0.8 : 0.75;
 
             if (Math.Abs(dx) > Math.Abs(dy))
             {
 
-                Interactor.YVel *= 0.9985; //Friction
+                Interactor.YVel *= friction; //Friction
                 
                 if (dx > 0)
                 {
@@ -57,8 +58,8 @@ namespace Epheremal.Model.Interactions
             }
             else
             {
-                
-                Interactor.XVel *= 0.9985; //Apply a small friction coefficient
+
+                Interactor.XVel *= friction; //Apply a small friction coefficient
                 
                 if (dy > 0)
                 {
