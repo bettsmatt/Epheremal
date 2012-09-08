@@ -29,6 +29,7 @@ namespace Epheremal
         public static int yOffset {get; set;}
 
         public static bool MarioControl = false;
+        public static bool Music = true;
 
         private Level _currentLevel;
         private bool _toggleKeyPressed;
@@ -109,20 +110,20 @@ namespace Epheremal
            
             song = Content.Load<Song>("song");
             song2 = Content.Load<Song>("song2");
-            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Volume = 0.3f;
 
-            try
+            if (Music)
             {
-                MediaPlayer.Play(song);
-                
-            }
-            catch (InvalidOperationException)
-            {
-                System.Diagnostics.Debug.WriteLine("don't steal music >:(");
-            }
+                try
+                {
+                    MediaPlayer.Play(song);
 
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(song);
+                }
+                catch (InvalidOperationException)
+                {
+                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                }
+            }
 
 
             font = Content.Load<SpriteFont>("basicFont");
@@ -161,7 +162,10 @@ namespace Epheremal
                 if (Player.isDead)
                 {
                     resetGameWorld();
-                    MediaPlayer.Play(song);
+                    if (Music)
+                    {
+                        MediaPlayer.Play(song);
+                    }
                 }
 
                 // TODO: Add your update logic here
@@ -276,11 +280,17 @@ namespace Epheremal
                 if (_currentLevel.ValidateToggle())
                     if (Entity.State == EntityState.GOOD){
                         Entity.State = EntityState.BAD;
-                         MediaPlayer.Play(song2);
+                        if (Music)
+                        {
+                            MediaPlayer.Play(song2);
+                        }
                     }
                     else{ 
                         Entity.State = EntityState.GOOD;
-                        MediaPlayer.Play(song);
+                        if (Music)
+                        {
+                            MediaPlayer.Play(song);
+                        }
                     }
                 else
                     Alert = true;
@@ -295,6 +305,25 @@ namespace Epheremal
             if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
             {
                 MarioControl = !MarioControl;
+                
+            }
+
+            if (keyboardState.IsKeyDown(Keys.M))
+            {
+                Debug.WriteLine("M pressed! Music is: " + Music);
+                Music = !Music;
+                if (Entity.State == EntityState.GOOD && Music)
+                {
+                    MediaPlayer.Play(song2);
+                }
+                else if (Entity.State == EntityState.GOOD && Music)
+                {
+                    MediaPlayer.Play(song);
+                }
+                else
+                {
+                    MediaPlayer.Stop();
+                }
             }
             _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
             _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
