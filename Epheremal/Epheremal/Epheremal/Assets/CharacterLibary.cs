@@ -41,7 +41,8 @@ namespace Epheremal.Assets
              * GOOD: A night that patrols +\-3 and kills
              * BAD: Turns into a harmless ghost that parrols +\-3
              */
-            if (id == getIDFor(0, 19)) {
+            if (id == getIDFor(0, 19))
+            {
                 return new Knight_Ghost(tileMap, getIDFor(0, 19), getIDFor(2, 19));
             }
 
@@ -54,7 +55,7 @@ namespace Epheremal.Assets
             {
                 return new Fly_Wasp(tileMap, getIDFor(0, 20), getIDFor(2, 20));
             }
-            
+
             /*
              * Worm / Devil
              * GOOD: harmless worm, will move towards to player
@@ -64,7 +65,7 @@ namespace Epheremal.Assets
             {
                 return new Worm_Devil(tileMap, getIDFor(0, 21), getIDFor(2, 21));
             }
-            
+
             /* Snail / Bull
              * GOOD: slow snail, will patrol +\- 3 will hurt
              * BAD: fast bull, tracks player and kills
@@ -86,11 +87,14 @@ namespace Epheremal.Assets
             /* Shrom_Man
              * GOOD: A mushroom, harmless
              * BAD: A Mushrrom and that kills you and patrols +\- 3
-             */ 
+             */
             else if (id == getIDFor(0, 24))
             {
                 return new Shrom_Man(tileMap, getIDFor(0, 24), getIDFor(2, 24));
             }
+
+            //else if (id == getIDFor(0, 25)) ;
+            //
 
             else
 
