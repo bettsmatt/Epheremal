@@ -30,6 +30,7 @@ namespace Epheremal.Model.Interactions
 
             double interactorAngle = Math.Atan2(yVel, xVel);
             double minimumReboundVelocity = 0.75;
+
             if (Math.Abs(dx) > Math.Abs(dy))
             {
 
