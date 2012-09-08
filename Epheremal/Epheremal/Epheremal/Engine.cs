@@ -116,6 +116,7 @@ namespace Epheremal
         protected override void Update(GameTime gameTime)
         {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (loadedLevel)
             {
                 // Allows the game to exit
