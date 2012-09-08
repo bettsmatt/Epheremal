@@ -12,7 +12,6 @@ namespace Epheremal.Model
         Behaviour moveLeft = new MoveLeft();
         Behaviour moveRight = new MoveRight();
         Behaviour jump = new Jumps();
-        public Boolean Jumping = false;
         List<Behaviour> currentBehaviours;
 
         public Boolean isDead = false;
@@ -55,11 +54,7 @@ namespace Epheremal.Model
 
         public void jumping()
         {
-            if (!Jumping)
-            {
-                Behaviours[Entity.State].Add(jump);
-                Jumping = !Jumping;
-            }
+            Behaviours[Entity.State].Add(jump);
         }
     }
 }

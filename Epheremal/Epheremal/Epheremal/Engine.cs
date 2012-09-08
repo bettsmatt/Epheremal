@@ -66,8 +66,6 @@ namespace Epheremal
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
-
-            _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
 

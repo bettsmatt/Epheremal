@@ -53,7 +53,7 @@ namespace Epheremal.Model
         public void movement()
         {
 
-            double gravity = 0.015;
+            double gravity = 0.025;
 
             foreach (Character c in _characters)
             {

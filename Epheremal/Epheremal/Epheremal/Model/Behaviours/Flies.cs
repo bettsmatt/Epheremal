@@ -15,7 +15,7 @@ namespace Epheremal.Model.Behaviours
         public void apply(Character character)
         {
             //anti gravity
-            character.YAcc -= 0.015;
+            character.YAcc -= 0.025;
 
             if (bobEffect >= 0.015)
             {
