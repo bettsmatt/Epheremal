@@ -44,6 +44,7 @@ namespace Epheremal.Assets
 
                     string state1Line = null;
                     string state2Line = null;
+                    string characterLine = null;
                     string widthLine = null;
                     string heightLine = null;
 
@@ -68,11 +69,16 @@ namespace Epheremal.Assets
                         if (lineNum == 10)
                             widthLine = line;
 
+                        if(lineNum == 26)
+                            characterLine = line;
+
                         lineNum++;
                     }
 
                     Debug.WriteLine("State1:" +state1Line);
                     Debug.WriteLine("State2:" + state2Line);
+                    Debug.WriteLine("Character:" + characterLine);
+
                     Debug.WriteLine("Width:" + widthLine);
                     Debug.WriteLine("Height:" + heightLine);
 
@@ -81,7 +87,7 @@ namespace Epheremal.Assets
                      * */
                     string[] state1Data = state1Line.Split( new[] { '[', ']' })[1].Split(new[] { ',' });
                     string[] state2Data = state2Line.Split( new[] { '[', ']' })[1].Split(new[] { ',' });
-
+                    string[] characterData = characterLine.Split(new[] { '[', ']' })[1].Split(new[] { ',' });
 
 
                     int height = int.Parse(heightLine.Split(new[] { ':', ',' })[1]);
@@ -92,11 +98,13 @@ namespace Epheremal.Assets
 
                     int[] state1Values = new int[width * height];
                     int[] state2Values = new int[width * height];
+                    int[] characterValues = new int[width * height];
 
                     for( int i = 0 ; i < width * height ; i ++)
                     {
                         state1Values[i] = int.Parse(state1Data[i]);
                         state2Values[i] = int.Parse(state2Data[i]);
+                        characterValues[i] = int.Parse(characterData[i]);
                     }
 
                     RawLevel rawlevel = new RawLevel();
@@ -104,6 +112,7 @@ namespace Epheremal.Assets
                     rawlevel.width = width;
                     rawlevel.State1 = state1Values;
                     rawlevel.State2 = state2Values;
+                    rawlevel.Characters = characterValues;
 
                     return rawlevel;
 

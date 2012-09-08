@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterLibary.cs" />
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
     <Compile Include="Assets\TileLibrary.cs" />
