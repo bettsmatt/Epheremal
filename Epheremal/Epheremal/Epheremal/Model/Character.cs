@@ -63,12 +63,12 @@ namespace Epheremal.Model
 
         public override double GetX()
         {
-            return PosX;
+            return (PosX + (_width / 2)) - Engine.xOffset;
         }
 
         public override double GetY()
         {
-            return PosY;
+            return (PosY + (_height / 2)) - Engine.yOffset;
         }
     }
 }

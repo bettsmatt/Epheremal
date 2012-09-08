@@ -19,10 +19,12 @@ namespace Epheremal.Model
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
+        private RawLevel _raw;
         private int _level;
 
         public Level(int level)
         {
+            this._level = level;
         }
         /// <summary>
         /// The method responsible for populating the current sprite batch 
@@ -92,6 +94,12 @@ namespace Epheremal.Model
                 c.YAcc += gravity; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
+
+                // If it is too slow set to 0
+                if (c.YVel < 0.01 && c.YVel > -0.01) c.YVel = 0;
+                if (c.XVel < 0.01 && c.XVel > -0.01) c.XVel = 0;
+                if (c.YAcc < 0.01 && c.YAcc > -0.01) c.YAcc = 0;
+                if (c.XAcc < 0.01 && c.XAcc > -0.01) c.XAcc = 0;
             }
         }
 
@@ -129,6 +137,7 @@ namespace Epheremal.Model
             _blocks = new LinkedList<Block>();
             _characters = new LinkedList<Character>();
             _entities = new LinkedList<Entity>();
+            _raw = rawLevel;
             /*
             for (int i = 0; i < 10; i++)
             {
@@ -179,6 +188,12 @@ namespace Epheremal.Model
             foreach (Character c in _characters) _entities.AddFirst(c);
 
             return true;
+        }
+
+        public Double GetLevelWidthInPixels()
+        {
+            if (_raw == null) return 0;
+            return _raw.width * Block.BLOCK_WIDTH;
         }
     }
 }

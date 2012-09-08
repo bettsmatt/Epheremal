@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
+
 using System.Diagnostics;
 
 namespace Epheremal
@@ -26,9 +27,6 @@ namespace Epheremal
         public static Player Player;
         public static int xOffset {get; set;}
         public static int yOffset {get; set;}
-
-        SoundEffect soundJump;
-        SoundEffectInstance soundInstance;
 
         private Level _currentLevel;
 
@@ -54,10 +52,12 @@ namespace Epheremal
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
             //LevelParser.ParseTextFile("test.level");
+
             _currentLevel = new Level(1);
 
             TileMap tileMap = LevelParser.ParseTileMap(this, "generic_platformer_tiles", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
@@ -74,10 +74,7 @@ namespace Epheremal
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
-
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
-
         }
 
         /// <summary>
@@ -102,6 +99,10 @@ namespace Epheremal
 
             // TODO: Add your update logic here
             getInput();
+            if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
+                    xOffset += Convert.ToInt32(Player.XVel);
+            if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
+                    xOffset += Convert.ToInt32(Player.XVel);
             _currentLevel.movement();
             _currentLevel.interact();
             _currentLevel.behaviour();
@@ -147,17 +148,10 @@ namespace Epheremal
             if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Space))
             {
                 Player.jumping();
-             //     if (soundInstance.State == SoundState.Stopped)
-             //   {
-             //       soundInstance.Volume = 0.75f;
-                   // soundInstance.IsLooped = False;
-             //       soundInstance.Play();
-             //   }
-                
-        
             }
             // Change world state
             if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
+
             {
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
