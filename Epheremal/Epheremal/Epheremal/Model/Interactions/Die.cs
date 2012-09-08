@@ -13,10 +13,9 @@ namespace Epheremal.Model.Interactions
 
         }
 
-
         public override void Interact()
         {
-
+            Interactor.KillFromCurrentLevel();
         }
     }
 }

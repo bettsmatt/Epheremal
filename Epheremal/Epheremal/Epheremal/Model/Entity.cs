@@ -25,11 +25,10 @@ namespace Epheremal.Model
 
         public static EntityState State = EntityState.GOOD;
 
+        protected Level _level;
         protected int _width = Block.BLOCK_WIDTH;
         protected int _height = Block.BLOCK_WIDTH;
         protected Rectangle _bounds;
-
-        internal Texture2D _texture;
 
         public TileMap _tileMap;
         public int _tileIDGood;
@@ -57,5 +56,10 @@ namespace Epheremal.Model
 
         public abstract double GetX();
         public abstract double GetY();
+
+        public void SetLevel(Level level)
+        {
+            this._level = level;
+        }
     }
 }

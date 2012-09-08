@@ -47,14 +47,19 @@ namespace Epheremal.Model
             return retVal.ToArray();
         }
 
+        public void AddScore(int credit)
+        {
+            this._level.AddLevelScore(credit);
+        }
+
         public void movingLeft()
         {
             if (Engine.MarioControl)
             {
                 if (oldDirection != -1)
                 {
-                    //XVel = 0;
-                    //XAcc = 0;
+                    XVel = 0;
+                    XAcc = 0;
                 }
                 oldDirection = -1;
             }
@@ -93,7 +98,7 @@ namespace Epheremal.Model
                 if (XVel < 0)
                 {
                    XVel++;
-                   if (XVel > 0) ;
+                   if (XVel > 0) 
                     XVel = 0;
                 }
 

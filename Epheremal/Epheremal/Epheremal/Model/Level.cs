@@ -13,14 +13,17 @@ using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
-    class Level
+    public class Level
     {
         public const double gravity = 0.0981;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
+        private Queue<Character> _toKill = new Queue<Character>();
         private RawLevel _raw;
+
         private int _level;
+        private int _levelScore = 0;
 
         public Level(int level)
         {
@@ -49,12 +52,41 @@ namespace Epheremal.Model
 
             throw new NotSupportedException();
         }
+        /// 
+        /// Manage the level specific score
+        /// 
+        public void AwardScore()
+        {
+            Engine.Player.score += this._levelScore;
+        }
+
+        public void AddLevelScore(int credit)
+        {
+            if(credit >= 0)
+                this._levelScore += credit;
+        }
+
+        public void ClearLevelScore()
+        {
+            this._levelScore = 0;
+        }
+
+        public int GetScore() { return this._levelScore; }
+        /// Endregion scores
+        /// 
+        
 
         public void movement()
         {
-
             foreach (Character c in _characters)
             {
+
+
+                // Skip inamiate
+                foreach (Behaviour b in c.Behaviours[Entity.State])
+                    if(b is Inanimate)
+                        continue;
+
                 //Remove residual friction from acceleration while greater than nothing
                 double resFriction = 0.1;
                 if (c.XAcc > 0)
@@ -112,13 +144,18 @@ namespace Epheremal.Model
                 //if (c.YAcc < 0.01 && c.YAcc > -0.01) c.YAcc = 0;
                 //if (c.XAcc < 0.01 && c.XAcc > -0.01) c.XAcc = 0;
 
+                //Those characters that drop below the bottom of the screen, regardless of lethal components
+                //should still be removed, at least to improve on computation costs.
+                if (c.GetY() > _raw.height*Block.BLOCK_WIDTH)
+                {                    
+                    _toKill.Enqueue(c);
+                }
             }
         }
 
         public void interact()
         {
             //Detect collisions, and create appropriate interactions
-            
             foreach (Character c in _characters)
             {
                 foreach (Entity b in _entities)
@@ -133,7 +170,19 @@ namespace Epheremal.Model
                 }
                 c.PollInteractions();
             }
-
+            while (_toKill.Count > 0)
+            {
+                Character c = _toKill.Dequeue();
+                if (c is Player)
+                {
+                    ((Player)c).isDead = true; ((Player)c).lives--;
+                }
+                else
+                {
+                    _entities.Remove(c);
+                    _characters.Remove(c);
+                }
+            }
         }
 
         public void behaviour()
@@ -199,10 +248,10 @@ namespace Epheremal.Model
 
                  }
             }
-
+            
             _characters.AddFirst(Engine.Player);
             _entities.AddFirst(Engine.Player);
-
+            foreach (Entity e in _entities) e.SetLevel(this);
 
             return true;
         }
@@ -227,6 +276,11 @@ namespace Epheremal.Model
         {
             if (_raw == null) return 0;
             return _raw.height * Block.BLOCK_WIDTH;
+        }
+
+        public void Kill(Character c)
+        {
+            _toKill.Enqueue(c);
         }
     }
 }

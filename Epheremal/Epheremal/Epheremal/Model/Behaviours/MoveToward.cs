@@ -25,15 +25,37 @@ namespace Epheremal.Model.Behaviours
         public override void apply(Character character)
         {
 
-            double acceleration = 1;
+            double acceleration = 0.1;
 
-            if (_doX)
+            if (Math.Abs(character.PosX - Engine.Player.PosX) < _aggroRange && Math.Abs(character.PosY - Engine.Player.PosY) < _aggroRange)
             {
 
-                //distance from player 
-                double dx = character.PosX - Engine.Player.PosX;
+                if (_doX)
+                {
 
+                    if (Math.Abs(character.PosX - Engine.Player.PosX) < _aggroRange)
+                    {
 
+                        if (character.PosX < Engine.Player.PosX)
+                            character.XAcc += acceleration * _speedMod;
+                        if (character.PosX > Engine.Player.PosX)
+                            character.XAcc -= acceleration * _speedMod;
+                    }
+                }
+                if (_doY)
+                {
+                    if (Math.Abs(character.PosY - Engine.Player.PosY) < _aggroRange)
+                    {
+                        if (character.PosY > Engine.Player.PosY)
+                            character.YAcc -= acceleration * _speedMod;
+
+                        if (character.PosY < Engine.Player.PosY)
+                            character.YAcc += acceleration * _speedMod;
+                    }
+                }
+            }
+
+                /*
                 //player is right of character and within aggro range
                 if (dx < 0 && dx > -_aggroRange)
                 {
@@ -74,11 +96,8 @@ namespace Epheremal.Model.Behaviours
                   //  character.YAcc = 0;
                 }
             }
-
+                */
           }
             
-           
-            
-        
     }
 }

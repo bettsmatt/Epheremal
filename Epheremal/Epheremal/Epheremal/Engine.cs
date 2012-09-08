@@ -37,6 +37,8 @@ namespace Epheremal
         public static int xOffset { get; set; }
         public static int yOffset { get; set; }
 
+        public static bool triggetNextLevel = false;
+
         public static bool MarioControl = false;
         public static bool Music = true;
 
@@ -44,6 +46,7 @@ namespace Epheremal
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
         private bool _toggleControlPressed;
+
         public static bool Alert;
 
 
@@ -62,7 +65,6 @@ namespace Epheremal
         int frameRate = 0;
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
-        bool test = false;
 
         protected Song song;
         protected Song song2;
@@ -76,8 +78,16 @@ namespace Epheremal
 
             animatedTexture = new AnimatedTexture(4, 10);
 
-            // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
+            // Set device frame rate to 60 fps.
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            Window.AllowUserResizing = true; //allow resize.
+            Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
+
+        }
+
+        void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            Engine.Bounds = GraphicsDevice.Viewport.Bounds;
 
         }
 
@@ -132,8 +142,10 @@ namespace Epheremal
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
-            SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
 
+            SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
+            //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
 
             song = Content.Load<Song>("song");
             song2 = Content.Load<Song>("song2");
@@ -152,6 +164,7 @@ namespace Epheremal
                 }
             }
 
+            MediaPlayer.IsRepeating = true;
 
             font = Content.Load<SpriteFont>("basicFont");
         }
@@ -174,14 +187,16 @@ namespace Epheremal
         protected override void Update(GameTime gameTime)
         {
 
-            if (test)
+            // Check if the game has been won
+            if (triggetNextLevel == true)
             {
-                test = false; return;
+                loadNextLevel();
+                this._currentLevel.AwardScore();
+                this._currentLevel.ClearLevelScore();
+                triggetNextLevel = false;
             }
-            else test = true;
+
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-
 
             if (gameState == GameState.MENU)
             {
@@ -197,9 +212,9 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
-                    startLevel(levels[currentLevel]);
-                    MediaPlayer.Play(song);
 
+                    this._currentLevel.ClearLevelScore();
+                    startLevel(levels[currentLevel]);
                 }
 
                 // TODO: Add your update logic here
@@ -240,7 +255,6 @@ namespace Epheremal
         private void startLevel(RawLevel level)
         {
 
-            Debug.WriteLine("Starting Level");
             gameState = GameState.PLAYING;
             loadedLevel = false;
             Player.isDead = false;
@@ -255,8 +269,10 @@ namespace Epheremal
             loadedLevel = _currentLevel.LoadLevel(this, level, tileMap);
         }
 
+
         private void reloadCurrentLevel()
         {
+            Player.lives--;
             startLevel(levels[currentLevel]);
         }
 
@@ -316,16 +332,17 @@ namespace Epheremal
         private void DrawText()
         {
 
-            spriteBatch.DrawString(font, "Score: " + Player.score, new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(font, "Score: " + (Player.score + this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
             spriteBatch.DrawString(font, Player.lives + "", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
             spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right - 150, 5), Color.White);
+
 
             frameCounter++;
 
             string fps = string.Format("fps: {0}", frameRate);
             spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right - 150, Engine.Bounds.Bottom - 50), Color.White);
 
-            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Physics");
+            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Fluid");
             spriteBatch.DrawString(font, controlScheme, new Vector2(Engine.Bounds.Right - 350, Engine.Bounds.Bottom - 50), Color.White);
 
         }
@@ -391,12 +408,12 @@ namespace Epheremal
                         if (Entity.State == EntityState.GOOD)
                         {
                             Entity.State = EntityState.BAD;
-                            MediaPlayer.Play(song2);
+                            //MediaPlayer.Play(song2);
                         }
                         else
                         {
                             Entity.State = EntityState.GOOD;
-                            MediaPlayer.Play(song);
+                            //MediaPlayer.Play(song);
                         }
                     else
                         Alert = true;
@@ -405,6 +422,8 @@ namespace Epheremal
                 // Reset 
                 if (keyboardState.IsKeyDown(Keys.R) && lastKeyBoard.IsKeyUp(Keys.R))
                 {
+                    
+                    this._currentLevel.ClearLevelScore();
                     reloadCurrentLevel();
                 }
 
@@ -413,14 +432,13 @@ namespace Epheremal
                     loadNextLevel();
                 }
 
-                if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
+                if (keyboardState.IsKeyDown(Keys.C) && lastKeyBoard.IsKeyUp(Keys.C))
                 {
+                    
                     MarioControl = !MarioControl;
                 }
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
                 {
-
-
 
                     _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
                     _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
@@ -429,42 +447,13 @@ namespace Epheremal
 
 
                 }
-                // Reset 
-                if (keyboardState.IsKeyDown(Keys.R))
-                {
-                    reloadCurrentLevel();
-                }
-                    if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
-                    {
-                        MarioControl = !MarioControl;
 
-                    }
+                lastKeyBoard = keyboardState;
 
-                    if (keyboardState.IsKeyDown(Keys.M))
-                    {
-                        Debug.WriteLine("M pressed! Music is: " + Music);
-                        Music = !Music;
-                        if (Entity.State == EntityState.GOOD && Music)
-                        {
-                            MediaPlayer.Play(song2);
-                        }
-                        else if (Entity.State == EntityState.GOOD && Music)
-                        {
-                            MediaPlayer.Play(song);
-                        }
-                        else
-                        {
-                            MediaPlayer.Stop();
-                        }
-
-                    }
-
-                    lastKeyBoard = keyboardState;
-
-
-               
             }
+
         }
     }
 }
+
 

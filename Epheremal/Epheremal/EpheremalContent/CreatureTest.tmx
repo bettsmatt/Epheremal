@@ -5,17 +5,17 @@
  </tileset>
  <layer name="Good" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt02sOwUAUhuGp+zpc96Et+0DYh7t9oBZSl3WIYhneJm0iEz/aqRqkP56ZRBw93+lhCCGMP1LNCVFDHQ00c/p7UumxzWcmLNjofGGOX+gxk45f+J9Fke1wJqkth4Odob8XX54dPiv0cuA44vThHGNMMMUM8+BeYIlVjN/yc19xw13T+1j7OxHYwIlRK88hnIHyLqCAIkoooxKx1sUNeymHy7GPMNuw3nd8w1wt2Oigq1DvSTkuHF4KOzKI8J06WgmeUZTEea/vpJqjFtwNSZKZ6Mhhvsihup86c/SDe/RkqClDkhyhnvEdwhyq9Q9FA0Q5
+   eJzt0+kNgkAQhuEFzzo8+xDUPjTRPrztw6sQrzqMVxm+JJCYjT+WBV0w/Hh2E5LR+YbBEkJYf6RiC1FFDXU0bPM96fTY4pkDF210EpgjDT1mviMN35mKbIczUW04tthZ5nvx5Njhi0YvR44Tzj/OMcIYE0wx8+85FliG+C0v9x0PPGPOoTrTlbcTvjW2If5DnkMwA+1dQB4FFFFCWbF2jwcOUo49x0FhFkG95xTD/F200UFXo/4m5bhy3GLeEVU1NCPUFyRh3msSclT9uy6JMhMTOZwPOXT302SOvn8P3wwMZYiSI9CzkiHIoVv/Ak5CRLg=
   </data>
  </layer>
- <layer name="Bad" width="50" height="20">
+ <layer name="Bad" width="50" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJztz0EKgkAUh/GZA5R2ktIOYp1M7SLqRbLAukYJ6roPajGLBMNgnvAWPx6zGb5/aIwJlVJKKaUEWGGNQEDLmBQZcgEtcxQoUf3hrwh7TztqXHBdYLvrgSfaic3xh4R2V2C52Fj/LXNs6d8hWvCOlPYEBxzt++276Vc5zQ335rjj9GXL2crW0dg7hpHmF0EMdN4=
   </data>
  </layer>
  <layer name="Char" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1EkNACAQBEEOJUhFKk5wwIfAElKloDOPSQmAE3qJLgB25BpdsDY++Zj2+M4AN01RzwGP
+   eJxjYBgFo2AUjIJRQAvQyDTQLhgFIwFkjKYzooAiM2H2UAMPR+N+FIyCUTAKhh0AAI31Aj0=
   </data>
  </layer>
 </map>
