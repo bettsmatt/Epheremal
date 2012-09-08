@@ -16,7 +16,7 @@ namespace Epheremal.Model
         List<Behaviour> currentBehaviours;
 
         public int score;
-        public int lives;
+        public int lives = 3;
 
 
         public Boolean isDead = false;
