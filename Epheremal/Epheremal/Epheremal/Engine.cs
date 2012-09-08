@@ -41,6 +41,10 @@ namespace Epheremal
 
         SpriteFont font;
 
+        int frameRate = 0;
+        int frameCounter = 0;
+        TimeSpan elapsedTime = TimeSpan.Zero;
+
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -50,6 +54,7 @@ namespace Epheremal
 
             // Set device frame rate to 30 fps.
             TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+           
         }
 
         /// <summary>
@@ -102,6 +107,7 @@ namespace Epheremal
             // TODO: Unload any non ContentManager content here
         }
 
+       
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -140,6 +146,16 @@ namespace Epheremal
                     Player.isDead = true;
                 }
 
+                //frame rate counter stuff
+                elapsedTime += gameTime.ElapsedGameTime;
+
+                if (elapsedTime > TimeSpan.FromSeconds(1))
+                {
+                    elapsedTime -= TimeSpan.FromSeconds(1);
+                    frameRate = frameCounter;
+                    frameCounter = 0;
+                }
+                
             }
 
             // TODO: Add your game logic here.
@@ -182,9 +198,17 @@ namespace Epheremal
 
         private void DrawText()
         {
+            
             spriteBatch.DrawString(font, "Score: "+Player.score, new Vector2(5, 5), Color.White);
             spriteBatch.DrawString(font, Player.lives+"", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
             spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right- 150, 5), Color.White);
+          
+            frameCounter++;
+
+            string fps = string.Format("fps: {0}", frameRate);
+            spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right- 150, Engine.Bounds.Bottom-50), Color.White);
+            
+
         }
 
         private void getInput()
