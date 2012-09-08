@@ -13,4 +13,9 @@
    eJzt07sNgDAMBFBnACAFYRKcNdmMmXATCQkjgYLgIq54/Z0/UUQiERFRo+YgoiaH77PQe7vpTH9iAOiODvFvRpPMBJClarZGTQbI8uce5Z5a71Hy73skB/rfeD3UUbOnJRytD7vTw8tzxQbgf12d
   </data>
  </layer>
+ <layer name="Characters" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0rkNACAQA7ATPd/+y9JQQ8cj2RNESSKAlZxuJ4C94qdH1dl31/v3mg0BeMgADG8AVg==
+  </data>
+ </layer>
 </map>

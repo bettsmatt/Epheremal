@@ -14,6 +14,8 @@ namespace Epheremal.Model.Levels
         public int[] State1;
         public int[] State2;
 
+        public int[] Characters;
+
         public int width;
         public int height;
     }

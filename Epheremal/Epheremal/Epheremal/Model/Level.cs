@@ -145,12 +145,24 @@ namespace Epheremal.Model
             _entities = new LinkedList<Entity>();
             _raw = rawLevel;
 
-            TileLibrary tileLibrary = new TileLibrary(tileMap);
+            CharacterLibrary characterLibrary = new CharacterLibrary(
+                tileMap.Width / tileMap.TileSize ,
+                tileMap.Height / tileMap.TileSize
+            );   
+
+            TileLibrary tileLibrary = new TileLibrary(
+                tileMap.Width / tileMap.TileSize ,
+                tileMap.Height / tileMap.TileSize
+            );
 
             for (int y = 0; y < rawLevel.height; y++)
             {
                 for (int x = 0; x < rawLevel.width; x++)
                 {
+
+                    /*
+                     * Check for blocks
+                     */ 
 
                     int blockIDGood = rawLevel.State1[y * rawLevel.width + x];
                     int blockIDBad = rawLevel.State2[y * rawLevel.width + x];
@@ -162,13 +174,27 @@ namespace Epheremal.Model
                                 {EntityState.GOOD, tileLibrary.get(blockIDGood)},
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
+
+                    /*
+                     * Check for characters
+                     */ 
+                    int characterId = rawLevel.Characters[y * rawLevel.width + x];
+                    if(characterId != 0){
+                        Character c = characterLibrary.get(characterId);
+                        c.PosX = x * 10;
+                        c.PosY = y * 10;
+                        c._texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD);
+
+                        _characters.AddFirst(c);
+                    }
                     
                     _blocks.AddLast(b);
                     _entities.AddLast(b);
                 }
             }
-            
+
             _characters.AddFirst(Engine.Player);
+
             //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });

@@ -7,7 +7,7 @@ using Epheremal.Model.Behaviours;
 
 namespace Epheremal.Model
 {
-    class NPC : Character
+    public class NPC : Character
     {
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
