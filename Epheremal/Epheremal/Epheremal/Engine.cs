@@ -53,7 +53,7 @@ namespace Epheremal
             animatedTexture = new AnimatedTexture( 4, 2);
 
             // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
            
         }
 
