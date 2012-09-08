@@ -235,11 +235,6 @@ namespace Epheremal.Assets
                 Behaviours.Add(getIDFor(p.x, p.y), new List<Behaviour>() { new Deadly() });
             }
 
-
-
-
-            
-
             // Sky
             Behaviours.Add(getIDFor(0, 0), new List<Behaviour>() {});
 
