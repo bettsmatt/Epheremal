@@ -57,12 +57,6 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            foreach (Behaviour b in this.Behaviours[EntityState.GOOD]){
-                if(b is Harmless){
-                    //Debug.WriteLine("HArmless");
-                }
-            
-            }
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
         }

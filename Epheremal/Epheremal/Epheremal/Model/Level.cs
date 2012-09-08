@@ -133,6 +133,8 @@ namespace Epheremal.Model
             }
              */
 
+            TileLibrary tileLibrary = new TileLibrary(tileMap);
+
             for (int y = 0; y < rawLevel.height; y++)
             {
                 // Debug.WriteLine("");
@@ -144,21 +146,11 @@ namespace Epheremal.Model
 
                     Block b = new Block(game, tileMap, blockID) { GridX = x, GridY = y };
 
-                    switch (blockID){
-                        case 1:
-                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
-                                {EntityState.GOOD, new List<Behaviour>()},
-                                {EntityState.BAD, new List<Behaviour>()}
+                    b.AssignBehaviour(
+                        new Dictionary<EntityState, List<Behaviour>>() {
+                                {EntityState.GOOD, tileLibrary.get(blockID)},
+                                {EntityState.BAD, tileLibrary.get(blockID)}
                         });
-                            break;
-                        default:
-                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
-                                {EntityState.GOOD, new List<Behaviour>(){new Harmless()}},
-                                {EntityState.BAD, new List<Behaviour>(){new Harmless()}}
-                        });
-                            break;
-
-                    }
                     
                     _blocks.AddLast(b);
                     
