@@ -150,7 +150,7 @@ namespace Epheremal
             }
 
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(song);
+            //MediaPlayer.Play(song);
 
 
             font = Content.Load<SpriteFont>("basicFont");

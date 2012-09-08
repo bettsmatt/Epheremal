@@ -111,6 +111,7 @@
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
     <Compile Include="Assets\TileLibrary.cs" />
+    <Compile Include="Model\Behaviours\Adhesive.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
     <Compile Include="Model\Behaviours\Bouncy.cs" />
     <Compile Include="Model\Behaviours\Collectable.cs" />
@@ -204,4 +205,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!--
+      To modify your build process, add your task inside one of the targets below and uncomment it. 
+      Other similar extension points exist, see Microsoft.Common.targets.
+      <Target Name="BeforeBuild">
+      </Target>
+      <Target Name="AfterBuild">
+      </Target>
+    -->
 </Project>
