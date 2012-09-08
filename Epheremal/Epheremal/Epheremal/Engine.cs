@@ -102,6 +102,7 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
             //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
             song = Content.Load<Song>("song");
             MediaPlayer.Volume = 0.1f;
