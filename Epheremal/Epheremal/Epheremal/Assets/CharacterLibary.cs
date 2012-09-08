@@ -93,8 +93,11 @@ namespace Epheremal.Assets
                 return new Shrom_Man(tileMap, getIDFor(0, 24), getIDFor(2, 24));
             }
 
-            //else if (id == getIDFor(0, 25)) ;
-            //
+            else if (id == getIDFor(0, 25))
+            {
+                return new Coin(tileMap, getIDFor(0, 25), getIDFor(0, 25));
+            }
+            
 
             else
 

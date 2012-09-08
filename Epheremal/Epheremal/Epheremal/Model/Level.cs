@@ -15,7 +15,7 @@ namespace Epheremal.Model
 {
     class Level
     {
-        public const double gravity = 0.098;
+        public const double gravity = 0.0981;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -53,7 +53,6 @@ namespace Epheremal.Model
         public void movement()
         {
 
-
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
@@ -65,7 +64,7 @@ namespace Epheremal.Model
                 }
                 else
                 {
-                    c.XAcc += resFriction * -1 * c.XAcc;
+                    c.XAcc -= resFriction * c.XAcc;
                     c.XVel -= 0.01 * c.XVel;
                 }
                 if (c.YAcc > 0)
@@ -75,23 +74,21 @@ namespace Epheremal.Model
                 }
                 else
                 {
-                    c.YAcc += resFriction * -1 * c.YAcc;
+                    c.YAcc -= resFriction * c.YAcc;
                     c.YVel -= 0.01 * c.YVel;
                 }
-
-                //Add acceleration if less than terminal velocity as defined by vector product
 
                 bool belowTerminalX = c.XVel < Character.ABS_TERMINAL_VELOCITY_X && c.XVel > -Character.ABS_TERMINAL_VELOCITY_X;
                 bool belowTerminalY = c.YVel < Character.ABS_TERMINAL_VELOCITY_Y && c.YVel > -Character.ABS_TERMINAL_VELOCITY_Y;
 
-                if (belowTerminalX)
+                /*if (belowTerminalX)
                     c.XVel += c.XAcc;
 
 
                 if(belowTerminalY)
                     c.YVel += c.YAcc;
-
-                /*
+                */
+                
                 if (belowTerminalX || (!belowTerminalX && (c.XVel < 0 ^ c.XAcc < 0)))
                 {
                     c.XVel += c.XAcc;
@@ -100,8 +97,7 @@ namespace Epheremal.Model
                 {
                     c.YVel += c.YAcc;
                 }
-                 */
-
+                
                 //Constant gravity
                 c.YAcc += gravity; 
 
