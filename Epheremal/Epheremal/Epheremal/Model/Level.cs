@@ -196,7 +196,7 @@ namespace Epheremal.Model
             _characters.AddFirst(Engine.Player);
 
             //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
 
@@ -209,6 +209,12 @@ namespace Epheremal.Model
         {
             if (_raw == null) return 0;
             return _raw.width * Block.BLOCK_WIDTH;
+        }
+
+        public Double GetLevelHeightInPixels()
+        {
+            if (_raw == null) return 0;
+            return _raw.height * Block.BLOCK_WIDTH;
         }
     }
 }

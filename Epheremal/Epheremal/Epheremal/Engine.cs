@@ -104,9 +104,15 @@ namespace Epheremal
             //Scroll the viewport left and right when the player moves into the quarter of the screen on either side of the viewport,
             //we stop scrolling when the offset is flush to the left hand side (0), or right hand side (total width minus viewport width)
             if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
-                    xOffset += Convert.ToInt32(Player.XVel);
+                xOffset += Convert.ToInt32(Player.XVel);
             if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
-                    xOffset += Convert.ToInt32(Player.XVel);
+                xOffset += Convert.ToInt32(Player.XVel);
+            //And the same for the y direction
+            if ((Player.PosY - Engine.yOffset) > (3 * Bounds.Height / 4) && (Engine.yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) && Player.YVel > 0)
+                yOffset += Convert.ToInt32(Player.YVel);
+            if ((Player.PosY - Engine.yOffset) < (Bounds.Height / 4) && Engine.yOffset > 0 && Player.YVel < 0)
+                yOffset += Convert.ToInt32(Player.YVel);
+
             _currentLevel.movement();
             _currentLevel.interact();
             _currentLevel.behaviour();
