@@ -11,7 +11,7 @@ namespace Epheremal.Model.Behaviours
         public override void apply(Character character)
         {
 
-            double velocity = 0.75;
+            double acceleration = 0.01;
 
             double aggroRange = 100;
 
@@ -23,17 +23,17 @@ namespace Epheremal.Model.Behaviours
                 if (dx < 0 && dx > -aggroRange)
                 {
                    
-                    character.XVel = velocity;
+                    character.XAcc += acceleration;
                 }
                 //player is left of character and within aggro range
                 else if (dx > 0 && dx < aggroRange)
                 {
                     
-                    character.XVel = -velocity;
+                    character.XAcc -= acceleration;
                 }
                 else
                 {
-                    character.XVel = 0;
+                    character.XAcc = 0;
                 }
           }
             

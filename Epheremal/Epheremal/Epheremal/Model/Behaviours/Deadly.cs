@@ -14,7 +14,7 @@ namespace Epheremal.Model.Behaviours
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            return null;
+            return new PlayerDie(interactor, interactee);
         }
     }
 }

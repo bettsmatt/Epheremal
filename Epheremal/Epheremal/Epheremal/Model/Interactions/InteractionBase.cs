@@ -15,6 +15,8 @@ namespace Epheremal.Model.Interactions
             this.Interactee = interactee;
         }
 
+      
+
         public abstract void Interact();
     }
 }
