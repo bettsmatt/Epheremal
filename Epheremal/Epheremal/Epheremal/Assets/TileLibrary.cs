@@ -247,8 +247,8 @@ namespace Epheremal.Assets
             Behaviours.Add(getIDFor(0, 15), new List<Behaviour>() { });
 
             //Bounce pad
-            Pair BouncePad = new Pair { y = 20, x = 4 };
-            Behaviours.Add(getIDFor(4, 20), new List<Behaviour>() { new Harmless(), new Bouncy() });
+            Pair BouncePad = new Pair { y = 19, x = 4 };
+            Behaviours.Add(getIDFor(4, 19), new List<Behaviour>() { new Harmless(), new Bouncy() });
         }
 
         public List<Behaviour> get(int id) {

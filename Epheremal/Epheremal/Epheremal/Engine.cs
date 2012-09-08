@@ -80,7 +80,7 @@ namespace Epheremal
             _currentLevel = new Level(1);
 
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
-            rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+            rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level");
 
             Player = new Player(tileMap, 557, 557);
 
