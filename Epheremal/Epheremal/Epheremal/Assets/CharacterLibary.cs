@@ -101,7 +101,7 @@ namespace Epheremal.Assets
 
             else
 
-                throw new Exception("ID - " + id + " Does not corropont to a character");
+                throw new Exception("ID - " + id + " Does not correspond to a character");
 
         }
 
