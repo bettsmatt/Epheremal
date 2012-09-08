@@ -49,7 +49,7 @@ namespace Epheremal
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            
             animatedTexture = new AnimatedTexture( 4, 2);
 
             // Set device frame rate to 30 fps.
@@ -182,7 +182,6 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            DateTime start = DateTime.Now;
             //TEST THINGS
             spriteBatch.Begin();
             spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
@@ -234,7 +233,6 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
-                
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
             }
