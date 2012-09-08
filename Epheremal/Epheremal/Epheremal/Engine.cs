@@ -45,6 +45,8 @@ namespace Epheremal
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
 
+        protected Song song;
+
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -95,6 +97,12 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            song = Content.Load<Song>("song");
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+           
+
             font = Content.Load<SpriteFont>("basicFont");
         }
 
