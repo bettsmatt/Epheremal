@@ -28,7 +28,7 @@ namespace Epheremal
         public static int yOffset {get; set;}
 
         private Level _currentLevel;
-
+        private bool _pressed;
 
         public Engine()
         {
@@ -146,12 +146,16 @@ namespace Epheremal
             {
                 Player.jumping();
             }
+
+            
+
             // Change world state
-            if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
+            if (gamePadState.Buttons.B == ButtonState.Released || (keyboardState.IsKeyUp(Keys.LeftShift) && _pressed))
             {
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
             }
+            _pressed = keyboardState.IsKeyDown(Keys.LeftShift) || gamePadState.Buttons.B == ButtonState.Pressed;
         }
     }
 }
