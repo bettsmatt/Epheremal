@@ -197,7 +197,7 @@ namespace Epheremal
                 if (Player.isDead)
                 {
                     startLevel(levels[currentLevel]);
-                    MediaPlayer.Play(song);
+                    //MediaPlayer.Play(song);
                 }
 
                 // TODO: Add your update logic here
@@ -383,12 +383,12 @@ namespace Epheremal
                         if (Entity.State == EntityState.GOOD)
                         {
                             Entity.State = EntityState.BAD;
-                            MediaPlayer.Play(song2);
+                            //MediaPlayer.Play(song2);
                         }
                         else
                         {
                             Entity.State = EntityState.GOOD;
-                            MediaPlayer.Play(song);
+                            //MediaPlayer.Play(song);
                         }
                     else
                         Alert = true;
