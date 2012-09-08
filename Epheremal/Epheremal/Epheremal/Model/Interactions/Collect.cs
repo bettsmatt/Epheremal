@@ -5,28 +5,29 @@ using System.Text;
 
 namespace Epheremal.Model.Interactions
 {
-    class PlayerDie : InteractionBase
+    class Collect : InteractionBase
     {
 
         Character player;
         Entity entity;
 
-        public PlayerDie(Character a, Entity b)
+
+        public Collect(Character a, Entity b)
             : base(a, b)
         {
             player = a;
             entity = b;
         }
 
-       
-
         public override void Interact()
         {
             if (player is Player)
             {
-                ((Player)player).isDead = true;
-                ((Player)player).lives--;
+                //can add checks here for entity types to determine the point or life value
+                ((Player)player).score += 100; 
             }
         }
+
+        
     }
 }

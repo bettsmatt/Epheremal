@@ -199,6 +199,8 @@ namespace Epheremal.Model
             _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Ghost((int)(Block.BLOCK_WIDTH * 13.5), (int)(Block.BLOCK_WIDTH * 14.5)) { PosX = Block.BLOCK_WIDTH * 14, PosY = Block.BLOCK_WIDTH * 10, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            
 
             foreach (Character c in _characters) _entities.AddFirst(c);
 
