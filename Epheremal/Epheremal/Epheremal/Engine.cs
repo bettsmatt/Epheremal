@@ -171,7 +171,7 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            DateTime start = DateTime.Now;
             //TEST THINGS
             spriteBatch.Begin();
             spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
