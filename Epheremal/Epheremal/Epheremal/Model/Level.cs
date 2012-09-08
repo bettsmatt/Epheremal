@@ -21,7 +21,9 @@ namespace Epheremal.Model
         private LinkedList<Entity> _entities;
         private Queue<Character> _toKill = new Queue<Character>();
         private RawLevel _raw;
+
         private int _level;
+        private int _levelScore = 0;
 
         public Level(int level)
         {
@@ -50,10 +52,32 @@ namespace Epheremal.Model
 
             throw new NotSupportedException();
         }
+        /// 
+        /// Manage the level specific score
+        /// 
+        public void AwardScore()
+        {
+            Engine.Player.score += this._levelScore;
+        }
+
+        public void AddLevelScore(int credit)
+        {
+            if(credit >= 0)
+                this._levelScore += credit;
+        }
+
+        public void ClearLevelScore()
+        {
+            this._levelScore = 0;
+        }
+
+        public int GetScore() { return this._levelScore; }
+        /// Endregion scores
+        /// 
+        
 
         public void movement()
         {
-
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
@@ -113,6 +137,12 @@ namespace Epheremal.Model
                 //if (c.YAcc < 0.01 && c.YAcc > -0.01) c.YAcc = 0;
                 //if (c.XAcc < 0.01 && c.XAcc > -0.01) c.XAcc = 0;
 
+                //Those characters that drop below the bottom of the screen, regardless of lethal components
+                //should still be removed, at least to improve on computation costs.
+                if (c.GetY() > _raw.height*Block.BLOCK_WIDTH)
+                {                    
+                    _toKill.Enqueue(c);
+                }
             }
         }
 
@@ -136,8 +166,15 @@ namespace Epheremal.Model
             while (_toKill.Count > 0)
             {
                 Character c = _toKill.Dequeue();
-                _entities.Remove(c);
-                _characters.Remove(c);
+                if (c is Player)
+                {
+                    ((Player)c).isDead = true; ((Player)c).lives--;
+                }
+                else
+                {
+                    _entities.Remove(c);
+                    _characters.Remove(c);
+                }
             }
         }
 
@@ -204,10 +241,10 @@ namespace Epheremal.Model
 
                  }
             }
-            foreach (Entity e in _entities) e.SetLevel(this);
+            
             _characters.AddFirst(Engine.Player);
             _entities.AddFirst(Engine.Player);
-
+            foreach (Entity e in _entities) e.SetLevel(this);
 
             return true;
         }

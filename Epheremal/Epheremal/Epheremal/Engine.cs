@@ -186,6 +186,7 @@ namespace Epheremal
             // Check if the game has been won
             if (triggetNextLevel == true) {
                 loadNextLevel();
+                this._currentLevel.AwardScore();
                 triggetNextLevel = false;
             }
 
@@ -212,6 +213,7 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
+                    this._currentLevel.ClearLevelScore();
                     startLevel(levels[currentLevel]);
                     //MediaPlayer.Play(song);
                 }
@@ -326,7 +328,7 @@ namespace Epheremal
         private void DrawText()
         {
             
-            spriteBatch.DrawString(font, "Score: "+Player.score, new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(font, "Score: "+(Player.score+this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
             spriteBatch.DrawString(font, Player.lives+"", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
             spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right- 150, 5), Color.White);
           
@@ -435,6 +437,7 @@ namespace Epheremal
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))
             {
+                this._currentLevel.ClearLevelScore();
                 reloadCurrentLevel();
 
             }

@@ -24,8 +24,7 @@ namespace Epheremal.Model.Interactions
         public override void Interact()
         {
             if (player is Player && ((Player)player).isDead != true)
-            {
-                
+            {                
                 ((Player)player).isDead = true;
                 ((Player)player).lives--;
             }

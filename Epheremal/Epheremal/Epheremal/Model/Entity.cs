@@ -30,8 +30,6 @@ namespace Epheremal.Model
         protected int _height = Block.BLOCK_WIDTH;
         protected Rectangle _bounds;
 
-        internal Texture2D _texture;
-
         public TileMap _tileMap;
         public int _tileIDGood;
         public int _tileIDBad;
