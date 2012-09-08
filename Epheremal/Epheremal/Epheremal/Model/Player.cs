@@ -14,6 +14,8 @@ namespace Epheremal.Model
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
+        public Boolean isDead = false;
+
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
             List<Interaction> retVal = new List<Interaction>();

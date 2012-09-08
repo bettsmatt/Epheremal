@@ -40,8 +40,8 @@ namespace Epheremal.Model.Interactions
                     this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
                 }
 
-
-                if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player)
+             
+                if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player && Interactor.XVel >0.5)
                 {
                     SoundEffects.sounds["hurt"].Volume = 0.75f;
                     // soundInstance.IsLooped = False;
