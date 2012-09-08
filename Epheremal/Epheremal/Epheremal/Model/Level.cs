@@ -79,19 +79,17 @@ namespace Epheremal.Model
                     c.YVel -= 0.01 * c.YVel;
                 }
 
-                //Add acceleration if less than terminal velocity as defined by vector product
-
                 bool belowTerminalX = c.XVel < Character.ABS_TERMINAL_VELOCITY_X && c.XVel > -Character.ABS_TERMINAL_VELOCITY_X;
                 bool belowTerminalY = c.YVel < Character.ABS_TERMINAL_VELOCITY_Y && c.YVel > -Character.ABS_TERMINAL_VELOCITY_Y;
 
-                if (belowTerminalX)
+                /*if (belowTerminalX)
                     c.XVel += c.XAcc;
 
 
                 if(belowTerminalY)
                     c.YVel += c.YAcc;
-
-                /*
+                */
+                
                 if (belowTerminalX || (!belowTerminalX && (c.XVel < 0 ^ c.XAcc < 0)))
                 {
                     c.XVel += c.XAcc;
@@ -100,8 +98,7 @@ namespace Epheremal.Model
                 {
                     c.YVel += c.YAcc;
                 }
-                 */
-
+                
                 //Constant gravity
                 c.YAcc += gravity; 
 
