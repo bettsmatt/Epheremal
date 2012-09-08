@@ -28,7 +28,7 @@ namespace Epheremal.Model
         public int GridX {get; set;}
         public int GridY {get; set;}
 
-        public const int BLOCK_WIDTH = 32; //magic!
+        public const int BLOCK_WIDTH = 20; //magic!
 
         public Block(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
         {

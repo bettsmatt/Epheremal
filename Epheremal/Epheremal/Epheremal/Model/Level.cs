@@ -181,7 +181,6 @@ namespace Epheremal.Model
                                 {EntityState.GOOD, tileLibrary.get(blockIDGood)},
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
-
                     _blocks.AddLast(b);
                     _entities.AddLast(b);
 

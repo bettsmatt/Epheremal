@@ -95,7 +95,7 @@ namespace Epheremal.Assets
 
             else if (id == getIDFor(0, 25))
             {
-                return null;// new Coin(tileMap, getIDFor(0, 25), getIDFor(0, 25));
+                return new Coin(tileMap, getIDFor(0, 25), getIDFor(0, 25));
             }
             
 
