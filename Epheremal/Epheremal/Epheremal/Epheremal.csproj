@@ -128,6 +128,7 @@
     <Compile Include="Model\Behaviours\MovePatrol.cs" />
     <Compile Include="Model\Behaviours\MoveRight.cs" />
     <Compile Include="Model\Behaviours\MoveToward.cs" />
+    <Compile Include="Model\Behaviours\Unkillable.cs" />
     <Compile Include="Model\Behaviours\WinLevel.cs" />
     <Compile Include="Model\Block.cs" />
     <Compile Include="Model\Character.cs" />

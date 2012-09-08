@@ -187,6 +187,7 @@ namespace Epheremal
             if (triggetNextLevel == true) {
                 loadNextLevel();
                 this._currentLevel.AwardScore();
+                this._currentLevel.ClearLevelScore();
                 triggetNextLevel = false;
             }
 
