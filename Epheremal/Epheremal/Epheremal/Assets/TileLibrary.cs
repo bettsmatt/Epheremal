@@ -17,10 +17,13 @@ namespace Epheremal.Assets
 
         private Dictionary<int, List<Behaviour>> Behaviours = new Dictionary<int, List<Behaviour>>();
         private TileMap tileMap;
+        private int w;
+        private int h;
 
-        public TileLibrary(TileMap t) {
+        public TileLibrary(int width, int height) {
 
-            tileMap = t;
+            w = width;
+            h = height;
 
             /*
              * Build the dictionary 
@@ -169,9 +172,6 @@ namespace Epheremal.Assets
             }
 
         private int getIDFor(int x, int y) {
-
-            int w = tileMap.Width / tileMap.TileSize;
-            int h = tileMap.Height / tileMap.TileSize;
 
             int id = y * w + x + 1;
 
