@@ -62,7 +62,7 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            if (this is Player) Debug.WriteLine(Jumping);
+            //if (this is Player) Debug.WriteLine(Jumping);
             if (Animated)
             {
                 if (XVel < 0.2 && XVel > -0.2) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), Color.White);

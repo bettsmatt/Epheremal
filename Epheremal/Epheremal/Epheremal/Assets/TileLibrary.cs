@@ -152,6 +152,36 @@ namespace Epheremal.Assets
 
             }
 
+            List<Pair> deadly = new List<Pair>(){
+                
+                // Water
+                new Pair {y = 11, x = 1 },
+                new Pair {y = 11, x = 2 },
+                new Pair {y = 12, x = 1 },
+                new Pair {y = 12, x = 2 },
+            
+                // Spikes
+                new Pair {y = 12, x = 14 },
+                new Pair {y = 14, x = 14 },
+                new Pair {y = 14, x = 13 },
+                new Pair {y = 14, x = 12 },
+                
+                new Pair {y = 12, x = 15 },
+                new Pair {y = 13, x = 15 },
+                new Pair {y = 14, x = 15 },
+
+
+            };
+
+            foreach (Pair p in deadly ){
+                Behaviours.Add(getIDFor(p.x, p.y), new List<Behaviour>() { new Deadly() });
+            }
+
+
+
+
+            
+
             // Sky
             Behaviours.Add(getIDFor(0, 0), new List<Behaviour>() {});
 
