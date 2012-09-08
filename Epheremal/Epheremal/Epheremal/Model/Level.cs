@@ -10,13 +10,12 @@ using System.Diagnostics;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 using Epheremal.Model.Behaviours;
-using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
     class Level
     {
-        public const double gravity = 0.03;
+        public const double gravity = 0.098;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -81,16 +80,27 @@ namespace Epheremal.Model
                 }
 
                 //Add acceleration if less than terminal velocity as defined by vector product
-                bool belowTerminal = Math.Sqrt(c.XVel * c.XVel + c.YVel * c.YVel) < Character.ABS_TERMINAL_VELOCITY;
-                
-                if (belowTerminal || (!belowTerminal && (c.XVel < 0 ^ c.XAcc < 0)))
+
+                bool belowTerminalX = c.XVel < Character.ABS_TERMINAL_VELOCITY_X && c.XVel > -Character.ABS_TERMINAL_VELOCITY_X;
+                bool belowTerminalY = c.YVel < Character.ABS_TERMINAL_VELOCITY_Y && c.YVel > -Character.ABS_TERMINAL_VELOCITY_Y;
+
+                if (belowTerminalX)
+                    c.XVel += c.XAcc;
+
+
+                if(belowTerminalY)
+                    c.YVel += c.YAcc;
+
+                /*
+                if (belowTerminalX || (!belowTerminalX && (c.XVel < 0 ^ c.XAcc < 0)))
                 {
                     c.XVel += c.XAcc;
                 }
-                if (belowTerminal || (!belowTerminal && (c.YVel < 0 ^ c.YAcc < 0)))
+                if (belowTerminalY || (!belowTerminalY && (c.YVel < 0 ^ c.YAcc < 0)))
                 {
                     c.YVel += c.YAcc;
                 }
+                 */
 
                 //Constant gravity
                 c.YAcc += gravity; 
