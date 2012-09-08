@@ -87,8 +87,8 @@ namespace Epheremal.Assets
                     int height = int.Parse(heightLine.Split(new[] { ':', ',' })[1]);
                     int width = int.Parse(widthLine.Split(new[] { ':',',' })[1]);
 
-                    foreach (string s in state1Data)
-                        Debug.WriteLine(s);
+                    //foreach (string s in state1Data)
+                        //Debug.WriteLine(s);
 
                     int[] state1Values = new int[width * height];
                     int[] state2Values = new int[width * height];
