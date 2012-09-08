@@ -22,9 +22,9 @@ namespace Epheremal
     public class Engine : Microsoft.Xna.Framework.Game
     {
 
-        enum GameState { MENU, PLAYING}
+        enum GameState { MENU, PLAYING }
         GameState gameState = GameState.MENU;
-
+        
         /*
          * Menus
          */
@@ -34,20 +34,24 @@ namespace Epheremal
         SpriteBatch spriteBatch;
         public static Rectangle Bounds;
         public static Player Player;
-        public static int xOffset {get; set;}
-        public static int yOffset {get; set;}
+        public static int xOffset { get; set; }
+        public static int yOffset { get; set; }
 
         public static bool triggetNextLevel = false;
 
         public static bool MarioControl = false;
+        public static bool Music = true;
 
         private Level _currentLevel;
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
         private bool _toggleControlPressed;
-        
-        public static bool Alert;
 
+        private int _transition;
+
+
+        public static bool Alert;
+        private bool _renderCap;
 
         bool loadedLevel = false;
         KeyboardState lastKeyBoard = Keyboard.GetState();
@@ -68,17 +72,17 @@ namespace Epheremal
         protected Song song;
         protected Song song2;
 
-        
+
 
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
-            animatedTexture = new AnimatedTexture( 4, 10);
+
+            animatedTexture = new AnimatedTexture(4, 10);
 
             // Set device frame rate to 60 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
             Window.AllowUserResizing = true; //allow resize.
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
 
@@ -87,6 +91,7 @@ namespace Epheremal
         void Window_ClientSizeChanged(object sender, EventArgs e)
         {
             Engine.Bounds = GraphicsDevice.Viewport.Bounds;
+
         }
 
         /// <summary>
@@ -99,7 +104,6 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            
             //LevelParser.ParseTextFile("test.level");
 
 
@@ -112,7 +116,7 @@ namespace Epheremal
 
             /*
              * Add Levels
-             */ 
+             */
             levels = new List<RawLevel>();
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/test.level"));
@@ -121,7 +125,7 @@ namespace Epheremal
 
             /*
              * Create Player
-             */ 
+             */
             Player = new Player(tileMap, 557, 557);
 
 
@@ -136,31 +140,32 @@ namespace Epheremal
         /// </summary>
         protected override void LoadContent()
         {
-            
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
+
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
             SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
             //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
 
             song = Content.Load<Song>("song");
             song2 = Content.Load<Song>("song2");
-            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Volume = 0.3f;
 
-            try
+            if (Music)
             {
-                MediaPlayer.Play(song);
-                
-            }
-            catch (InvalidOperationException)
-            {
-                System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                try
+                {
+                     MediaPlayer.Play(song);
+                }
+                catch (InvalidOperationException)
+                {
+                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                }
             }
 
             MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Play(song);
-
 
             font = Content.Load<SpriteFont>("basicFont");
         }
@@ -174,7 +179,7 @@ namespace Epheremal
             // TODO: Unload any non ContentManager content here
         }
 
-       
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -184,15 +189,17 @@ namespace Epheremal
         {
 
             // Check if the game has been won
-            if (triggetNextLevel == true) {
+            if (triggetNextLevel == true)
+            {
                 loadNextLevel();
                 this._currentLevel.AwardScore();
                 this._currentLevel.ClearLevelScore();
                 triggetNextLevel = false;
             }
-
+            if (_renderCap) { _renderCap = false; return; }
+            else _renderCap = true;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
+
             if (gameState == GameState.MENU)
             {
                 getInput();
@@ -207,9 +214,9 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
+
                     this._currentLevel.ClearLevelScore();
                     startLevel(levels[currentLevel]);
-                    //MediaPlayer.Play(song);
                 }
 
                 // TODO: Add your update logic here
@@ -238,7 +245,7 @@ namespace Epheremal
                     frameRate = frameCounter;
                     frameCounter = 0;
                 }
-                
+
             }
             animatedTexture.UpdateFrame(elapsed);
 
@@ -260,11 +267,14 @@ namespace Epheremal
             Player.XAcc = 0;
             Player.YAcc = 0;
             Engine.xOffset = 0;
-            Entity.State = EntityState.GOOD;
+            //Entity.State = EntityState.GOOD;
             loadedLevel = _currentLevel.LoadLevel(this, level, tileMap);
+           
         }
 
-        private void reloadCurrentLevel(){
+
+        private void reloadCurrentLevel()
+        {
             Player.lives--;
             startLevel(levels[currentLevel]);
         }
@@ -279,14 +289,17 @@ namespace Epheremal
                 startLevel(levels[currentLevel]);
             }
 
-            else {
+            else
+            {
                 currentLevel = 0;
-                setSplashScreen(); 
+                setSplashScreen();
             }
+            
         }
 
 
-        private void setSplashScreen() {
+        private void setSplashScreen()
+        {
 
             gameState = GameState.MENU;
 
@@ -304,6 +317,16 @@ namespace Epheremal
             {
                 spriteBatch.Begin();
                 spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
+                if (_transition > 0)
+                {
+                    Texture2D txtr = new Texture2D(GraphicsDevice, Bounds.Width, Bounds.Height);
+                    Color[] buff = new Color[Bounds.Width * Bounds.Height];
+                    for (int i = 0; i < buff.Length; i++) buff[i] = Entity.State == EntityState.BAD ? Color.DarkRed : Color.LightBlue;
+                    txtr.SetData(buff);
+                    int fade = Entity.State == EntityState.GOOD ? 255 : 255;
+                    spriteBatch.Draw(txtr, Bounds, new Color(fade, fade, fade, _transition));
+                    _transition -= 30;
+                }
                 DrawText();
                 spriteBatch.End();
             }
@@ -322,15 +345,16 @@ namespace Epheremal
 
         private void DrawText()
         {
-            
-            spriteBatch.DrawString(font, "Score: "+(Player.score+this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
-            spriteBatch.DrawString(font, Player.lives+"", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
-            spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right- 150, 5), Color.White);
-          
+
+            spriteBatch.DrawString(font, "Score: " + (Player.score + this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(font, Player.lives + "", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
+            spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right - 150, 5), Color.White);
+
+
             frameCounter++;
 
             string fps = string.Format("fps: {0}", frameRate);
-            spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right- 150, Engine.Bounds.Bottom-50), Color.White);
+            spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right - 150, Engine.Bounds.Bottom - 50), Color.White);
 
             string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Fluid");
             spriteBatch.DrawString(font, controlScheme, new Vector2(Engine.Bounds.Right - 350, Engine.Bounds.Bottom - 50), Color.White);
@@ -356,59 +380,115 @@ namespace Epheremal
 
             }
 
+
             /*
              * Listen for game input 
              */
 
-            if(gameState == GameState.PLAYING)
+            if (gameState == GameState.PLAYING)
             {
 
-                if(keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)){
+                if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape))
+                {
                     setSplashScreen();
                 }
 
                 // Move left
-                if (gamePadState.DPad.Left == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X < 0 || keyboardState.IsKeyDown(Keys.Left))
+                if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (xOffset > 0) xOffset -= 5;
+                    if (xOffset < 0) xOffset = 0;
+                }
+                else if (gamePadState.DPad.Left == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X < 0 || keyboardState.IsKeyDown(Keys.Left))
                 {
                     Player.movingLeft();
                 }
                 // Move right
+                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (xOffset < (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset += 5;
+                    if (xOffset > (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset = (int)(_currentLevel.GetLevelWidthInPixels() - Bounds.Width);
+                }
                 else if (gamePadState.DPad.Right == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X > 0 || keyboardState.IsKeyDown(Keys.Right))
                 {
                     Player.movingRight();
                 }
+
                 else
                 {
                     Player.notMoving();
                 }
                 // Jump
-                if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
+                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (yOffset > 0) yOffset -= 5;
+                    if (yOffset < 0) yOffset = 0;
+                }
+                else if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
                 {
                     Player.jumping();
                 }
 
+                if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (_currentLevel.GetLevelHeightInPixels() > Bounds.Height)
+                    {
+                        if (yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset += 5;
+                        if (yOffset > (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset = (int)(_currentLevel.GetLevelHeightInPixels() - Bounds.Height);
+                    }
+                }
+                if (keyboardState.IsKeyUp(Keys.LeftControl) && lastKeyBoard.IsKeyDown(Keys.LeftControl))
+                {
+                    xOffset = Convert.ToInt32(Math.Min(Math.Max(Player.PosX - Bounds.Width/2, 0), _currentLevel.GetLevelWidthInPixels()-Bounds.Width));
+                    yOffset = Convert.ToInt32(Math.Min(Math.Max(Player.PosY - Bounds.Height / 2, 0), _currentLevel.GetLevelHeightInPixels()-Bounds.Height));
+                }
+
                 // Change world state
-                
+
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyBoard.IsKeyUp(Keys.LeftShift)))
                 {
                     if (_currentLevel.ValidateToggle())
+                    {
+                        _transition = 255;
                         if (Entity.State == EntityState.GOOD)
                         {
                             Entity.State = EntityState.BAD;
-                            //MediaPlayer.Play(song2);
+                            if (Music)
+                            {
+                                try
+                                {
+                                    MediaPlayer.Play(song2);
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                                }
+                            }
                         }
                         else
                         {
                             Entity.State = EntityState.GOOD;
-                            //MediaPlayer.Play(song);
+                            if (Music)
+                            {
+                                try
+                                {
+                                    MediaPlayer.Play(song);
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                                }
+                            }
                         }
+                    }
                     else
                         Alert = true;
                 }
-                
+
                 // Reset 
                 if (keyboardState.IsKeyDown(Keys.R) && lastKeyBoard.IsKeyUp(Keys.R))
                 {
+                    
                     this._currentLevel.ClearLevelScore();
                     reloadCurrentLevel();
                 }
@@ -418,23 +498,34 @@ namespace Epheremal
                     loadNextLevel();
                 }
 
-                if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
+                if (keyboardState.IsKeyDown(Keys.C) && lastKeyBoard.IsKeyUp(Keys.C))
                 {
+                    
                     MarioControl = !MarioControl;
                 }
 
-                _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
-                _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
-                _toggleControlPressed = keyboardState.IsKeyDown(Keys.C);
+                if (keyboardState.IsKeyDown(Keys.M) && lastKeyBoard.IsKeyUp(Keys.M))
+                {
 
-                
+                    Music = !Music;
+                }
+                if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
+                {
+
+                    _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
+                    _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
+                    _toggleControlPressed = keyboardState.IsKeyDown(Keys.C);
+
+
+
+                }
+
+                lastKeyBoard = keyboardState;
 
             }
-           
-            lastKeyBoard = keyboardState;
-
 
         }
-
     }
 }
+
+

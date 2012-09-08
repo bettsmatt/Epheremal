@@ -247,6 +247,12 @@ namespace Epheremal.Assets
             //Sticky/web
             Pair Web = new Pair { y = 19, x = 4 };
             Behaviours.Add(getIDFor(5, 19), new List<Behaviour>() { new Harmless(), new Adhesive() });
+
+            Pair BoostLeft = new Pair { y = 20, x = 4 };
+            Behaviours.Add(getIDFor(4, 20), new List<Behaviour>() { new Harmless(), new Boosts() });
+
+            Pair BoostRight = new Pair { y = 20, x = 5 };
+            Behaviours.Add(getIDFor(5, 20), new List<Behaviour>() { new Harmless(), new Boosts() });
         }
 
         public List<Behaviour> get(int id) {

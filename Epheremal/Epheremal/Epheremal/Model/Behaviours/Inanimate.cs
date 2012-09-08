@@ -15,18 +15,6 @@ namespace Epheremal.Model.Behaviours
         public void apply(Character character)
         {
 
-            // AntiGrav
-            /*
-            if (first)
-            {
-                firstX = character.PosX;
-                firstY = character.PosY;
-                first = false;
-            }
-             * */
-
-            //character.PosX = firstX;
-            //character.PosY = firstY;
 
             character.XVel = 0;
             character.YVel = 0;
