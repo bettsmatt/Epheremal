@@ -34,7 +34,7 @@ namespace Epheremal.Model.Interactions
             if (Math.Abs(dx) > Math.Abs(dy))
             {
 
-                Interactor.YVel *= 0.98; //Friction
+                Interactor.YVel *= 0.9985; //Friction
 
                 if (dx > 0)
                 {
@@ -48,7 +48,7 @@ namespace Epheremal.Model.Interactions
                 }
 
                 Interactor.PosX -= xVel;
-
+                
                 if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player && Interactor.XVel >0.5)
 
                 {
@@ -60,7 +60,7 @@ namespace Epheremal.Model.Interactions
             else
             {
 
-                Interactor.XVel *= 0.98; //Apply a small friction coefficient
+                Interactor.XVel *= 0.9985; //Apply a small friction coefficient
 
                 if (dy > 0)
                 {
@@ -74,6 +74,7 @@ namespace Epheremal.Model.Interactions
                     Interactor.Jumping = false;
                 }
                 Interactor.PosY -= yVel;
+                
             }
 
         }

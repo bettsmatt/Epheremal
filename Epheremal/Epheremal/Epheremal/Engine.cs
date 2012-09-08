@@ -39,6 +39,8 @@ namespace Epheremal
         RawLevel rawLevel;
         AnimatedTexture animatedTexture;
 
+        SpriteFont font;
+
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -88,6 +90,7 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            font = Content.Load<SpriteFont>("basicFont");
         }
 
         /// <summary>
@@ -109,13 +112,14 @@ namespace Epheremal
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (loadedLevel)
             {
-                
                 // Allows the game to exit
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                     this.Exit();
 
                 if (Player.isDead)
                 {
+                    Player.isDead = true;
+                    Player.lives--;
                     resetGameWorld();
                 }
 
@@ -135,6 +139,7 @@ namespace Epheremal
                 {
                     Player.isDead = true;
                 }
+
             }
 
             // TODO: Add your game logic here.
@@ -151,6 +156,10 @@ namespace Epheremal
             Player.isDead = false;
             Player.PosX = 20;
             Player.PosY = 20;
+            Player.XVel = 0;
+            Player.YVel = 0;
+            Player.XAcc = 0;
+            Player.YAcc = 0;
             Engine.xOffset = 0;
             Entity.State = EntityState.GOOD;
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
@@ -166,10 +175,17 @@ namespace Epheremal
             //TEST THINGS
             spriteBatch.Begin();
             spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
+            DrawText();
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+        private void DrawText()
+        {
+            spriteBatch.DrawString(font, "Score: "+Player.score, new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(font, Player.lives+"", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
+            spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right- 150, 5), Color.White);
+        }
 
         private void getInput()
         {

@@ -15,6 +15,10 @@ namespace Epheremal.Model
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
+        public int score;
+        public int lives;
+
+
         public Boolean isDead = false;
 
         public Player(TileMap tileMap, int tileIDGood, int tileIDBad)

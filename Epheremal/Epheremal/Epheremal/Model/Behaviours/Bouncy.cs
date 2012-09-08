@@ -6,16 +6,15 @@ using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
-    class Ethreal : Behaviour
+    public class Bouncy : Behaviour
     {
         public void apply(Character character)
         {
-            //anti gravity
-            character.YAcc -= 0.015;
+
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            return null;
+            return new Bounce(interactor, interactee);
         }
     }
 }

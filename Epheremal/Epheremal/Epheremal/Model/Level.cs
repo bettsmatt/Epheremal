@@ -1,4 +1,3 @@
-
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace Epheremal.Model
 {
     class Level
     {
-        public const double gravity = 0.025;
+        public const double gravity = 0.03;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -59,7 +58,7 @@ namespace Epheremal.Model
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
-                double resFriction = 0.25;
+                double resFriction = 0.3;
                 if (c.XAcc > 0)
                 {
                     c.XAcc -= resFriction * c.XAcc;
@@ -199,8 +198,10 @@ namespace Epheremal.Model
             _characters.AddFirst(Engine.Player);
             _entities.AddFirst(Engine.Player);
 
+
             return true;
         }
+
 
         public Double GetLevelWidthInPixels()
         {
