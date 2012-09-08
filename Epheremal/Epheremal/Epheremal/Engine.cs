@@ -77,9 +77,16 @@ namespace Epheremal
             
             animatedTexture = new AnimatedTexture( 4, 10);
 
-            // Set device frame rate to 30 fps.
+            // Set device frame rate to 60 fps.
             TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
-           
+            Window.AllowUserResizing = true; //allow resize.
+            Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
+
+        }
+
+        void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            Engine.Bounds = GraphicsDevice.Viewport.Bounds;
         }
 
         /// <summary>
