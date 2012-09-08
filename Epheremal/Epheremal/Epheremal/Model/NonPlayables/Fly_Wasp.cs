@@ -17,15 +17,15 @@ namespace Epheremal.Model.NonPlayables
                                 new List<Behaviour>()
                                 {
                                     new Harmless(),
-                                    new Flies(),
+                                    new Flies(true),
                                     new MovePatrol(30,30,1)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
-                                    new Flies(),
+                                    new Flies(true),
                                     new Deadly(),
-                                    new MoveToward(2,100,true,true),
+                                    new MoveToward(1.25,150,true,true),
                                 }); 
         }
 

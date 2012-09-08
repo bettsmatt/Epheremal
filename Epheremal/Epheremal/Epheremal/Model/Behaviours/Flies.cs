@@ -9,8 +9,15 @@ namespace Epheremal.Model.Behaviours
 {
     class Flies : Behaviour
     {
-        double totalBob = 0.5;
-        double currentBob = 0;
+
+        bool _bob;
+
+        public Flies(bool bob) {
+            _bob = bob;
+        }
+
+        int totalBob = 30;
+        int currentBob = 15;
         string bobDirection = "up";
 
         public void apply(Character character)
@@ -18,25 +25,33 @@ namespace Epheremal.Model.Behaviours
             //anti gravity
             character.YAcc -= Level.gravity;
 
+            
+            if(_bob){
+                if (bobDirection == "up")
+                {
+                    currentBob++;
+                    character.PosY -= 0.3;
 
-            if (bobDirection == "up")
-            {
+                    if (currentBob > totalBob)
+                    {
+                        bobDirection = "down";
+                        currentBob = 0;
+                    }
+                }
 
-                currentBob += 0.1;
+                else {
 
-                if (currentBob > totalBob)
-                    bobDirection = "down";
+                    currentBob ++;
+                    character.PosY += 0.3;
+                    if (currentBob > totalBob)
+                    {
+                        bobDirection = "up";
+                        currentBob = 0;
+                    }
+                }
             }
+             
 
-            else {
-
-                currentBob -= 0.1;
-
-                if (currentBob < -totalBob)
-                    bobDirection = "up";
-            }
-
-            character.PosY += currentBob;
                 
                 /*
             if (bobEffect >= Level.gravity)
