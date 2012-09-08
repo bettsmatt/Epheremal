@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
-
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
 
@@ -51,6 +50,9 @@ namespace Epheremal
         bool test = false;
 
         protected Song song;
+        protected Song song2;
+
+        
 
         public Engine()
         {
@@ -98,14 +100,18 @@ namespace Epheremal
         /// </summary>
         protected override void LoadContent()
         {
+            
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
             SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
             //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
+
             song = Content.Load<Song>("song");
-            MediaPlayer.Volume = 0.1f;
+            song2 = Content.Load<Song>("song2");
+            MediaPlayer.Volume = 0.2f;
+
             try
             {
                 MediaPlayer.Play(song);
@@ -115,8 +121,10 @@ namespace Epheremal
             {
                 System.Diagnostics.Debug.WriteLine("don't steal music >:(");
             }
+
             MediaPlayer.IsRepeating = true;
-           
+            MediaPlayer.Play(song);
+
 
             font = Content.Load<SpriteFont>("basicFont");
         }
@@ -154,6 +162,7 @@ namespace Epheremal
                 if (Player.isDead)
                 {
                     resetGameWorld();
+                    MediaPlayer.Play(song);
                 }
 
                 // TODO: Add your update logic here
@@ -264,11 +273,19 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
+
                 if (_currentLevel.ValidateToggle())
-                    if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
-                    else Entity.State = EntityState.GOOD;
+                    if (Entity.State == EntityState.GOOD){
+                        Entity.State = EntityState.BAD;
+                         MediaPlayer.Play(song2);
+                    }
+                    else{ 
+                        Entity.State = EntityState.GOOD;
+                        MediaPlayer.Play(song);
+                    }
                 else
                     Alert = true;
+
             }
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))
