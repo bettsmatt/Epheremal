@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 using System.Diagnostics;
+using Epheremal.Model.NonPlayables;
 
 namespace Epheremal.Model
 {
@@ -63,6 +64,13 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
+            Debug.WriteLine(this.GetType());
+           // if (this is Coin)
+           // {
+           //     Debug.WriteLine(AnimatedTexture.Frame);
+           //     sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame), Color.White);
+            //    return sprites;
+           // }
             //if (this is Player) Debug.WriteLine(Jumping);
             if (Animated)
             {

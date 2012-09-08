@@ -6,6 +6,7 @@ using Epheremal.Model.Levels;
 using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Epheremal.Model.NonPlayables
 {
@@ -27,9 +28,10 @@ namespace Epheremal.Model.NonPlayables
                                     new Collectable()
                                 });
         }
-
+        
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
+            Debug.WriteLine(AnimatedTexture.Frame);
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame), Color.White);
             return sprites;
         }
