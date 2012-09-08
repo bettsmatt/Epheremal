@@ -18,7 +18,7 @@ public class AnimatedTexture
 {
     private int framecount;
     private float TimePerFrame;
-    private int Frame;
+    public static int Frame;
     private float TotalElapsed;
     private bool Paused;
 
