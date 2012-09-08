@@ -14,7 +14,6 @@ namespace Epheremal.Model.Behaviours
 
         public void apply(Character character)
         {
-<<<<<<< HEAD
             // AntiGrav
             if (first)
             {
@@ -25,8 +24,6 @@ namespace Epheremal.Model.Behaviours
             character.PosX = firstX;
             character.PosY = firstY;
 
-=======
->>>>>>> eddf9089a7e092111885077b7ce0057757b5e2e0
             character.XVel = 0;
             character.YVel = 0;
 
