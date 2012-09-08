@@ -31,11 +31,13 @@ namespace Epheremal.Assets
             /*
              * Some test characters 
              */
-            Behaviours.Add(getIDFor(12, 16), new Birdie(10, 30));
-            Behaviours.Add(getIDFor(13, 16), new Charger());
-            Behaviours.Add(getIDFor(14, 16), new Goomba());
-            Behaviours.Add(getIDFor(15, 16), new Jumper());
-            Behaviours.Add(getIDFor(16, 16), new Birdie(20, 25));
+
+            Behaviours.Add(getIDFor(0, 19), new Birdie(tileMap, getIDFor(12, 16), getIDFor(12, 16), 10, 30));
+            Behaviours.Add(getIDFor(0, 20), new Charger(tileMap, getIDFor(13, 16), getIDFor(13, 16)));
+            Behaviours.Add(getIDFor(0, 21), new Goomba(tileMap, getIDFor(14, 16), getIDFor(14, 16)));
+            Behaviours.Add(getIDFor(0, 22), new Jumper(tileMap, getIDFor(15, 16), getIDFor(15, 16)));
+            Behaviours.Add(getIDFor(0, 23), new Birdie(tileMap, getIDFor(16, 16), getIDFor(16, 16), 20, 25));
+            Behaviours.Add(getIDFor(0, 24), new Birdie(tileMap, getIDFor(16, 16), getIDFor(16, 16), 20, 25));
         }
 
         public NPC get(int id)

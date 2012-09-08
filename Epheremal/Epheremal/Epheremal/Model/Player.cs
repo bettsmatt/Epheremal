@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Epheremal.Model.Behaviours;
 using Epheremal.Model.Interactions;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
@@ -12,7 +13,6 @@ namespace Epheremal.Model
         Behaviour moveLeft = new MoveLeft();
         Behaviour moveRight = new MoveRight();
         Behaviour jump = new Jumps();
-        public Boolean Jumping = false;
         List<Behaviour> currentBehaviours;
 
         public int score;
@@ -32,7 +32,7 @@ namespace Epheremal.Model
             return retVal.ToArray();
         }
 
-        public Player()
+        public Player(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
         {
             Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             currentBehaviours = new List<Behaviour>();
@@ -41,6 +41,7 @@ namespace Epheremal.Model
             score = 0;
             lives = 3;
         }
+
 
         public void movingLeft()
         {
@@ -61,11 +62,7 @@ namespace Epheremal.Model
 
         public void jumping()
         {
-            if (!Jumping)
-            {
-                Behaviours[Entity.State].Add(jump);
-                Jumping = !Jumping;
-            }
+            Behaviours[Entity.State].Add(jump);
         }
     }
 }

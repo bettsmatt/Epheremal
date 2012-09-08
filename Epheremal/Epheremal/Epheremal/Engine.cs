@@ -42,6 +42,9 @@ namespace Epheremal
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Set device frame rate to 30 fps.
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
         }
 
         /// <summary>
@@ -54,22 +57,21 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            Player = new Player()
+            
+            //LevelParser.ParseTextFile("test.level");
+           
+            _currentLevel = new Level(1);
+
+            Player = new Player(tileMap, 10, 10)
             {
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
-            //LevelParser.ParseTextFile("test.level");
-
-            _currentLevel = new Level(1);
 
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
-
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
-
-            _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
 
@@ -104,6 +106,7 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -118,9 +121,15 @@ namespace Epheremal
             //Scroll the viewport left and right when the player moves into the quarter of the screen on either side of the viewport,
             //we stop scrolling when the offset is flush to the left hand side (0), or right hand side (total width minus viewport width)
             if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
-                    xOffset += Convert.ToInt32(Player.XVel);
+                xOffset += Convert.ToInt32(Player.XVel);
             if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
-                    xOffset += Convert.ToInt32(Player.XVel);
+                xOffset += Convert.ToInt32(Player.XVel);
+            //And the same for the y direction
+            if ((Player.PosY - Engine.yOffset) > (3 * Bounds.Height / 4) && (Engine.yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) && Player.YVel > 0)
+                yOffset += Convert.ToInt32(Player.YVel);
+            if ((Player.PosY - Engine.yOffset) < (Bounds.Height / 4) && Engine.yOffset > 0 && Player.YVel < 0)
+                yOffset += Convert.ToInt32(Player.YVel);
+
             _currentLevel.movement();
             _currentLevel.interact();
             _currentLevel.behaviour();

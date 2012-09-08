@@ -71,7 +71,7 @@ namespace Epheremal.Model.Interactions
                 {
                     Interactor.YVel = 0;
                     this.Interactor.YAcc = -0.3 * this.Interactor.YAcc; //bounce a little 
-                    if (Interactor is Player) ((Player)Interactor).Jumping = false;
+                    Interactor.Jumping = false;
                 }
                 Interactor.PosY -= yVel;
             }

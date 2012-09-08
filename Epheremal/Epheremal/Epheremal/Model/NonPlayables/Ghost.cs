@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epheremal.Model.Behaviours;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model.NonPlayables
 {
     class Ghost : NPC
     {
-        public Ghost(int patrolLeft, int patrolRight)
+        public Ghost(TileMap tileMap, int tileIDGood, int tileIDBad, int patrolLeft, int patrolRight)
+            : base(tileMap, tileIDGood, tileIDBad)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,

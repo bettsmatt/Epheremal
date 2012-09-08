@@ -18,8 +18,10 @@ namespace Epheremal.Model.Behaviours
         {
             
             //if charaters current vertical velocity is 0 do jump
-            if (character.YVel == 0)
+            if (Math.Abs(character.YVel) < 0.3 && !character.Jumping)
             {
+                character.Jumping = !character.Jumping;
+                character.Jumping = true;
                 //add a positive vertical velocity
                 character.YAcc -= jumpAcceleration;
                 if (SoundEffects.sounds["jump"].State == SoundState.Stopped)

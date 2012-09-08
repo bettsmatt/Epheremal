@@ -192,6 +192,9 @@
     <Folder Include="Engine\" />
     <Folder Include="View\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnimatedTexture.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
