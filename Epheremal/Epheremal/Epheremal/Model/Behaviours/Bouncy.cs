@@ -13,7 +13,7 @@ namespace Epheremal.Model.Behaviours
 
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
-        {
+        {            
             return new Bounce(interactor, interactee);
         }
     }

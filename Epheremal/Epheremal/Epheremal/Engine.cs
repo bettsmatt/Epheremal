@@ -107,6 +107,7 @@ namespace Epheremal
             levels = new List<RawLevel>();
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/test.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level"));
             loadedLevel = false;
 
             /*
