@@ -1,4 +1,5 @@
-﻿﻿using System;
+
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Epheremal.Model
 {
     class Level
     {
+        public const double gravity = 0.025;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -53,7 +55,6 @@ namespace Epheremal.Model
         public void movement()
         {
 
-            double gravity = 0.015;
 
             foreach (Character c in _characters)
             {
@@ -205,6 +206,11 @@ namespace Epheremal.Model
         {
             if (_raw == null) return 0;
             return _raw.width * Block.BLOCK_WIDTH;
+        }
+        public Double GetLevelHeightInPixels()
+        {
+            if (_raw == null) return 0;
+            return _raw.height * Block.BLOCK_WIDTH;
         }
     }
 }

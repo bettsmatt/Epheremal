@@ -23,6 +23,7 @@ namespace Epheremal.Model.NonPlayables
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
+                                    new Flies(),
                                     new Deadly(),
                                     new MoveToward(),
                                 }); 

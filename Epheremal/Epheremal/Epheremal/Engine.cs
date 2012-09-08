@@ -69,6 +69,7 @@ namespace Epheremal
 
             loadedLevel = _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
+
             base.Initialize();
         }
 

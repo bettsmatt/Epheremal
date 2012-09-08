@@ -24,10 +24,13 @@ namespace Epheremal.Model
         public double XVel {get; set;}
         public double YVel {get; set;}
 
+        public Boolean Jumping = false;
+
         public Character(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
         {
 
         }
+
 
         public void DoBehaviour()
         {
