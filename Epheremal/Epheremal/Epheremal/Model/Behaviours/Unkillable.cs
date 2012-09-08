@@ -6,7 +6,7 @@ using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
-    class Deadly : Behaviour
+    class Unkillable : Behaviour
     {
         public void apply(Character character)
         {
@@ -14,12 +14,7 @@ namespace Epheremal.Model.Behaviours
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            if (interactor.Behaviours[Entity.State].Exists(e => e is Unkillable)) return null;
-            
-            if (interactor is Player)
-            return new PlayerDie(interactor, interactee);
-
-            return new Die(interactor, interactee);
+            return null;
         }
     }
 }

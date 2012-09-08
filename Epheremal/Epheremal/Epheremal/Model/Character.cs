@@ -66,7 +66,6 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            if (Dead) return sprites;
             Color tint = Engine.Alert ? Color.Red : Color.White;
             if (Animated)
             {
@@ -114,12 +113,10 @@ namespace Epheremal.Model
             return (PosY + (_height / 2)) - Engine.yOffset;
         }
 
-        public void Kill()
+        public void KillFromCurrentLevel()
         {
-            // TODO PLEASE DO IT PROPERLY LOL
-            PosX = -100;
-            PosY = -100;
-            Dead = true;
+            this._level.Kill(this);
         }
+
     }
 }

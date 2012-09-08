@@ -21,13 +21,15 @@ namespace Epheremal.Model.NonPlayables
                                 new List<Behaviour>()
                                 {
                                     new Collectable(),
-                                    new Inanimate()
+                                    new Inanimate(),
+                                    new Unkillable(),
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
                                     new Collectable(),
-                                    new Inanimate()
+                                    new Inanimate(),
+                                    new Unkillable(),
                                 });
         }
         

@@ -45,6 +45,7 @@ namespace Epheremal
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
         private bool _toggleControlPressed;
+        
         public static bool Alert;
 
 
@@ -63,7 +64,6 @@ namespace Epheremal
         int frameRate = 0;
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
-        bool test = false;
 
         protected Song song;
         protected Song song2;
@@ -78,7 +78,7 @@ namespace Epheremal
             animatedTexture = new AnimatedTexture( 4, 10);
 
             // Set device frame rate to 60 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
             Window.AllowUserResizing = true; //allow resize.
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
 
@@ -186,18 +186,13 @@ namespace Epheremal
             // Check if the game has been won
             if (triggetNextLevel == true) {
                 loadNextLevel();
+                this._currentLevel.AwardScore();
+                this._currentLevel.ClearLevelScore();
                 triggetNextLevel = false;
             }
 
-            if (test)
-            {
-                test = false; return;
-            }
-            else test = true;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-
-
+            
             if (gameState == GameState.MENU)
             {
                 getInput();
@@ -212,6 +207,7 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
+                    this._currentLevel.ClearLevelScore();
                     startLevel(levels[currentLevel]);
                     //MediaPlayer.Play(song);
                 }
@@ -269,6 +265,7 @@ namespace Epheremal
         }
 
         private void reloadCurrentLevel(){
+            Player.lives--;
             startLevel(levels[currentLevel]);
         }
 
@@ -326,7 +323,7 @@ namespace Epheremal
         private void DrawText()
         {
             
-            spriteBatch.DrawString(font, "Score: "+Player.score, new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(font, "Score: "+(Player.score+this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
             spriteBatch.DrawString(font, Player.lives+"", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
             spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right- 150, 5), Color.White);
           
@@ -335,7 +332,7 @@ namespace Epheremal
             string fps = string.Format("fps: {0}", frameRate);
             spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right- 150, Engine.Bounds.Bottom-50), Color.White);
 
-            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Physics");
+            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Fluid");
             spriteBatch.DrawString(font, controlScheme, new Vector2(Engine.Bounds.Right - 350, Engine.Bounds.Bottom - 50), Color.White);
 
         }
@@ -412,6 +409,7 @@ namespace Epheremal
                 // Reset 
                 if (keyboardState.IsKeyDown(Keys.R) && lastKeyBoard.IsKeyUp(Keys.R))
                 {
+                    this._currentLevel.ClearLevelScore();
                     reloadCurrentLevel();
                 }
 
@@ -432,16 +430,11 @@ namespace Epheremal
                 
 
             }
-            // Reset 
-            if ( keyboardState.IsKeyDown(Keys.R))
-            {
-                reloadCurrentLevel();
-
-            }
-
+           
             lastKeyBoard = keyboardState;
 
 
         }
+
     }
 }
