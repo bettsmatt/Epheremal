@@ -97,7 +97,11 @@ namespace Epheremal.Assets
             {
                 return new Coin(tileMap, getIDFor(0, 25), getIDFor(0, 25));
             }
-            
+
+            else if (id == getIDFor(7, 19)) { 
+                return new Door(tileMap, getIDFor(7, 19), getIDFor(7, 19));
+            }
+
 
             else
 

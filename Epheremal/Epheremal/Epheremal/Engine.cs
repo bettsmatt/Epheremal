@@ -37,6 +37,8 @@ namespace Epheremal
         public static int xOffset {get; set;}
         public static int yOffset {get; set;}
 
+        public static bool triggetNextLevel = false;
+
         public static bool MarioControl = false;
 
         private Level _currentLevel;
@@ -174,6 +176,12 @@ namespace Epheremal
         protected override void Update(GameTime gameTime)
         {
 
+            // Check if the game has been won
+            if (triggetNextLevel == true) {
+                loadNextLevel();
+                triggetNextLevel = false;
+            }
+
             if (test)
             {
                 test = false; return;
@@ -239,7 +247,6 @@ namespace Epheremal
         private void startLevel(RawLevel level)
         {
 
-            Debug.WriteLine("Starting Level");
             gameState = GameState.PLAYING;
             loadedLevel = false;
             Player.isDead = false;
