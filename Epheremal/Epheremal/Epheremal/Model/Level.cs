@@ -115,7 +115,7 @@ namespace Epheremal.Model
             {
                 foreach (Entity b in _entities)
                 {
-                    if (c == b) continue;
+                    if (c == b) continue;//cannot interact with self
                     Rectangle cBounds = c.GetBoundingRectangle();
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
@@ -167,10 +167,10 @@ namespace Epheremal.Model
             }
             
             _characters.AddFirst(Engine.Player);
-            _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
 
             foreach (Character c in _characters) _entities.AddFirst(c);
 

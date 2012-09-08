@@ -16,6 +16,12 @@ namespace Epheremal.Model.Interactions
 
         public override void Interact()
         {
+            applyTo(Interactor, Interactee);
+            if (Interactee is Character) applyTo((Character)Interactee, Interactor);
+        }
+
+        private void applyTo(Character Interactor, Entity Interactee)
+        {
             double dx = Interactor.GetX() - Interactee.GetX();
             double dy = Interactor.GetY() - Interactee.GetY();
             double yVel = ((Character)Interactor).YVel;
@@ -26,35 +32,37 @@ namespace Epheremal.Model.Interactions
 
             if (Math.Abs(dx) > Math.Abs(dy))
             {
-                Interactor.PosX -= xVel;
-                //if (Interactor is Player || Interactee is Player) Debug.WriteLine("1--- dx: " + dx + " dy: " + dy);
+
+                Interactor.YVel *= 0.98; //Friction
+
                 if (dx > 0)
                 {
-                    this.Interactor.XVel = -Interactor.XVel * 0.5;
+                    Interactor.XVel *= -0.5;
                     this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
                 }
                 else
                 {
-                    this.Interactor.XVel = -Interactor.XVel * 0.5;
+                    Interactor.XVel *= -0.5;
                     this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
                 }
-                
+                Interactor.PosX -= xVel;
             }
             else
             {
-                Interactor.PosY -= yVel;
-                //if (Interactor is Player || Interactee is Player) Debug.WriteLine("2--- dx: " + dx + " dy: " + dy);
+
+                Interactor.XVel *= 0.95; //Apply a small friction coefficient
+
                 if (dy > 0)
                 {
-                    this.Interactor.YVel = -Interactor.YVel * 0.5;
+                    Interactor.YVel *= -0.5;
                     this.Interactor.YAcc = 1 * this.Interactor.YAcc * (this.Interactor.YAcc < 0 ? -1 : 1); //bounce a little
                 }
                 else
                 {
-                    this.Interactor.YVel = 0;
+                    Interactor.YVel = 0;
                     this.Interactor.YAcc = -0.3 * this.Interactor.YAcc; //bounce a little 
                 }
-                
+                Interactor.PosY -= yVel;
             }
         }
     }
