@@ -165,7 +165,7 @@ namespace Epheremal.Model
                     int blockIDGood = rawLevel.State1[y * rawLevel.width + x];
                     int blockIDBad = rawLevel.State2[y * rawLevel.width + x];
 
-                    Block b = new Block(game, tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
+                    Block b = new Block(tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
 
                     b.AssignBehaviour(
                         new Dictionary<EntityState, List<Behaviour>>() {

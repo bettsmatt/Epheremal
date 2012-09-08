@@ -6,6 +6,7 @@ using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Epheremal.Model.Interactions;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
@@ -22,6 +23,10 @@ namespace Epheremal.Model
 
         public double XVel {get; set;}
         public double YVel {get; set;}
+
+        public Character(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
+        {
+        }
 
         public void DoBehaviour()
         {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epheremal.Model.Behaviours;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model.NonPlayables
 {
     class Goomba : NPC
     {
-        public Goomba()
+        public Goomba(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,

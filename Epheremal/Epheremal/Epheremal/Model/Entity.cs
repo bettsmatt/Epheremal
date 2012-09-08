@@ -7,6 +7,7 @@ using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Epheremal.Model.Levels;
+using Epheremal.Assets;
 
 namespace Epheremal.Model
 {
@@ -34,9 +35,11 @@ namespace Epheremal.Model
         public int _tileIDGood;
         public int _tileIDBad;
 
-        public Entity()
+        public Entity(TileMap tileMap, int tileIDGood, int tileIDBad)
         {
-            this._bounds = Engine.Bounds;
+            this._tileIDGood = tileIDGood;
+            this._tileIDBad = tileIDBad;
+            this._tileMap = tileMap;
         }
 
         /*
