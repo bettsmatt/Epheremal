@@ -112,6 +112,10 @@
     <Compile Include="Assets\LevelParser.cs" />
     <Compile Include="Assets\TileLibrary.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Model\Behaviours\Collectable.cs" />
+>>>>>>> 6e86741eae8c0cba672f120380d1cfff3b083e8b
     <Compile Include="Model\Behaviours\Flies.cs" />
     <Compile Include="Model\Behaviours\Deadly.cs" />
     <Compile Include="Model\Behaviours\Ethreal.cs" />
@@ -129,6 +133,10 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Interactions\Bounce.cs" />
     <Compile Include="Model\Interactions\Collide.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Model\Interactions\Collect.cs" />
+>>>>>>> 6e86741eae8c0cba672f120380d1cfff3b083e8b
     <Compile Include="Model\Interactions\Die.cs" />
     <Compile Include="Model\Interactions\Interaction.cs" />
     <Compile Include="Model\Interactions\InteractionBase.cs" />
@@ -137,6 +145,10 @@
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Charger.cs" />
     <Compile Include="Model\NonPlayables\Birdie.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Model\NonPlayables\Ghost.cs" />
+>>>>>>> 6e86741eae8c0cba672f120380d1cfff3b083e8b
     <Compile Include="Model\NonPlayables\Jumper.cs" />
     <Compile Include="Model\NonPlayables\Goomba.cs" />
     <Compile Include="Model\NPC.cs" />

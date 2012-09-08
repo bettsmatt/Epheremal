@@ -6,16 +6,19 @@ using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
-    class Ethreal : Behaviour
+    class Collectable : Behaviour
     {
         public void apply(Character character)
         {
-            //anti gravity
-            character.YAcc -= 0.015;
+
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            return null;
+            if (interactor is Player)
+            {
+                return new Collect(interactor, interactee);
+            }
+            else return null;
         }
     }
 }

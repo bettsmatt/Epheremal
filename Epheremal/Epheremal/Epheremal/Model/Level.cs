@@ -198,6 +198,7 @@ namespace Epheremal.Model
             _characters.AddFirst(Engine.Player);
             _entities.AddFirst(Engine.Player);
 
+
             return true;
         }
 
