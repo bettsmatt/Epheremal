@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
+  <image source="tilemap.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Good" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1n0OwTAYBvDW9znYuIePuYdkLuIjDsI4CJtzMOMYniYaLDXVrS2JP36VSNb1Wd+3GyWE0L+f0CwR0gIHXGiXfvP+XVzXgz4MwDOcw/b9bTlQ+2vIqwo1qENDw/zvajwu6D4utKGj6TmZqnFRjgDDGjbUfr3kyRFiiGCvkGOLYWchfzoH6/kEznBRWE+M4XS7rmLwnJzBPON38cFcZbZ2ov/sEFllWCvM5wj22FSOQCCESGG+PgzAg6GmNbPaL6dqNs9evHo3+DDWlGECU3Kve060F4FkDt3vBv6dcaTP/y8znn8RvVEkfmbIEvWHam8UjfeaKyG9DyxD8gUZOF8yC1//Y1+M6HdxJHJcAe0bYik=
+  </data>
+ </layer>
+ <layer name="Bad" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt07sNgDAMBFBnACAFYRKcNdmMmXATCQkjgYLgIq54/Z0/UUQiERFRo+YgoiaH77PQe7vpTH9iAOiODvFvRpPMBJClarZGTQbI8uce5Z5a71Hy73skB/rfeD3UUbOnJRytD7vTw8tzxQbgf12d
+  </data>
+ </layer>
+</map>
