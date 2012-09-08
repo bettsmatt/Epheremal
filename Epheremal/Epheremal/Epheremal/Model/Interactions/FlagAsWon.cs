@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Epheremal.Model.Interactions
 {
-    class Collect : InteractionBase
+    class FlagAsWon : InteractionBase
     {
 
         Character player;
         Entity entity;
 
 
-        public Collect(Character a, Entity b)
+        public FlagAsWon(Character a, Entity b)
             : base(a, b)
         {
             player = a;
@@ -24,8 +24,10 @@ namespace Epheremal.Model.Interactions
             if (player is Player)
             {
                 //can add checks here for entity types to determine the point or life value
-                ((Player)player).score += 100;
-                SoundEffects.sounds["pickupcoin"].Play();
+                ((Player)player).score += 1000;
+                //SoundEffects.sounds["win"].Play();
+                Engine.triggetNextLevel = true;
+                new Die((Character)entity, player).Interact();
             }
         }
 
