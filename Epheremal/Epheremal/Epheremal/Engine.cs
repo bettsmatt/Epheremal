@@ -165,8 +165,8 @@ namespace Epheremal
         private void resetGameWorld()
         {
             Player.isDead = false;
-            Player.PosX = 20;
-            Player.PosY = 20;
+            Player.PosX = 32;
+            Player.PosY = 32;
             Player.XVel = 0;
             Player.YVel = 0;
             Player.XAcc = 0;

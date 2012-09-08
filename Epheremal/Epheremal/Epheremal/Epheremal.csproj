@@ -137,11 +137,12 @@
     <Compile Include="Model\Interactions\PlayerDie.cs" />
     <Compile Include="Model\Interactions\Stick.cs" />
     <Compile Include="Model\Level.cs" />
-    <Compile Include="Model\NonPlayables\Charger.cs" />
-    <Compile Include="Model\NonPlayables\Birdie.cs" />
-    <Compile Include="Model\NonPlayables\Ghost.cs" />
-    <Compile Include="Model\NonPlayables\Jumper.cs" />
-    <Compile Include="Model\NonPlayables\Goomba.cs" />
+    <Compile Include="Model\NonPlayables\Bird_Block.cs" />
+    <Compile Include="Model\NonPlayables\Knight_Ghost.cs" />
+    <Compile Include="Model\NonPlayables\Shrom_Man.cs" />
+    <Compile Include="Model\NonPlayables\Fly_Wasp.cs" />
+    <Compile Include="Model\NonPlayables\Snail_Bull.cs" />
+    <Compile Include="Model\NonPlayables\Worm_Devil.cs" />
     <Compile Include="Model\NPC.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
