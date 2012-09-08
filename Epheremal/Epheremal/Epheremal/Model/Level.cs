@@ -58,7 +58,7 @@ namespace Epheremal.Model
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
-                double resFriction = 0.3;
+                double resFriction = 0.1;
                 if (c.XAcc > 0)
                 {
                     c.XAcc -= resFriction * c.XAcc;
