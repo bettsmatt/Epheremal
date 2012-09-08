@@ -146,14 +146,15 @@ namespace Epheremal.Model
                 for (int x = 0; x < rawLevel.width; x++)
                 {
 
-                    int blockID = rawLevel.State1[y * rawLevel.width + x];
+                    int blockIDGood = rawLevel.State1[y * rawLevel.width + x];
+                    int blockIDBad = rawLevel.State2[y * rawLevel.width + x];
 
-                    Block b = new Block(game, tileMap, blockID) { GridX = x, GridY = y };
+                    Block b = new Block(game, tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
 
                     b.AssignBehaviour(
                         new Dictionary<EntityState, List<Behaviour>>() {
-                                {EntityState.GOOD, tileLibrary.get(blockID)},
-                                {EntityState.BAD, tileLibrary.get(blockID)}
+                                {EntityState.GOOD, tileLibrary.get(blockIDGood)},
+                                {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
                     
                     _blocks.AddLast(b);
