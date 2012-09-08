@@ -15,6 +15,10 @@ namespace Epheremal.Model
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
+        public int score;
+        public int lives;
+
+
         public Boolean isDead = false;
 
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
@@ -34,6 +38,8 @@ namespace Epheremal.Model
             currentBehaviours = new List<Behaviour>();
             Behaviours[EntityState.GOOD] = currentBehaviours;
             Behaviours[EntityState.BAD] = currentBehaviours;
+            score = 0;
+            lives = 3;
         }
 
 
