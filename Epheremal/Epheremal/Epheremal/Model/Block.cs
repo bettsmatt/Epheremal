@@ -30,10 +30,6 @@ namespace Epheremal.Model
 
         public const int BLOCK_WIDTH = 20; //magic!
 
-        public TileMap _tileMap;
-        public int _tileIDGood;
-        public int _tileIDBad;
-
         public Block(Engine game, TileMap tileMap, int tileIDGood, int tileIDBad)
         {
             this._tileIDGood = tileIDGood;

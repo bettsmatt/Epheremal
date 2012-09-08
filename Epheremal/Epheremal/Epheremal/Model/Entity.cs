@@ -6,6 +6,7 @@ using Epheremal.Model.Interactions;
 using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
@@ -28,6 +29,10 @@ namespace Epheremal.Model
         protected Rectangle _bounds;
 
         internal Texture2D _texture;
+
+        public TileMap _tileMap;
+        public int _tileIDGood;
+        public int _tileIDBad;
 
         public Entity()
         {
