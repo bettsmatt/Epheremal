@@ -8,7 +8,7 @@ namespace Epheremal.Model.NonPlayables
 {
     class Birdie : NPC
     {
-        public Birdie()
+        public Birdie(int patrolLeft, int patrolRight)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,
@@ -17,7 +17,7 @@ namespace Epheremal.Model.NonPlayables
                                     new Harmless(),
                                     new Flies(),
                                     new MoveToward(),
-                                    new MovePatrol( 50,  50)
+                                    new MovePatrol( patrolLeft,  patrolRight)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()

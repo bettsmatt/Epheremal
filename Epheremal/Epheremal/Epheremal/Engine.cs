@@ -27,6 +27,9 @@ namespace Epheremal
         public static int xOffset {get; set;}
         public static int yOffset {get; set;}
 
+        SoundEffect soundJump;
+        SoundEffectInstance soundInstance;
+
         private Level _currentLevel;
 
 
@@ -72,6 +75,9 @@ namespace Epheremal
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+
+            SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
+
         }
 
         /// <summary>
@@ -141,6 +147,14 @@ namespace Epheremal
             if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Space))
             {
                 Player.jumping();
+             //     if (soundInstance.State == SoundState.Stopped)
+             //   {
+             //       soundInstance.Volume = 0.75f;
+                   // soundInstance.IsLooped = False;
+             //       soundInstance.Play();
+             //   }
+                
+        
             }
             // Change world state
             if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
