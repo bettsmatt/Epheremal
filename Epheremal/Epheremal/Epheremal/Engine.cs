@@ -53,7 +53,7 @@ namespace Epheremal
             animatedTexture = new AnimatedTexture( 4, 2);
 
             // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
            
         }
 
@@ -124,8 +124,6 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
-                    Player.isDead = true;
-                    Player.lives--;
                     resetGameWorld();
                 }
 
@@ -141,10 +139,7 @@ namespace Epheremal
                 _currentLevel.interact();
                 _currentLevel.behaviour();
 
-                if (rawLevel.height * 32 < Player.PosY)
-                {
-                    Player.isDead = true;
-                }
+                
 
                 //frame rate counter stuff
                 elapsedTime += gameTime.ElapsedGameTime;

@@ -29,28 +29,25 @@ namespace Epheremal.Model.Interactions
             double xVel = ((Character)Interactor).XVel;
 
             double interactorAngle = Math.Atan2(yVel, xVel);
-            Console.WriteLine("dx:"+dx+"\tdy:"+dy);
-
+            double minimumReboundVelocity = 0.75;
             if (Math.Abs(dx) > Math.Abs(dy))
             {
 
                 Interactor.YVel *= 0.9985; //Friction
-
+                
                 if (dx > 0)
                 {
-                    Interactor.XVel *= -0.5;
-                    this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
+                    Interactor.PosX -= Math.Min(xVel, -minimumReboundVelocity);
+                    Interactor.XVel *= 0.5 * (Interactor.XAcc < 0 ? -1 : 1);
+                    this.Interactor.XAcc = this.Interactor.XAcc * (this.Interactor.XAcc < 0 ? -1 : 1); //bounce a little 
                 }
                 else
                 {
-                    Interactor.XVel *= -0.5;
-                    this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
+                    Interactor.PosX -= Math.Max(xVel, minimumReboundVelocity);
+                    Interactor.XVel *= 0.5 * (Interactor.XAcc > 0 ? -1 : 1);
+                    this.Interactor.XAcc = this.Interactor.XAcc * (this.Interactor.XAcc > 0 ? -1 : 1); ; //bounce a little 
                 }
-
-                Interactor.PosX -= xVel;
-                
                 if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player && Interactor.XVel >0.5)
-
                 {
                     SoundEffects.sounds["hurt"].Volume = 0.75f;
                     // soundInstance.IsLooped = False;
@@ -59,21 +56,23 @@ namespace Epheremal.Model.Interactions
             }
             else
             {
-
+                
                 Interactor.XVel *= 0.9985; //Apply a small friction coefficient
-
+                
                 if (dy > 0)
                 {
-                    Interactor.YVel *= -0.5;
-                    this.Interactor.YAcc = 1 * this.Interactor.YAcc * (this.Interactor.YAcc < 0 ? -1 : 1); //bounce a little
+                    Interactor.PosY -= Math.Min(yVel, -minimumReboundVelocity);
+                    Interactor.YVel *= 0.5 * (Interactor.YVel > 0 ? -1 : 1);
+                    this.Interactor.YAcc = 0.3 * this.Interactor.YAcc * (this.Interactor.YAcc < 0 ? -1 : 1); //bounce a little
                 }
                 else
                 {
+                    Interactor.PosY -= yVel;
                     Interactor.YVel = 0;
-                    this.Interactor.YAcc = -0.3 * this.Interactor.YAcc; //bounce a little 
+                    this.Interactor.YAcc = 0.3 * this.Interactor.YAcc * (this.Interactor.YAcc > 0 ? -1 : 1); //bounce a little 
                     Interactor.Jumping = false;
                 }
-                Interactor.PosY -= yVel;
+                
                 
             }
 
