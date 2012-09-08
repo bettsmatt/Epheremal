@@ -68,7 +68,6 @@ namespace Epheremal
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
-
             _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
