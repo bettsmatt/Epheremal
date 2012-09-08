@@ -9,7 +9,7 @@ namespace Epheremal.Model.NonPlayables
 {
     class Ghost : NPC
     {
-        public Ghost(TileMap tileMap, int tileIDGood, int tileIDBad, int patrolLeft, int patrolRight)
+        public Ghost(TileMap tileMap, int tileIDGood, int tileIDBad)
             : base(tileMap, tileIDGood, tileIDBad)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
@@ -17,13 +17,13 @@ namespace Epheremal.Model.NonPlayables
                                 new List<Behaviour>()
                                 {
                                     new Ethreal(),
-                                    new MovePatrol( patrolLeft,  patrolRight)
+                                    new MovePatrol()
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
                                     new Deadly(),
-                                    new MovePatrol( patrolLeft,  patrolRight)
+                                    new MovePatrol()
                                 }); 
         }
 
