@@ -48,7 +48,7 @@ namespace Epheremal.Model.Interactions
                 }
 
                 Interactor.PosX -= xVel;
-
+                
                 if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player && Interactor.XVel >0.5)
 
                 {
@@ -74,6 +74,7 @@ namespace Epheremal.Model.Interactions
                     Interactor.Jumping = false;
                 }
                 Interactor.PosY -= yVel;
+                
             }
 
         }

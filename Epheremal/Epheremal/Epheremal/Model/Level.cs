@@ -16,7 +16,7 @@ namespace Epheremal.Model
 {
     class Level
     {
-        public const double gravity = 0.3;
+        public const double gravity = 0.03;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
