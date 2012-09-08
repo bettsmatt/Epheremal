@@ -50,7 +50,7 @@ namespace Epheremal.Model.Interactions
             else
             {
 
-                Interactor.XVel *= 0.95; //Apply a small friction coefficient
+                Interactor.XVel *= 0.98; //Apply a small friction coefficient
 
                 if (dy > 0)
                 {
@@ -61,6 +61,7 @@ namespace Epheremal.Model.Interactions
                 {
                     Interactor.YVel = 0;
                     this.Interactor.YAcc = -0.3 * this.Interactor.YAcc; //bounce a little 
+                    if (Interactor is Player) ((Player)Interactor).Jumping = false;
                 }
                 Interactor.PosY -= yVel;
             }

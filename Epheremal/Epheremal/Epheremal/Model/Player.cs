@@ -12,6 +12,7 @@ namespace Epheremal.Model
         Behaviour moveLeft = new MoveLeft();
         Behaviour moveRight = new MoveRight();
         Behaviour jump = new Jumps();
+        public Boolean Jumping = false;
         List<Behaviour> currentBehaviours;
 
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
@@ -52,7 +53,11 @@ namespace Epheremal.Model
 
         public void jumping()
         {
-            Behaviours[Entity.State].Add(jump);
+            if (!Jumping)
+            {
+                Behaviours[Entity.State].Add(jump);
+                Jumping = !Jumping;
+            }
         }
     }
 }

@@ -36,8 +36,10 @@ namespace Epheremal.Model
         {
             foreach (Block block in _blocks)
             {
-                //accurately compute abs x and y from a grid position
-                block.RenderSelf(ref sprite);
+                double absX = block.GridX * Block.BLOCK_WIDTH, absY = block.GetY();
+                //only render those blocks which are within the screen
+                if(absX > (Engine.xOffset-2*Block.BLOCK_WIDTH) && absY < (Engine.xOffset+Engine.Bounds.Width+Block.BLOCK_WIDTH))
+                    block.RenderSelf(ref sprite);
             }
             foreach (Character character in _characters)
             {
