@@ -11,7 +11,6 @@ using System.Diagnostics;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 using Epheremal.Model.Behaviours;
-using Epheremal.Model.Levels;
 
 namespace Epheremal.Model
 {
