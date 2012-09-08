@@ -48,6 +48,7 @@ namespace Epheremal
         int frameRate = 0;
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
+        bool test = false;
 
         protected Song song;
 
@@ -56,10 +57,10 @@ namespace Epheremal
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             
-            animatedTexture = new AnimatedTexture( 4, 2);
+            animatedTexture = new AnimatedTexture( 4, 10);
 
             // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
            
         }
 
@@ -101,11 +102,13 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
             song = Content.Load<Song>("song");
             MediaPlayer.Volume = 0.1f;
             try
             {
                 MediaPlayer.Play(song);
+                
             }
             catch (InvalidOperationException)
             {
@@ -134,7 +137,13 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (test)
+            {
+                test = false; return;
+            }
+            else test = true;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (loadedLevel)
             {
                 // Allows the game to exit
@@ -158,11 +167,10 @@ namespace Epheremal
                     yOffset += Convert.ToInt32(Player.YVel);
                 if ((Player.PosY - Engine.yOffset) < (Bounds.Height / 4) && Engine.yOffset > 0 && Player.YVel < 0)
                     yOffset += Convert.ToInt32(Player.YVel);
+
                 _currentLevel.movement();
                 _currentLevel.interact();
                 _currentLevel.behaviour();
-
-                
 
                 //frame rate counter stuff
                 elapsedTime += gameTime.ElapsedGameTime;
@@ -175,10 +183,7 @@ namespace Epheremal
                 }
                 
             }
-
-            // TODO: Add your game logic here.
             animatedTexture.UpdateFrame(elapsed);
-           //Debug.WriteLine(animatedTexture.GetFrame());
 
             base.Update(gameTime);
         }

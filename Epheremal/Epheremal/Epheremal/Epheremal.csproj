@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{4612100E-42A2-48F2-830B-8C2C58C4D547}</ProjectGuid>
@@ -117,6 +117,7 @@
     <Compile Include="Model\Behaviours\Deadly.cs" />
     <Compile Include="Model\Behaviours\Ethreal.cs" />
     <Compile Include="Model\Behaviours\Harmless.cs" />
+    <Compile Include="Model\Behaviours\Inanimate.cs" />
     <Compile Include="Model\Behaviours\Invisible.cs" />
     <Compile Include="Model\Behaviours\Jumps.cs" />
     <Compile Include="Model\Behaviours\Move.cs" />
@@ -138,12 +139,11 @@
     <Compile Include="Model\Interactions\Stick.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Bird_Block.cs" />
-
     <Compile Include="Model\NonPlayables\Fly_Wasp.cs" />
     <Compile Include="Model\NonPlayables\Knight_Ghost.cs" />
     <Compile Include="Model\NonPlayables\Shrom_Man.cs" />
-             <Compile Include="Model\NonPlayables\Snail_Bull.cs" />
-                      <Compile Include="Model\NonPlayables\Worm_Devil.cs" />
+    <Compile Include="Model\NonPlayables\Snail_Bull.cs" />
+    <Compile Include="Model\NonPlayables\Worm_Devil.cs" />
     <Compile Include="Model\NPC.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

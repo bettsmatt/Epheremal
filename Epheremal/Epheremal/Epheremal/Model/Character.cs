@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 using System.Diagnostics;
+using Epheremal.Model.NonPlayables;
 
 namespace Epheremal.Model
 {
@@ -64,7 +65,6 @@ namespace Epheremal.Model
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
             Color tint = Engine.Alert ? Color.Red : Color.White;
-
             if (Animated)
             {
                 if (XVel < 0.2 && XVel > -0.2) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), tint);
