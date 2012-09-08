@@ -17,35 +17,60 @@ namespace Epheremal.Assets
     public class CharacterLibrary
     {
 
-        private Dictionary<int, NPC> Behaviours = new Dictionary<int, NPC>();
-        private TileMap tileMap;
+        private Dictionary<int, Character> Behaviours = new Dictionary<int, Character>();
         private int w;
         private int h;
+        TileMap tileMap;
 
-        public CharacterLibrary(int width, int height)
+        public CharacterLibrary(TileMap t, int width, int height)
         {
 
             w = width;
             h = height;
-
+            tileMap = t;
             /*
              * Some test characters 
              */
 
-            Behaviours.Add(getIDFor(0, 19), new Birdie(tileMap, getIDFor(12, 16), getIDFor(12, 16), 10, 30));
-            Behaviours.Add(getIDFor(0, 20), new Charger(tileMap, getIDFor(13, 16), getIDFor(13, 16)));
-            Behaviours.Add(getIDFor(0, 21), new Goomba(tileMap, getIDFor(14, 16), getIDFor(14, 16)));
-            Behaviours.Add(getIDFor(0, 22), new Jumper(tileMap, getIDFor(15, 16), getIDFor(15, 16)));
-            Behaviours.Add(getIDFor(0, 23), new Birdie(tileMap, getIDFor(16, 16), getIDFor(16, 16), 20, 25));
-            Behaviours.Add(getIDFor(0, 24), new Birdie(tileMap, getIDFor(16, 16), getIDFor(16, 16), 20, 25));
         }
 
-        public NPC get(int id)
+        public Character get(int id)
         {
-            //Debug.WriteLine("finding id " + id);
-            if (Behaviours.ContainsKey(id))
 
-                return Behaviours[id];
+            // Knight / Ghostr
+            if (id == getIDFor(0, 19)) {
+                return new Birdie(tileMap, getIDFor(0, 19), getIDFor(2, 19));
+            }
+
+            // Fly / Wasp
+            else if (id == getIDFor(0, 20))
+            {
+                return new Jumper(tileMap, getIDFor(0, 20), getIDFor(2, 20));
+            }
+            
+            // Worm / Devil
+            else if (id == getIDFor(0, 21))
+            {
+                return new Goomba(tileMap, getIDFor(0, 21), getIDFor(2, 21));
+            }
+            
+            // Snail / Bull
+            else if (id == getIDFor(0, 22))
+            {
+                return new Charger(tileMap, getIDFor(0, 22), getIDFor(2, 22));
+            }
+
+            //Bird /Block
+            else if (id == getIDFor(0, 23))
+            {
+                return new Birdie(tileMap, getIDFor(0, 23), getIDFor(2, 23));
+            }
+
+            // Mrushroom /Man
+            else if (id == getIDFor(0, 24))
+            {
+                return new Birdie(tileMap, getIDFor(0, 24), getIDFor(2, 24));
+            }
 
             else
 

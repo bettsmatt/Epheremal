@@ -12,18 +12,25 @@ namespace Epheremal.Model.Behaviours
         int left, right;
         bool goingLeft;
 
-        public MovePatrol(int l, int r)
+        bool fitstMove= true;
+
+        public MovePatrol()
         {
             goingLeft = true;
             moveLeft = new MoveLeft();
             moveRight = new MoveRight();
 
-            left = l;
-            right = r;
+
         }
 
         public override void apply(Character character)
         {
+            if (fitstMove) {
+                left = (int) character.PosX - 20;
+                right = (int) character.PosX + 20;
+                fitstMove = false;
+            }
+
             if (character.PosX < left) goingLeft = false;
             else if (character.PosX > right) goingLeft = true;
 
