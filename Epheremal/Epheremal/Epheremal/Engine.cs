@@ -124,8 +124,6 @@ namespace Epheremal
 
                 if (Player.isDead)
                 {
-                    Player.isDead = true;
-                    Player.lives--;
                     resetGameWorld();
                 }
 
@@ -141,10 +139,7 @@ namespace Epheremal
                 _currentLevel.interact();
                 _currentLevel.behaviour();
 
-                if (rawLevel.height * 32 < Player.PosY)
-                {
-                    Player.isDead = true;
-                }
+                
 
                 //frame rate counter stuff
                 elapsedTime += gameTime.ElapsedGameTime;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Epheremal.Model.Interactions
 {
@@ -22,8 +23,9 @@ namespace Epheremal.Model.Interactions
 
         public override void Interact()
         {
-            if (player is Player)
+            if (player is Player && ((Player)player).isDead != true)
             {
+                
                 ((Player)player).isDead = true;
                 ((Player)player).lives--;
             }
