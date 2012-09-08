@@ -29,7 +29,7 @@ namespace Epheremal.Model.Interactions
             double xVel = ((Character)Interactor).XVel;
 
             double interactorAngle = Math.Atan2(yVel, xVel);
-            Console.WriteLine("dx:"+dx+"\tdy:"+dy);
+            //Console.WriteLine("dx:"+dx+"\tdy:"+dy);
 
             if (Math.Abs(dx) > Math.Abs(dy))
             {
