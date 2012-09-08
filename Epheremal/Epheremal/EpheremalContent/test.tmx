@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
+  <image source="tilemap.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Good" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFZGNWIGYDYnYg5iBDPzMQsyCZowrEbkDsToGbVKDmwLA6hX6ktnkuQOxKJb/CcCrUTJDbkhipg0H+BgBJDAwR
+  </data>
+ </layer>
+ <layer name="Bad" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJwTYGBgEBjFNMO8QMwHxfyDwD2UYlEqY9NBjgHAdxKl
+  </data>
+ </layer>
+</map>

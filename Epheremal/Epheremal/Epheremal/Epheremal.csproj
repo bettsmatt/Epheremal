@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
+    <Compile Include="Assets\TileLibrary.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
     <Compile Include="Model\Behaviours\Flies.cs" />
     <Compile Include="Model\Behaviours\Deadly.cs" />

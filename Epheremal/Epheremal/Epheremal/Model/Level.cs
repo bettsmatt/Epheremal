@@ -141,41 +141,24 @@ namespace Epheremal.Model
             _characters = new LinkedList<Character>();
             _entities = new LinkedList<Entity>();
             _raw = rawLevel;
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                Block _block = new Block(game, tileMap, rawLevel.State1[0]) { GridX = i, GridY = 15 };
-                _block.Behaviours[EntityState.GOOD].Add(new Harmless());
-                _blocks.AddFirst(_block);
-                _entities.AddFirst(_block);
-            }*/
-            
+
+            TileLibrary tileLibrary = new TileLibrary(tileMap);
+
             for (int y = 0; y < rawLevel.height; y++)
             {
-                // Debug.WriteLine("");
                 for (int x = 0; x < rawLevel.width; x++)
                 {
-                    // Debug.Write("|" + rawLevel.State1[y * rawLevel.width + x]);
 
-                    int blockID = rawLevel.State1[y * rawLevel.width + x];
+                    int blockIDGood = rawLevel.State1[y * rawLevel.width + x];
+                    int blockIDBad = rawLevel.State2[y * rawLevel.width + x];
 
-                    Block b = new Block(game, tileMap, blockID) { GridX = x, GridY = y };
+                    Block b = new Block(game, tileMap, blockIDGood, blockIDBad) { GridX = x, GridY = y };
 
-                    switch (blockID){
-                        case 1:
-                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
-                                {EntityState.GOOD, new List<Behaviour>()},
-                                {EntityState.BAD, new List<Behaviour>()}
+                    b.AssignBehaviour(
+                        new Dictionary<EntityState, List<Behaviour>>() {
+                                {EntityState.GOOD, tileLibrary.get(blockIDGood)},
+                                {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
-                            break;
-                        default:
-                            b.AssignBehaviour( new Dictionary<EntityState, List<Behaviour>> () {
-                                {EntityState.GOOD, new List<Behaviour>(){new Harmless()}},
-                                {EntityState.BAD, new List<Behaviour>(){new Harmless()}}
-                        });
-                            break;
-
-                    }
                     
                     _blocks.AddLast(b);
                     _entities.AddLast(b);

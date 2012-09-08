@@ -49,8 +49,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="generic_platformer_tiles.png">
-      <Name>generic_platformer_tiles</Name>
+    <Compile Include="tilemap.png">
+      <Name>tilemap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

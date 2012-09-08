@@ -55,7 +55,7 @@ namespace Epheremal
 
             _currentLevel = new Level(1);
 
-            TileMap tileMap = LevelParser.ParseTileMap(this, "generic_platformer_tiles", 32);
+            TileMap tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
 
