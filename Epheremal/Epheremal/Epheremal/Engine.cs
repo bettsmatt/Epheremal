@@ -99,7 +99,14 @@ namespace Epheremal
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
             song = Content.Load<Song>("song");
             MediaPlayer.Volume = 0.1f;
-            MediaPlayer.Play(song);
+            try
+            {
+                MediaPlayer.Play(song);
+            }
+            catch (InvalidOperationException)
+            {
+                System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+            }
             MediaPlayer.IsRepeating = true;
            
 
@@ -241,8 +248,9 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
-                if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
-                else Entity.State = EntityState.GOOD;
+                if (_currentLevel.ValidateToggle()) 
+                    if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
+                    else Entity.State = EntityState.GOOD;
             }
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))

@@ -212,6 +212,16 @@ namespace Epheremal.Model
             return true;
         }
 
+        public bool ValidateToggle()
+        {
+            EntityState state = Entity.State == EntityState.GOOD ? EntityState.BAD : EntityState.GOOD;
+            foreach (Block b in _blocks)
+            {
+                if (!b.Behaviours[state].Exists(e => e is Harmless)) continue;
+                if (b.GetBoundingRectangle().Intersects(Engine.Player.GetBoundingRectangle())) return false;
+            }
+            return true;
+        }
 
         public Double GetLevelWidthInPixels()
         {
