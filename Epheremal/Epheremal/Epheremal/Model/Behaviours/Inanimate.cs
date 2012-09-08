@@ -8,11 +8,21 @@ namespace Epheremal.Model.Behaviours
 {
     public class Inanimate : Behaviour
     {
+
+        public double firstX, firstY;
+        bool first = true;
+
         public void apply(Character character)
         {
             // AntiGrav
+            if (first)
+            {
+                firstX = character.PosX;
+                firstY = character.PosY;
+            }
 
-
+            character.PosX = firstX;
+            character.PosY = firstY;
 
             character.XVel = 0;
             character.YVel = 0;

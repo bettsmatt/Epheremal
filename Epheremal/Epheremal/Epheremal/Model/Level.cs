@@ -55,6 +55,13 @@ namespace Epheremal.Model
 
             foreach (Character c in _characters)
             {
+
+
+                // Skip inamiate
+                foreach (Behaviour b in c.Behaviours[Entity.State])
+                    if(b is Inanimate)
+                        continue;
+
                 //Remove residual friction from acceleration while greater than nothing
                 double resFriction = 0.1;
                 if (c.XAcc > 0)

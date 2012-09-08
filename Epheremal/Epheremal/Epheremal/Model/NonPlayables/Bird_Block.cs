@@ -37,7 +37,8 @@ namespace Epheremal.Model.NonPlayables
             if (Entity.State == EntityState.BAD)
             {
                 int xPosition = Convert.ToInt32(PosX - Engine.xOffset), yPosition = Convert.ToInt32(PosY - Engine.yOffset);
-                return new Rectangle(xPosition - Block.BLOCK_WIDTH, yPosition, this._width + Block.BLOCK_WIDTH * 2, this._height);
+
+                return new Rectangle(xPosition - (int)(Block.BLOCK_WIDTH), yPosition,  Block.BLOCK_WIDTH * 3, this._height);
             }
 
             else 
@@ -57,29 +58,34 @@ namespace Epheremal.Model.NonPlayables
                         sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + 1), tint);
 
                 else{
-                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), tint);
+
+                    int xPosition = Convert.ToInt32(PosX - Engine.xOffset), yPosition = Convert.ToInt32(PosY - Engine.yOffset);
 
                         sprites.Draw(this._tileMap.TileMapTexture, new Rectangle(
-                            this.GetBoundingRectangle().X,
-                            this.GetBoundingRectangle().Y,
+                            xPosition,
+                            yPosition,
                             Block.BLOCK_WIDTH,
                             Block.BLOCK_WIDTH),
                             _tileMap.getRectForTile(_tileIDBad), tint);
 
                         sprites.Draw(this._tileMap.TileMapTexture,new Rectangle(
-                            this.GetBoundingRectangle().X + Block.BLOCK_WIDTH,
-                            this.GetBoundingRectangle().Y,
+                            xPosition + Block.BLOCK_WIDTH,
+                            yPosition,
                             Block.BLOCK_WIDTH,
                             Block.BLOCK_WIDTH),
                             _tileMap.getRectForTile(_tileIDBad + 1), tint);
 
                         sprites.Draw(this._tileMap.TileMapTexture, new Rectangle(
-                           this.GetBoundingRectangle().X - Block.BLOCK_WIDTH,
-                           this.GetBoundingRectangle().Y,
+                           xPosition - Block.BLOCK_WIDTH,
+                           yPosition,
                            Block.BLOCK_WIDTH,
                            Block.BLOCK_WIDTH),
-                           _tileMap.getRectForTile(_tileIDBad + 2), tint);
+                           _tileMap.getRectForTile(_tileIDBad + 1), tint);
+
+                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + 1), tint);
                         }
+
+
 
             }
             Engine.Alert = false;
