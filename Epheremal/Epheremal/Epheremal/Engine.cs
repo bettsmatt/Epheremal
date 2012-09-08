@@ -51,10 +51,7 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            Player = new Player()
-            {
-                _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
-            };
+            
             //LevelParser.ParseTextFile("test.level");
 
             _currentLevel = new Level(1);
@@ -62,6 +59,10 @@ namespace Epheremal
             TileMap tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
+            Player = new Player(tileMap, 10, 10)
+            {
+                _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
+            };
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 

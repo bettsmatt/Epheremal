@@ -36,8 +36,10 @@ namespace Epheremal.Model
         {
             foreach (Block block in _blocks)
             {
-                //accurately compute abs x and y from a grid position
-                block.RenderSelf(ref sprite);
+                double absX = block.GridX * Block.BLOCK_WIDTH, absY = block.GetY();
+                //only render those blocks which are within the screen
+                if(absX > (Engine.xOffset-2*Block.BLOCK_WIDTH) && absY < (Engine.xOffset+Engine.Bounds.Width+Block.BLOCK_WIDTH))
+                    block.RenderSelf(ref sprite);
             }
             foreach (Character character in _characters)
             {
@@ -115,7 +117,7 @@ namespace Epheremal.Model
             {
                 foreach (Entity b in _entities)
                 {
-                    if (c == b) continue;
+                    if (c == b) continue;//cannot interact with self
                     Rectangle cBounds = c.GetBoundingRectangle();
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
@@ -192,9 +194,13 @@ namespace Epheremal.Model
             }
 
             _characters.AddFirst(Engine.Player);
-            
-            foreach (Character c in _characters) 
-                _entities.AddFirst(c);
+
+            //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+           // _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+
+            foreach (Character c in _characters) _entities.AddFirst(c);
 
             return true;
         }
