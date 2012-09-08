@@ -16,7 +16,7 @@ namespace Epheremal.Model
 {
     class Level
     {
-        public const double gravity = 0.025;
+        public const double gravity = 0.03;
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
         private LinkedList<Entity> _entities;
@@ -58,7 +58,7 @@ namespace Epheremal.Model
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
-                double resFriction = 0.25;
+                double resFriction = 0.3;
                 if (c.XAcc > 0)
                 {
                     c.XAcc -= resFriction * c.XAcc;
@@ -174,7 +174,11 @@ namespace Epheremal.Model
                                 {EntityState.GOOD, tileLibrary.get(blockIDGood)},
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
-
+                    if (b.Behaviours[EntityState.GOOD].Exists(e => e is Harmless))
+                    {
+                        //b.Behaviours[EntityState.GOOD].RemoveAll(e => e is Harmless);
+                        //b.Behaviours[EntityState.GOOD].Add(new Bouncy());
+                    }
                     /*
                      * Check for characters
                      */ 
@@ -185,7 +189,7 @@ namespace Epheremal.Model
                         c.PosY = y * 10;
                         c._texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD);
 
-                        _characters.AddFirst(c);
+                        //_characters.AddFirst(c);
                     }
                     
                     _blocks.AddLast(b);
