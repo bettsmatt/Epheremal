@@ -53,5 +53,8 @@ namespace Epheremal.Model
         public abstract Rectangle GetBoundingRectangle();
 
         public abstract SpriteBatch RenderSelf(ref SpriteBatch sprites);
+
+        public abstract double GetX();
+        public abstract double GetY();
     }
 }

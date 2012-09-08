@@ -18,10 +18,13 @@ namespace Epheremal.Model
     {
         private LinkedList<Block> _blocks;
         private LinkedList<Character> _characters;
+        private LinkedList<Entity> _entities;
+        private RawLevel _raw;
         private int _level;
 
         public Level(int level)
         {
+            this._level = level;
         }
         /// <summary>
         /// The method responsible for populating the current sprite batch 
@@ -47,6 +50,9 @@ namespace Epheremal.Model
 
         public void movement()
         {
+
+            double gravity = 0.015;
+
             foreach (Character c in _characters)
             {
                 //Remove residual friction from acceleration while greater than nothing
@@ -85,19 +91,27 @@ namespace Epheremal.Model
                 }
 
                 //Constant gravity
-                c.YAcc += 0.015; 
+                c.YAcc += gravity; 
 
                 c.PosX += c.XVel; c.PosY += c.YVel;
+
+                // If it is too slow set to 0
+                if (c.YVel < 0.01 && c.YVel > -0.01) c.YVel = 0;
+                if (c.XVel < 0.01 && c.XVel > -0.01) c.XVel = 0;
+                if (c.YAcc < 0.01 && c.YAcc > -0.01) c.YAcc = 0;
+                if (c.XAcc < 0.01 && c.XAcc > -0.01) c.XAcc = 0;
             }
         }
 
         public void interact()
         {
             //Detect collisions, and create appropriate interactions
+            
             foreach (Character c in _characters)
             {
-                foreach (Block b in _blocks)
+                foreach (Entity b in _entities)
                 {
+                    if (c == b) continue;
                     Rectangle cBounds = c.GetBoundingRectangle();
                     Rectangle bBounds = b.GetBoundingRectangle();
                     if (cBounds.Intersects(bBounds))
@@ -121,26 +135,16 @@ namespace Epheremal.Model
         public Boolean LoadLevel(Engine game, RawLevel rawLevel, TileMap tileMap)
         {
             _blocks = new LinkedList<Block>();
-            _characters = new LinkedList<Character>(); 
-           
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                Block _block = new Block(game) { GridX = i, GridY = 15 };
-                _block.Behaviours[EntityState.GOOD].Add(new Harmless());
-                _blocks.AddFirst(_block);   
-                
-            }
-             */
+            _characters = new LinkedList<Character>();
+            _entities = new LinkedList<Entity>();
+            _raw = rawLevel;
 
             TileLibrary tileLibrary = new TileLibrary(tileMap);
 
             for (int y = 0; y < rawLevel.height; y++)
             {
-                // Debug.WriteLine("");
                 for (int x = 0; x < rawLevel.width; x++)
                 {
-                    // Debug.Write("|" + rawLevel.State1[y * rawLevel.width + x]);
 
                     int blockID = rawLevel.State1[y * rawLevel.width + x];
 
@@ -153,16 +157,25 @@ namespace Epheremal.Model
                         });
                     
                     _blocks.AddLast(b);
-                    
+                    _entities.AddLast(b);
                 }
             }
-
+            
             _characters.AddFirst(Engine.Player);
             _characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            _characters.AddFirst(new Charger() { PosX = 150, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
             _characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+            _characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
+
+            foreach (Character c in _characters) _entities.AddFirst(c);
 
             return true;
+        }
+
+        public Double GetLevelWidthInPixels()
+        {
+            if (_raw == null) return 0;
+            return _raw.width * Block.BLOCK_WIDTH;
         }
     }
 }

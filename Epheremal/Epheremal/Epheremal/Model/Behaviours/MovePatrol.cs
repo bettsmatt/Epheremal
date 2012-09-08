@@ -25,7 +25,7 @@ namespace Epheremal.Model.Behaviours
         public override void apply(Character character)
         {
             if (character.PosX < left) goingLeft = false;
-            else if (character.PosY > right) goingLeft = true;
+            else if (character.PosX > right) goingLeft = true;
 
             if (goingLeft) moveLeft.apply(character);
             else moveRight.apply(character);

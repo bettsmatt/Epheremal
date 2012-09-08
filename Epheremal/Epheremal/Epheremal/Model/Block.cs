@@ -28,6 +28,8 @@ namespace Epheremal.Model
         public int GridX {get; set;}
         public int GridY {get; set;}
 
+        public const int BLOCK_WIDTH = 20; //magic!
+
         public TileMap _tileMap;
         public int _tileID;
 
@@ -59,6 +61,16 @@ namespace Epheremal.Model
         {
             sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
             return sprites;
+        }
+
+        public override double GetX()
+        {
+            return ((GridX * _width) + (_width / 2)) - Engine.xOffset;
+        }
+
+        public override double GetY()
+        {
+            return ((GridY * _height) + (_height / 2)) - Engine.yOffset;
         }
     }
 }

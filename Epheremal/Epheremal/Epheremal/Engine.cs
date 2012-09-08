@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
+
 using System.Diagnostics;
 
 namespace Epheremal
@@ -51,10 +52,12 @@ namespace Epheremal
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
             //LevelParser.ParseTextFile("test.level");
+
             _currentLevel = new Level(1);
 
             TileMap tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
@@ -71,7 +74,7 @@ namespace Epheremal
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+            SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
         }
 
         /// <summary>
@@ -96,6 +99,10 @@ namespace Epheremal
 
             // TODO: Add your update logic here
             getInput();
+            if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
+                    xOffset += Convert.ToInt32(Player.XVel);
+            if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
+                    xOffset += Convert.ToInt32(Player.XVel);
             _currentLevel.movement();
             _currentLevel.interact();
             _currentLevel.behaviour();
@@ -144,6 +151,7 @@ namespace Epheremal
             }
             // Change world state
             if (gamePadState.Buttons.B == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.LeftShift))
+
             {
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
