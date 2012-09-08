@@ -33,6 +33,8 @@ namespace Epheremal
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
 
+        bool loadedLevel = false;
+
         TileMap tileMap;
         RawLevel rawLevel;
 
@@ -60,16 +62,13 @@ namespace Epheremal
            
             _currentLevel = new Level(1);
 
-            Player = new Player(tileMap, 10, 10)
-            {
-                _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
-            };
-
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
+            Player = new Player(tileMap, 557, 557);
 
-            _currentLevel.LoadLevel(this,rawLevel,tileMap);
+            loadedLevel = _currentLevel.LoadLevel(this, rawLevel, tileMap);
+
             base.Initialize();
         }
 
@@ -103,31 +102,35 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
 
-           if (Player.isDead)
-           {
-                resetGameWorld();
-           }
-               
-            // TODO: Add your update logic here
-            getInput();
-            //Scroll the viewport left and right when the player moves into the quarter of the screen on either side of the viewport,
-            //we stop scrolling when the offset is flush to the left hand side (0), or right hand side (total width minus viewport width)
-            if ((Player.PosX - Engine.xOffset) > (3*Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels()-Bounds.Width)) && Player.XVel > 0) 
-                    xOffset += Convert.ToInt32(Player.XVel);
-            if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
-                    xOffset += Convert.ToInt32(Player.XVel);
-            _currentLevel.movement();
-            _currentLevel.interact();
-            _currentLevel.behaviour();
-
-            if (rawLevel.height*32 < Player.PosY)
+            if (loadedLevel)
             {
-                Player.isDead = true;
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                // Allows the game to exit
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                    this.Exit();
+
+                if (Player.isDead)
+                {
+                    resetGameWorld();
+                }
+
+                // TODO: Add your update logic here
+                getInput();
+                //Scroll the viewport left and right when the player moves into the quarter of the screen on either side of the viewport,
+                //we stop scrolling when the offset is flush to the left hand side (0), or right hand side (total width minus viewport width)
+                if ((Player.PosX - Engine.xOffset) > (3 * Bounds.Width / 4) && (Engine.xOffset < (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) && Player.XVel > 0)
+                    xOffset += Convert.ToInt32(Player.XVel);
+                if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
+                    xOffset += Convert.ToInt32(Player.XVel);
+                _currentLevel.movement();
+                _currentLevel.interact();
+                _currentLevel.behaviour();
+
+                if (rawLevel.height * 32 < Player.PosY)
+                {
+                    Player.isDead = true;
+                }
             }
 
             base.Update(gameTime);

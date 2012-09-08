@@ -13,9 +13,9 @@
    eJzt07sNgDAMBFBnACAFYRKcNdmMmXATCQkjgYLgIq54/Z0/UUQiERFRo+YgoiaH77PQe7vpTH9iAOiODvFvRpPMBJClarZGTQbI8uce5Z5a71Hy73skB/rfeD3UUbOnJRytD7vTw8tzxQbgf12d
   </data>
  </layer>
- <layer name="Chara" width="50" height="20">
+ <layer name="Tile Layer 3" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwwk8ZBpoF9AfNI5AP1MCGJkH2gX0A6NpY2SA0XjGBAeJDBNi6oyFwzh8R2KdOdxBIhXidDRdjIJRMAoGEgAAPisG4w==
+   eJzt0bENACAMA8GITRmFURiFzSiJKFw78Fe5IMWLCNx6O3ukPdNeaav7Lt65Ux2Vun74j0ro8EKHFzq80OHllQ4AUDbhYAy+
   </data>
  </layer>
 </map>

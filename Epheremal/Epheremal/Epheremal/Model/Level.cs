@@ -146,7 +146,8 @@ namespace Epheremal.Model
             _raw = rawLevel;
 
             CharacterLibrary characterLibrary = new CharacterLibrary(
-                tileMap.Width / tileMap.TileSize ,
+                tileMap,
+                tileMap.Width / tileMap.TileSize,
                 tileMap.Height / tileMap.TileSize
             );   
 
@@ -175,6 +176,9 @@ namespace Epheremal.Model
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
 
+                    _blocks.AddLast(b);
+                    _entities.AddLast(b);
+
                     /*
                      * Check for characters
                      */ 
@@ -183,24 +187,16 @@ namespace Epheremal.Model
                         Character c = characterLibrary.get(characterId);
                         c.PosX = x * 10;
                         c.PosY = y * 10;
-                        c._texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD);
 
                         _characters.AddFirst(c);
+                        _entities.AddFirst(c);
                     }
-                    
-                    _blocks.AddLast(b);
-                    _entities.AddLast(b);
-                }
+
+                 }
             }
 
             _characters.AddFirst(Engine.Player);
-
-            //_characters.AddFirst(new Goomba() { PosX = 100, PosY = 50, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-           // _characters.AddFirst(new Charger() { PosX = 100, PosY = 25, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            //_characters.AddFirst(new Charger() { PosX = 150, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-            //_characters.AddFirst(new Birdie(200, 350) { PosX = 250, PosY = 75, _texture = TextureProvider.GetBlockTextureFor(game, BlockType.TEST, EntityState.GOOD) });
-
-            foreach (Character c in _characters) _entities.AddFirst(c);
+            _entities.AddFirst(Engine.Player);
 
             return true;
         }
