@@ -29,9 +29,13 @@ namespace Epheremal
         public static int xOffset {get; set;}
         public static int yOffset {get; set;}
 
+        public static bool MarioControl = false;
+
         private Level _currentLevel;
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
+        private bool _toggleControlPressed;
+        public static bool Alert;
 
         bool loadedLevel = false;
 
@@ -216,7 +220,9 @@ namespace Epheremal
 
             string fps = string.Format("fps: {0}", frameRate);
             spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right- 150, Engine.Bounds.Bottom-50), Color.White);
-            
+
+            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Physics");
+            spriteBatch.DrawString(font, controlScheme, new Vector2(Engine.Bounds.Right - 350, Engine.Bounds.Bottom - 50), Color.White);
 
         }
 
@@ -248,17 +254,25 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
-                if (_currentLevel.ValidateToggle()) 
+                if (_currentLevel.ValidateToggle())
                     if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                     else Entity.State = EntityState.GOOD;
+                else
+                    Alert = true;
             }
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))
             {
                 resetGameWorld();
             }
+
+            if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
+            {
+                MarioControl = !MarioControl;
+            }
             _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
             _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
+            _toggleControlPressed = keyboardState.IsKeyDown(Keys.C);
         }
     }
 }
