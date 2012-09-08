@@ -7,6 +7,8 @@ namespace Epheremal.Model.Interactions
 {
     class Boost : InteractionBase
     {
+        private bool _isLeft;
+
         public Boost(Character a, Entity b)
             : base(a, b)
         {}
@@ -19,7 +21,23 @@ namespace Epheremal.Model.Interactions
 
         public void applyTo(Character Interactor, Entity Interactee)
         {
-            Interactor.XAcc *= 5;
+            int vel = 20;
+            int acc = 8;
+            if (_isLeft)
+            {
+                Interactor.XVel = vel;
+                Interactor.XAcc = acc;
+            }
+            else
+            {
+                Interactor.XVel = -vel;
+                Interactor.XAcc = -acc;
+            }
+        }
+
+        public void IsLeft(bool maybe)
+        {
+            _isLeft = maybe;
         }
 
     }

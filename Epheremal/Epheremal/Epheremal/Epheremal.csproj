@@ -113,7 +113,8 @@
     <Compile Include="Assets\TileLibrary.cs" />
     <Compile Include="Model\Behaviours\Adhesive.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
-    <Compile Include="Model\Behaviours\Boosts.cs" />
+    <Compile Include="Model\Behaviours\BoostsLeft.cs" />
+    <Compile Include="Model\Behaviours\BoostsRight.cs" />
     <Compile Include="Model\Behaviours\Bouncy.cs" />
     <Compile Include="Model\Behaviours\Collectable.cs" />
     <Compile Include="Model\Behaviours\Flies.cs" />
