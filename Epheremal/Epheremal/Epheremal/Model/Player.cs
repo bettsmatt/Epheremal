@@ -11,8 +11,8 @@ namespace Epheremal.Model
 {
     public class Player : Character
     {
-        Behaviour moveLeft = new MoveLeft();
-        Behaviour moveRight = new MoveRight();
+        Behaviour moveLeft = new MoveLeft(1);
+        Behaviour moveRight = new MoveRight(1);
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 

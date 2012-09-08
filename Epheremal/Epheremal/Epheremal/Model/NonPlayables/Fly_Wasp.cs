@@ -7,9 +7,10 @@ using Epheremal.Model.Levels;
 
 namespace Epheremal.Model.NonPlayables
 {
-    class Birdie : NPC
+    class Fly_Wasp : NPC
     {
-        public Birdie(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
+        public Fly_Wasp(TileMap tileMap, int tileIDGood, int tileIDBad)
+            : base(tileMap, tileIDGood, tileIDBad)
         {
             this.Behaviours = new Dictionary<EntityState, List<Behaviour>>();
             this.Behaviours.Add(EntityState.GOOD,
@@ -17,17 +18,17 @@ namespace Epheremal.Model.NonPlayables
                                 {
                                     new Harmless(),
                                     new Flies(),
-                                    new MoveToward(),
-                                    new MovePatrol()
+                                    new MovePatrol(30,30,1)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
                                     new Flies(),
                                     new Deadly(),
-                                    new MoveToward(),
+                                    new MoveToward(2,100,true,true),
                                 }); 
         }
+
 
     }
 }

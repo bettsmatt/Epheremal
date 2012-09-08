@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
+  <image source="tilemap.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Good" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1E0KwjAQhuFJrBexrQfR6kkKHqQV9R5qPYio9xCqx/AVuqgQuzGdgHTxTCBZfGHyY0TEBDSxIjESpJhandwZOXNkWGCplDvoh/V4frl8v5cMMkKEcYuvbNe9zJs9vdczrFpC9z2Uu9HNW2ODLXaKuQdUjvkjpcLJcx8KlB25F8oVtx76v+/IrSkPPH/MjRz/xFk+37KmdPDXXg+aKtE=
+  </data>
+ </layer>
+ <layer name="Bad" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwTYGBgEBjFo3gUDxpsCMTGg8Ado35EYFNGCDZjpK8/vwPxFzr60wTqT1LtpUZ8fgNicUb6+hdmrygBfJ4RFRNSTyw2HcXDGgMAmzdCdw==
+  </data>
+ </layer>
+ <layer name="Enemies" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwEEBtoBQww0MuGWY2SmnztGweAED/Gkj1EwCg5SmD740PAoGAXEAACCJQJ2
+  </data>
+ </layer>
+</map>

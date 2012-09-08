@@ -210,13 +210,22 @@ namespace Epheremal.Assets
             
                 // Spikes
                 new Pair {y = 12, x = 14 },
+
                 new Pair {y = 14, x = 14 },
                 new Pair {y = 14, x = 13 },
                 new Pair {y = 14, x = 12 },
                 
+                new Pair {y = 15, x = 14 },
+                new Pair {y = 15, x = 13 },
+                new Pair {y = 15, x = 12 },
+                
                 new Pair {y = 12, x = 15 },
                 new Pair {y = 13, x = 15 },
                 new Pair {y = 14, x = 15 },
+
+                new Pair {y = 12, x = 16 },
+                new Pair {y = 13, x = 16 },
+                new Pair {y = 14, x = 16 },
 
 
             };
