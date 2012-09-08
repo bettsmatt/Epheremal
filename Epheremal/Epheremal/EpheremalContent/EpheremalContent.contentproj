@@ -85,6 +85,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pickupcoin.wav">
+      <Name>pickupcoin</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="splash.png">
       <Name>splash</Name>
       <Importer>TextureImporter</Importer>

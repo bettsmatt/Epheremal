@@ -29,11 +29,13 @@ namespace Epheremal.Model
 
         public bool Jumping = false;
         public bool Animated = false;
+        public bool Dead = false;
 
         public Character(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad) { }
 
         public void DoBehaviour()
         {
+            if (Dead) return;
             //null protection
             if (this.Behaviours == null) return;
             if (this.Behaviours[Entity.State] == null) return;
@@ -64,6 +66,7 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
+            if (Dead) return sprites;
             Color tint = Engine.Alert ? Color.Red : Color.White;
             if (Animated)
             {
@@ -109,6 +112,14 @@ namespace Epheremal.Model
         public override double GetY()
         {
             return (PosY + (_height / 2)) - Engine.yOffset;
+        }
+
+        public void Kill()
+        {
+            // TODO PLEASE DO IT PROPERLY LOL
+            PosX = -100;
+            PosY = -100;
+            Dead = true;
         }
     }
 }
