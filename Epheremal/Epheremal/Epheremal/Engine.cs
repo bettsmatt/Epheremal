@@ -75,6 +75,7 @@ namespace Epheremal
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
+            SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
         }
 
         /// <summary>

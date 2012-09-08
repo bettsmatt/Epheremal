@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Epheremal.Model.Interactions
 {
@@ -32,6 +33,13 @@ namespace Epheremal.Model.Interactions
                     this.Interactor.XVel = -1;
                     this.Interactor.XAcc = -1.0 * this.Interactor.XAcc; //bounce a little 
                 }
+
+                if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player)
+                {
+                    SoundEffects.sounds["hurt"].Volume = 0.75f;
+                    // soundInstance.IsLooped = False;
+                    SoundEffects.sounds["hurt"].Play();
+                }
             }
             else
             {
@@ -47,6 +55,7 @@ namespace Epheremal.Model.Interactions
                     this.Interactor.YAcc = -0.3 * this.Interactor.YAcc; //bounce a little 
                 }
             }
+            
     
         }
     }
