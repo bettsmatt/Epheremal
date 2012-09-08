@@ -111,6 +111,7 @@
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
     <Compile Include="Assets\TileLibrary.cs" />
+    <Compile Include="Model\Behaviours\Adhesive.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
     <Compile Include="Model\Behaviours\Bouncy.cs" />
     <Compile Include="Model\Behaviours\Collectable.cs" />
