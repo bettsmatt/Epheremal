@@ -24,7 +24,7 @@ namespace Epheremal
 
         enum GameState { MENU, PLAYING }
         GameState gameState = GameState.MENU;
-
+        
         /*
          * Menus
          */
@@ -157,8 +157,7 @@ namespace Epheremal
             {
                 try
                 {
-                    MediaPlayer.Play(song);
-
+                     MediaPlayer.Play(song);
                 }
                 catch (InvalidOperationException)
                 {
@@ -268,8 +267,9 @@ namespace Epheremal
             Player.XAcc = 0;
             Player.YAcc = 0;
             Engine.xOffset = 0;
-            Entity.State = EntityState.GOOD;
+            //Entity.State = EntityState.GOOD;
             loadedLevel = _currentLevel.LoadLevel(this, level, tileMap);
+           
         }
 
 
@@ -294,6 +294,7 @@ namespace Epheremal
                 currentLevel = 0;
                 setSplashScreen();
             }
+            
         }
 
 
@@ -452,12 +453,32 @@ namespace Epheremal
                         if (Entity.State == EntityState.GOOD)
                         {
                             Entity.State = EntityState.BAD;
-                            //MediaPlayer.Play(song2);
+                            if (Music)
+                            {
+                                try
+                                {
+                                    MediaPlayer.Play(song2);
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                                }
+                            }
                         }
                         else
                         {
                             Entity.State = EntityState.GOOD;
-                            //MediaPlayer.Play(song);
+                            if (Music)
+                            {
+                                try
+                                {
+                                    MediaPlayer.Play(song);
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                                }
+                            }
                         }
                     }
                     else
@@ -481,6 +502,12 @@ namespace Epheremal
                 {
                     
                     MarioControl = !MarioControl;
+                }
+
+                if (keyboardState.IsKeyDown(Keys.M) && lastKeyBoard.IsKeyUp(Keys.M))
+                {
+
+                    Music = !Music;
                 }
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
                 {
