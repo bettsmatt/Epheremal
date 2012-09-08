@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Epheremal.Model;
 using Epheremal.Assets;
 using Epheremal.Model.Levels;
+
 using System.Diagnostics;
 
 namespace Epheremal
@@ -28,7 +29,8 @@ namespace Epheremal
         public static int yOffset {get; set;}
 
         private Level _currentLevel;
-        private bool _pressed;
+        private bool _toggleKeyPressed;
+        private bool _toggleButtonPressed;
 
         public Engine()
         {
@@ -51,10 +53,12 @@ namespace Epheremal
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
             //LevelParser.ParseTextFile("test.level");
+
             _currentLevel = new Level(1);
 
-            TileMap tileMap = LevelParser.ParseTileMap(this, "generic_platformer_tiles", 32);
+            TileMap tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
             RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
 
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
 
@@ -71,7 +75,7 @@ namespace Epheremal
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
         }
 
         /// <summary>
@@ -147,15 +151,14 @@ namespace Epheremal
                 Player.jumping();
             }
 
-            
-
             // Change world state
-            if (gamePadState.Buttons.B == ButtonState.Released || (keyboardState.IsKeyUp(Keys.LeftShift) && _pressed))
+            if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
             }
-            _pressed = keyboardState.IsKeyDown(Keys.LeftShift) || gamePadState.Buttons.B == ButtonState.Pressed;
+            _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
+            _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
         }
     }
 }

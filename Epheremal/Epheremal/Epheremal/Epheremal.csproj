@@ -109,7 +109,9 @@
   <ItemGroup>
     <Compile Include="Assets\TextureProvider.cs" />
     <Compile Include="Assets\LevelParser.cs" />
+    <Compile Include="Assets\TileLibrary.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
+    <Compile Include="Model\Behaviours\Flies.cs" />
     <Compile Include="Model\Behaviours\Deadly.cs" />
     <Compile Include="Model\Behaviours\Ethreal.cs" />
     <Compile Include="Model\Behaviours\Harmless.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Model\Interactions\Stick.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Charger.cs" />
+    <Compile Include="Model\NonPlayables\Birdie.cs" />
     <Compile Include="Model\NonPlayables\Jumper.cs" />
     <Compile Include="Model\NonPlayables\Goomba.cs" />
     <Compile Include="Model\NPC.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Model\Levels\RawLevel.cs" />
     <Compile Include="Model\Levels\TileMap.cs" />
+    <Compile Include="SoundEffects.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -49,10 +49,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="generic_platformer_tiles.png">
-      <Name>generic_platformer_tiles</Name>
+    <Compile Include="tilemap.png">
+      <Name>tilemap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="jump.wav">
+      <Name>jump</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epheremal.Model.Interactions;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Epheremal.Model.Behaviours
 {
@@ -10,6 +11,8 @@ namespace Epheremal.Model.Behaviours
     {
         //jump vlocity magic number
         double jumpAcceleration = Character.ABS_TERMINAL_VELOCITY/5;
+
+        
 
         public void apply(Character character)
         {
@@ -19,6 +22,12 @@ namespace Epheremal.Model.Behaviours
             {
                 //add a positive vertical velocity
                 character.YAcc -= jumpAcceleration;
+                if (SoundEffects.sounds["jump"].State == SoundState.Stopped)
+                {
+                    SoundEffects.sounds["jump"].Volume = 0.75f;
+                    // soundInstance.IsLooped = False;
+                    SoundEffects.sounds["jump"].Play();
+                }
             }
                 
             //else do nothing
