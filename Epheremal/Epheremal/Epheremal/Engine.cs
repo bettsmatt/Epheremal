@@ -64,9 +64,6 @@ namespace Epheremal
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
 
-            _currentLevel.LoadLevel(this, rawLevel, tileMap);
-
-
             _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
