@@ -138,6 +138,7 @@ namespace Epheremal
             Player.PosX = 20;
             Player.PosY = 20;
             Engine.xOffset = 0;
+            Entity.State = EntityState.GOOD;
             _currentLevel.LoadLevel(this, rawLevel, tileMap);
         }
 
