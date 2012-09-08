@@ -10,7 +10,7 @@ namespace Epheremal.Model.Behaviours
     class Jumps : Behaviour
     {
         //jump vlocity magic number
-        double jumpAcceleration = Character.ABS_TERMINAL_VELOCITY_Y/4;
+        double jumpAcceleration = Character.ABS_TERMINAL_VELOCITY_Y/3.5;
 
         
 
