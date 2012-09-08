@@ -13,6 +13,7 @@ using Epheremal.Assets;
 using Epheremal.Model.Levels;
 
 using System.Diagnostics;
+using Epheremal.Model.Interactions;
 
 namespace Epheremal
 {
@@ -31,6 +32,9 @@ namespace Epheremal
         private Level _currentLevel;
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
+
+        TileMap tileMap;
+        RawLevel rawLevel;
 
         public Engine()
         {
@@ -53,20 +57,23 @@ namespace Epheremal
             Bounds = GraphicsDevice.Viewport.Bounds;
             
             //LevelParser.ParseTextFile("test.level");
-
+           
             _currentLevel = new Level(1);
-
-            TileMap tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
-            RawLevel rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
 
             Player = new Player(tileMap, 10, 10)
             {
                 _texture = TextureProvider.GetBlockTextureFor(this, BlockType.TEST, EntityState.GOOD),
             };
 
+            tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
+            rawLevel = LevelParser.ParseTextFile("../../../../EpheremalContent/test.level");
+
+
             _currentLevel.LoadLevel(this,rawLevel,tileMap);
             base.Initialize();
         }
+
+
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -101,6 +108,11 @@ namespace Epheremal
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+           if (Player.isDead)
+           {
+                resetGameWorld();
+           }
+               
             // TODO: Add your update logic here
             getInput();
             //Scroll the viewport left and right when the player moves into the quarter of the screen on either side of the viewport,
@@ -113,7 +125,24 @@ namespace Epheremal
             _currentLevel.interact();
             _currentLevel.behaviour();
 
+            if (rawLevel.height*32 < Player.PosY)
+            {
+                Player.isDead = true;
+            }
+
             base.Update(gameTime);
+        }
+
+
+        //reloads the current level
+        private void resetGameWorld()
+        {
+            Player.isDead = false;
+            Player.PosX = 20;
+            Player.PosY = 20;
+            Engine.xOffset = 0;
+            Entity.State = EntityState.GOOD;
+            _currentLevel.LoadLevel(this, rawLevel, tileMap);
         }
 
         /// <summary>
@@ -159,8 +188,14 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
+                
                 if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
                 else Entity.State = EntityState.GOOD;
+            }
+            // Reset 
+            if ( keyboardState.IsKeyDown(Keys.R))
+            {
+                resetGameWorld();
             }
             _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
             _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
