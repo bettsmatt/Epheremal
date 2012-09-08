@@ -31,11 +31,14 @@ namespace Epheremal.Model
         public const int BLOCK_WIDTH = 20; //magic!
 
         public TileMap _tileMap;
-        public int _tileID;
+        public int _tileIDGood;
+        public int _tileIDBad;
 
-        public Block(Engine game, TileMap tileMap, int tileID)
+        public Block(Engine game, TileMap tileMap, int tileIDGood, int tileIDBad)
         {
-            this._tileID = tileID;
+            this._tileIDGood = tileIDGood;
+            this._tileIDBad = tileIDBad;
+
             this._tileMap = tileMap;
             this._texture = TextureProvider.GetBlockTextureFor(game, this.Type, Entity.State);
         }
@@ -59,7 +62,12 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileID), Color.White);
+            if(Entity.State == EntityState.GOOD)
+                sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(),_tileMap.getRectForTile(_tileIDGood), Color.White);
+            
+            else
+            sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), Color.White);
+
             return sprites;
         }
 
