@@ -45,11 +45,13 @@ namespace Epheremal
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
 
+        protected Song song;
+
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            
             animatedTexture = new AnimatedTexture( 4, 2);
 
             // Set device frame rate to 30 fps.
@@ -95,6 +97,19 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+            song = Content.Load<Song>("song");
+            MediaPlayer.Volume = 0.1f;
+            try
+            {
+                MediaPlayer.Play(song);
+            }
+            catch (InvalidOperationException)
+            {
+                System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+            }
+            MediaPlayer.IsRepeating = true;
+           
+
             font = Content.Load<SpriteFont>("basicFont");
         }
 
@@ -182,7 +197,6 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            DateTime start = DateTime.Now;
             //TEST THINGS
             spriteBatch.Begin();
             spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
@@ -234,9 +248,9 @@ namespace Epheremal
             // Change world state
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
-                
-                if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
-                else Entity.State = EntityState.GOOD;
+                if (_currentLevel.ValidateToggle()) 
+                    if (Entity.State == EntityState.GOOD) Entity.State = EntityState.BAD;
+                    else Entity.State = EntityState.GOOD;
             }
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))

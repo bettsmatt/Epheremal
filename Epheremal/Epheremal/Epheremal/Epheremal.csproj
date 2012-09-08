@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{4612100E-42A2-48F2-830B-8C2C58C4D547}</ProjectGuid>
@@ -138,11 +138,12 @@
     <Compile Include="Model\Interactions\Stick.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Bird_Block.cs" />
+
+    <Compile Include="Model\NonPlayables\Fly_Wasp.cs" />
     <Compile Include="Model\NonPlayables\Knight_Ghost.cs" />
     <Compile Include="Model\NonPlayables\Shrom_Man.cs" />
-    <Compile Include="Model\NonPlayables\Fly_Wasp.cs" />
-    <Compile Include="Model\NonPlayables\Snail_Bull.cs" />
-    <Compile Include="Model\NonPlayables\Worm_Devil.cs" />
+             <Compile Include="Model\NonPlayables\Snail_Bull.cs" />
+                      <Compile Include="Model\NonPlayables\Worm_Devil.cs" />
     <Compile Include="Model\NPC.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimatedTexture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
