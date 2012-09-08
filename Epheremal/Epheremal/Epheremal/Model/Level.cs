@@ -191,8 +191,8 @@ namespace Epheremal.Model
                     int characterId = rawLevel.Characters[y * rawLevel.width + x];
                     if(characterId != 0){
                         Character c = characterLibrary.get(characterId);
-                        c.PosX = x * 20;
-                        c.PosY = y * 20;
+                        c.PosX = x * Block.BLOCK_WIDTH;
+                        c.PosY = y * Block.BLOCK_WIDTH;
 
                         _characters.AddFirst(c);
                         _entities.AddFirst(c);
