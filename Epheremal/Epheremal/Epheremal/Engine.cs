@@ -45,9 +45,10 @@ namespace Epheremal
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
         private bool _toggleControlPressed;
-        
-        public static bool Alert;
+        private int _transition;
 
+        public static bool Alert;
+        private bool _renderCap;
 
         bool loadedLevel = false;
         KeyboardState lastKeyBoard = Keyboard.GetState();
@@ -78,7 +79,7 @@ namespace Epheremal
             animatedTexture = new AnimatedTexture( 4, 10);
 
             // Set device frame rate to 60 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
             Window.AllowUserResizing = true; //allow resize.
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
 
@@ -99,7 +100,6 @@ namespace Epheremal
         {
             // TODO: Add your initialization logic here
             Bounds = GraphicsDevice.Viewport.Bounds;
-            
             //LevelParser.ParseTextFile("test.level");
 
 
@@ -190,7 +190,8 @@ namespace Epheremal
                 this._currentLevel.ClearLevelScore();
                 triggetNextLevel = false;
             }
-
+            if (_renderCap) { _renderCap = false; return; }
+            else _renderCap = true;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             
             if (gameState == GameState.MENU)
@@ -304,6 +305,16 @@ namespace Epheremal
             {
                 spriteBatch.Begin();
                 spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
+                if (_transition > 0)
+                {
+                    Texture2D txtr = new Texture2D(GraphicsDevice, Bounds.Width, Bounds.Height);
+                    Color[] buff = new Color[Bounds.Width * Bounds.Height];
+                    for (int i = 0; i < buff.Length; i++) buff[i] = Entity.State == EntityState.BAD ? Color.DarkRed : Color.LightBlue;
+                    txtr.SetData(buff);
+                    int fade = Entity.State == EntityState.GOOD ? 255 : 255;
+                    spriteBatch.Draw(txtr, Bounds, new Color(fade, fade, fade, _transition));
+                    _transition -= 30;
+                }
                 DrawText();
                 spriteBatch.End();
             }
@@ -368,11 +379,21 @@ namespace Epheremal
                 }
 
                 // Move left
-                if (gamePadState.DPad.Left == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X < 0 || keyboardState.IsKeyDown(Keys.Left))
+                if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (xOffset > 0) xOffset -= 5;
+                    if (xOffset < 0) xOffset = 0;
+                }
+                else if (gamePadState.DPad.Left == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X < 0 || keyboardState.IsKeyDown(Keys.Left))
                 {
                     Player.movingLeft();
                 }
                 // Move right
+                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (xOffset < (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset += 5;
+                    if (xOffset > (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset = (int)(_currentLevel.GetLevelWidthInPixels() - Bounds.Width);
+                }
                 else if (gamePadState.DPad.Right == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X > 0 || keyboardState.IsKeyDown(Keys.Right))
                 {
                     Player.movingRight();
@@ -382,9 +403,28 @@ namespace Epheremal
                     Player.notMoving();
                 }
                 // Jump
-                if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
+                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (yOffset > 0) yOffset -= 5;
+                    if (yOffset < 0) yOffset = 0;
+                }
+                else if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
                 {
                     Player.jumping();
+                }
+
+                if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (_currentLevel.GetLevelHeightInPixels() > Bounds.Height)
+                    {
+                        if (yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset += 5;
+                        if (yOffset > (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset = (int)(_currentLevel.GetLevelHeightInPixels() - Bounds.Height);
+                    }
+                }
+                if (keyboardState.IsKeyUp(Keys.LeftControl) && lastKeyBoard.IsKeyDown(Keys.LeftControl))
+                {
+                    xOffset = Convert.ToInt32(Math.Min(Math.Max(Player.PosX - Bounds.Width/2, 0), _currentLevel.GetLevelWidthInPixels()-Bounds.Width));
+                    yOffset = Convert.ToInt32(Math.Min(Math.Max(Player.PosY - Bounds.Height / 2, 0), _currentLevel.GetLevelHeightInPixels()-Bounds.Height));
                 }
 
                 // Change world state
@@ -392,6 +432,8 @@ namespace Epheremal
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyBoard.IsKeyUp(Keys.LeftShift)))
                 {
                     if (_currentLevel.ValidateToggle())
+                    {
+                        _transition = 255;
                         if (Entity.State == EntityState.GOOD)
                         {
                             Entity.State = EntityState.BAD;
@@ -402,6 +444,7 @@ namespace Epheremal
                             Entity.State = EntityState.GOOD;
                             //MediaPlayer.Play(song);
                         }
+                    }
                     else
                         Alert = true;
                 }
