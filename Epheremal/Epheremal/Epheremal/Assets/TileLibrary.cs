@@ -189,9 +189,10 @@ namespace Epheremal.Assets
                 new Pair{y = 9, x = 25},
                 new Pair{y = 9, x = 26},
 
-
             
             };
+
+
 
             foreach (Pair p in land)
             {
@@ -244,6 +245,10 @@ namespace Epheremal.Assets
 
             // Brown Sky
             Behaviours.Add(getIDFor(0, 15), new List<Behaviour>() { });
+
+            //Bounce pad
+            Pair BouncePad = new Pair { y = 19, x = 4 };
+            Behaviours.Add(getIDFor(4, 19), new List<Behaviour>() { new Harmless(), new Bouncy() });
         }
 
         public List<Behaviour> get(int id) {
