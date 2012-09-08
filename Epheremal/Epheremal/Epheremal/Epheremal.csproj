@@ -113,6 +113,7 @@
     <Compile Include="Assets\TileLibrary.cs" />
     <Compile Include="Model\Behaviours\Adhesive.cs" />
     <Compile Include="Model\Behaviours\Behaviour.cs" />
+    <Compile Include="Model\Behaviours\Boosts.cs" />
     <Compile Include="Model\Behaviours\Bouncy.cs" />
     <Compile Include="Model\Behaviours\Collectable.cs" />
     <Compile Include="Model\Behaviours\Flies.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Model\Block.cs" />
     <Compile Include="Model\Character.cs" />
     <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Interactions\Boost.cs" />
     <Compile Include="Model\Interactions\Bounce.cs" />
     <Compile Include="Model\Interactions\Collide.cs" />
     <Compile Include="Model\Interactions\Collect.cs" />
