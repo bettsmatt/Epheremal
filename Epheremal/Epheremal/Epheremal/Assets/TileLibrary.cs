@@ -86,6 +86,35 @@ namespace Epheremal.Assets
                 new Pair{y = 0, x = 13},
                 new Pair{y = 0, x = 14},
 
+                new Pair{y = 2, x = 12},
+                new Pair{y = 2, x = 13},
+                new Pair{y = 2, x = 14},
+
+                new Pair{y = 1, x = 16},
+                new Pair{y = 1, x = 17},
+                new Pair{y = 1, x = 18},
+
+                new Pair{y = 2, x = 16},
+
+                // Spike
+                new Pair{x = 13, y = 4},
+                new Pair{x = 14, y = 4},
+                new Pair{x = 15, y = 4},
+                new Pair{x = 16, y = 4},
+                new Pair{x = 17, y = 4},
+
+                new Pair{x = 14, y = 5},
+                new Pair{x = 15, y = 5},
+                new Pair{x = 16, y = 5},
+
+                new Pair{x = 15, y = 6},
+                new Pair{x = 15, y = 7},
+                new Pair{x = 15, y = 8},
+                new Pair{x = 15, y = 9},
+                new Pair{x = 14, y = 10},
+                new Pair{x = 15, y = 10},
+                new Pair{x = 16, y = 10},
+
                 // Rocks
                 new Pair{y = 0, x = 19},
                 new Pair{y = 0, x = 20},
@@ -110,6 +139,11 @@ namespace Epheremal.Assets
                 new Pair{y = 2, x = 23},
                 new Pair{y = 2, x = 24},
                 new Pair{y = 2, x = 25},
+
+                new Pair{y = 3, x = 19},
+                new Pair{y = 3, x = 20},
+                new Pair{y = 3, x = 21},
+
 
 
                 // Green
@@ -139,7 +173,21 @@ namespace Epheremal.Assets
 
                 new Pair{y = 9, x = 19},
                 new Pair{y = 9, x = 20},
-                new Pair{y = 9, x = 21}
+                new Pair{y = 9, x = 21},
+                new Pair{y = 9, x = 22},
+
+                new Pair{y = 10, x = 19},
+                new Pair{y = 10, x = 20},
+                new Pair{y = 10, x = 21},
+                new Pair{y = 10, x = 22},
+
+                new Pair{y = 11, x = 19},
+                new Pair{y = 11, x = 20},
+                new Pair{y = 11, x = 21},
+                new Pair{y = 11, x = 22},
+
+                new Pair{y = 9, x = 25},
+                new Pair{y = 9, x = 26},
 
 
             
@@ -151,6 +199,36 @@ namespace Epheremal.Assets
                 Behaviours.Add(getIDFor(p.x, p.y), new List<Behaviour>() { new Harmless() });
 
             }
+
+            List<Pair> deadly = new List<Pair>(){
+                
+                // Water
+                new Pair {y = 11, x = 1 },
+                new Pair {y = 11, x = 2 },
+                new Pair {y = 12, x = 1 },
+                new Pair {y = 12, x = 2 },
+            
+                // Spikes
+                new Pair {y = 12, x = 14 },
+                new Pair {y = 14, x = 14 },
+                new Pair {y = 14, x = 13 },
+                new Pair {y = 14, x = 12 },
+                
+                new Pair {y = 12, x = 15 },
+                new Pair {y = 13, x = 15 },
+                new Pair {y = 14, x = 15 },
+
+
+            };
+
+            foreach (Pair p in deadly ){
+                Behaviours.Add(getIDFor(p.x, p.y), new List<Behaviour>() { new Deadly() });
+            }
+
+
+
+
+            
 
             // Sky
             Behaviours.Add(getIDFor(0, 0), new List<Behaviour>() {});
