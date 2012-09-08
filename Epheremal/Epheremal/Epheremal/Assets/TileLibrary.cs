@@ -144,7 +144,7 @@ namespace Epheremal.Assets
 
             foreach (Pair p in land)
             {
-               Debug.WriteLine("Adding " + p.x + " " + p.y + " " + getIDFor(p.x, p.y));
+               //Debug.WriteLine("Adding " + p.x + " " + p.y + " " + getIDFor(p.x, p.y));
                 Behaviours.Add(getIDFor(p.x, p.y), new List<Behaviour>() { new Harmless() });
 
             }
@@ -157,20 +157,15 @@ namespace Epheremal.Assets
         }
 
         public List<Behaviour> get(int id) {
-            Debug.WriteLine("finding id " + id);
-            List<Behaviour> found;
-            try
-            {
+            //Debug.WriteLine("finding id " + id);
+            if(Behaviours.ContainsKey(id))
 
-                found = Behaviours[id];
+                return Behaviours[id];
 
-            }
-            catch (Exception e) {
-                found = new List<Behaviour>();
-            }
-                return found;
-        
-            
+            else 
+   
+               return new List<Behaviour>();
+  
             }
 
         private int getIDFor(int x, int y) {
