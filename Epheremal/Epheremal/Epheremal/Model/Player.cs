@@ -21,6 +21,17 @@ namespace Epheremal.Model
 
         public Boolean isDead = false;
 
+        public Player(TileMap tileMap, int tileIDGood, int tileIDBad)
+            : base(tileMap, tileIDGood, tileIDBad)
+        {
+            Animated = true;
+            Behaviours = new Dictionary<EntityState, List<Behaviour>>();
+            currentBehaviours = new List<Behaviour>();
+            Behaviours[EntityState.GOOD] = currentBehaviours;
+            Behaviours[EntityState.BAD] = currentBehaviours;
+        }
+
+
         public override Interactions.Interaction[] GetInteractionsFor(Character interactor)
         {
             List<Interaction> retVal = new List<Interaction>();
@@ -31,17 +42,6 @@ namespace Epheremal.Model
             }
             return retVal.ToArray();
         }
-
-        public Player(TileMap tileMap, int tileIDGood, int tileIDBad) : base(tileMap, tileIDGood, tileIDBad)
-        {
-            Behaviours = new Dictionary<EntityState, List<Behaviour>>();
-            currentBehaviours = new List<Behaviour>();
-            Behaviours[EntityState.GOOD] = currentBehaviours;
-            Behaviours[EntityState.BAD] = currentBehaviours;
-            score = 0;
-            lives = 3;
-        }
-
 
         public void movingLeft()
         {
