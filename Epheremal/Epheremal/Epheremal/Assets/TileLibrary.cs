@@ -132,7 +132,11 @@ namespace Epheremal.Assets
                 new Pair{y = 8, x = 22},
                 new Pair{y = 8, x = 23},
                 new Pair{y = 8, x = 24},
-                new Pair{y = 8, x = 25}
+                new Pair{y = 8, x = 25},
+
+                new Pair{y = 9, x = 19},
+                new Pair{y = 9, x = 20},
+                new Pair{y = 9, x = 21}
 
 
             
