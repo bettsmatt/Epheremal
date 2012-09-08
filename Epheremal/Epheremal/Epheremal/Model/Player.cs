@@ -11,8 +11,8 @@ namespace Epheremal.Model
 {
     public class Player : Character
     {
-        Behaviour moveLeft = new MoveLeft();
-        Behaviour moveRight = new MoveRight();
+        Behaviour moveLeft = new MoveLeft(1);
+        Behaviour moveRight = new MoveRight(1);
         Behaviour jump = new Jumps();
         List<Behaviour> currentBehaviours;
 
@@ -49,52 +49,56 @@ namespace Epheremal.Model
 
         public void movingLeft()
         {
-
-            if (oldDirection != -1)
+            if (Engine.MarioControl)
             {
-                Debug.WriteLine("Changed");
-                XVel = 0;
-                XAcc = 0;
+                if (oldDirection != -1)
+                {
+                    //XVel = 0;
+                    //XAcc = 0;
+                }
+                oldDirection = -1;
             }
-            oldDirection = -1;
-
             Behaviours[Entity.State].Clear();
             Behaviours[Entity.State].Add(moveLeft);
         }
 
         public void movingRight()
         {
-
-            if (oldDirection != 1)
+            if (Engine.MarioControl)
             {
-                Debug.WriteLine("Changed");
-                XVel = 0;
-                XAcc = 0;
+                if (oldDirection != 1)
+                {
+                    XVel = 0;
+                    XAcc = 0;
+                }
+                oldDirection = 1;
             }
-            oldDirection = 1;
-
             Behaviours[Entity.State].Clear();
             Behaviours[Entity.State].Add(moveRight);
         }
 
         public void notMoving()
         {
-            oldDirection = 0;
-            if (XVel > 0)
-            {
-                XVel--;
-                if (XVel < 0)
-                    XVel = 0;
-            }
 
-            if (XVel < 0)
+            if (Engine.MarioControl)
             {
-                XVel++;
+                oldDirection = 0;
                 if (XVel > 0)
-                    XVel = 0;
-            }
+                {
+                    XVel--;
+                    if (XVel < 0)
+                       XVel = 0;
+                }
 
-            XAcc = 0;
+                if (XVel < 0)
+                {
+                   XVel++;
+                   if (XVel > 0) ;
+                    XVel = 0;
+                }
+
+                XAcc = 0;
+            }
             Behaviours[Entity.State].Clear();
         }
 

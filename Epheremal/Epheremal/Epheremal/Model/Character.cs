@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Epheremal.Model.Interactions;
 using Epheremal.Model.Levels;
 using System.Diagnostics;
+using Epheremal.Model.NonPlayables;
 
 namespace Epheremal.Model
 {
@@ -63,22 +64,22 @@ namespace Epheremal.Model
 
         public override SpriteBatch RenderSelf(ref SpriteBatch sprites)
         {
-            //if (this is Player) Debug.WriteLine(Jumping);
+            Color tint = Engine.Alert ? Color.Red : Color.White;
             if (Animated)
             {
-                if (XVel < 0.2 && XVel > -0.2) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), Color.White);
+                if (XVel < 0.2 && XVel > -0.2) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), tint);
 
                 else if (XVel < 0)
                 {
-                    if (Jumping) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 1), Color.White);
+                    if (Jumping) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 1), tint);
 
-                    else sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 1), Color.White);
+                    else sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 1), tint);
                 }
                 else
                 {
-                    if (Jumping) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 6), Color.White);
+                    if (Jumping) sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 6), tint);
 
-                    else sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 6), Color.White);
+                    else sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + AnimatedTexture.Frame + 6), tint);
 
                 }
             }
@@ -86,16 +87,17 @@ namespace Epheremal.Model
             {
                 if (Entity.State == EntityState.GOOD)
                     if (XVel < 0)
-                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), Color.White);
+                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), tint);
                     else
-                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + 1), Color.White);
+                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood + 1), tint);
 
                 else
                     if (XVel < 0)
-                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), Color.White);
+                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad), tint);
                     else
-                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad + 1), Color.White);
+                        sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDBad + 1), tint);
             }
+            Engine.Alert = false;
             return sprites;
         }
 

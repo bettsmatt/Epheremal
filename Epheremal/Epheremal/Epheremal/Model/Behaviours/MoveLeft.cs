@@ -7,9 +7,21 @@ namespace Epheremal.Model.Behaviours
 {
     class MoveLeft : Move
     {
-        public override void apply(Character character)
-        {            
-            character.XAcc -= accelerationSpeed * (character is Player ? character.Jumping ? 4 : 8 : 1);
+
+        float _speedMod;
+
+        public MoveLeft(float speedMod)
+        {
+            _speedMod = speedMod;
         }
+
+        public override void apply(Character character)
+        {
+            if(Engine.MarioControl)
+                character.XAcc -= accelerationSpeed * (character is Player ? character.Jumping ? 4 : 8 : 1 * _speedMod);
+            else
+                character.XAcc -= accelerationSpeed * (character is Player ? character.Jumping ? 6 : 6 : 1.5);
+        }
+
     }
 }

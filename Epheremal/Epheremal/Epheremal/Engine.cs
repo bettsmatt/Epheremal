@@ -28,9 +28,13 @@ namespace Epheremal
         public static int xOffset {get; set;}
         public static int yOffset {get; set;}
 
+        public static bool MarioControl = false;
+
         private Level _currentLevel;
         private bool _toggleKeyPressed;
         private bool _toggleButtonPressed;
+        private bool _toggleControlPressed;
+        public static bool Alert;
 
         bool loadedLevel = false;
 
@@ -43,6 +47,7 @@ namespace Epheremal
         int frameRate = 0;
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
+        bool test = false;
 
         protected Song song;
         protected Song song2;
@@ -53,11 +58,11 @@ namespace Epheremal
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            animatedTexture = new AnimatedTexture( 4, 2);
+            
+            animatedTexture = new AnimatedTexture( 4, 10);
 
             // Set device frame rate to 30 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
            
         }
 
@@ -100,10 +105,22 @@ namespace Epheremal
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
+
            
             song = Content.Load<Song>("song");
             song2 = Content.Load<Song>("song2");
             MediaPlayer.Volume = 0.2f;
+
+            try
+            {
+                MediaPlayer.Play(song);
+                
+            }
+            catch (InvalidOperationException)
+            {
+                System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+            }
+
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
 
@@ -128,7 +145,13 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (test)
+            {
+                test = false; return;
+            }
+            else test = true;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (loadedLevel)
             {
                 // Allows the game to exit
@@ -149,11 +172,14 @@ namespace Epheremal
                     xOffset += Convert.ToInt32(Player.XVel);
                 if ((Player.PosX - Engine.xOffset) < (Bounds.Width / 4) && Engine.xOffset > 0 && Player.XVel < 0)
                     xOffset += Convert.ToInt32(Player.XVel);
+                if ((Player.PosY - Engine.yOffset) > (3 * Bounds.Height / 4) && (Engine.yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) && Player.YVel > 0)
+                    yOffset += Convert.ToInt32(Player.YVel);
+                if ((Player.PosY - Engine.yOffset) < (Bounds.Height / 4) && Engine.yOffset > 0 && Player.YVel < 0)
+                    yOffset += Convert.ToInt32(Player.YVel);
+
                 _currentLevel.movement();
                 _currentLevel.interact();
                 _currentLevel.behaviour();
-
-                
 
                 //frame rate counter stuff
                 elapsedTime += gameTime.ElapsedGameTime;
@@ -166,10 +192,7 @@ namespace Epheremal
                 }
                 
             }
-
-            // TODO: Add your game logic here.
             animatedTexture.UpdateFrame(elapsed);
-           //Debug.WriteLine(animatedTexture.GetFrame());
 
             base.Update(gameTime);
         }
@@ -179,8 +202,8 @@ namespace Epheremal
         private void resetGameWorld()
         {
             Player.isDead = false;
-            Player.PosX = 20;
-            Player.PosY = 20;
+            Player.PosX = Block.BLOCK_WIDTH;
+            Player.PosY = Block.BLOCK_WIDTH;
             Player.XVel = 0;
             Player.YVel = 0;
             Player.XAcc = 0;
@@ -196,7 +219,6 @@ namespace Epheremal
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            DateTime start = DateTime.Now;
             //TEST THINGS
             spriteBatch.Begin();
             spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
@@ -216,7 +238,9 @@ namespace Epheremal
 
             string fps = string.Format("fps: {0}", frameRate);
             spriteBatch.DrawString(font, "" + fps, new Vector2(Engine.Bounds.Right- 150, Engine.Bounds.Bottom-50), Color.White);
-            
+
+            string controlScheme = string.Format("control: {0}", MarioControl ? "Mario" : "Physics");
+            spriteBatch.DrawString(font, controlScheme, new Vector2(Engine.Bounds.Right - 350, Engine.Bounds.Bottom - 50), Color.White);
 
         }
 
@@ -249,27 +273,32 @@ namespace Epheremal
             if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
             {
 
-                if (Entity.State == EntityState.GOOD)
-                {
-                    Entity.State = EntityState.BAD;
-                   
-                    MediaPlayer.Play(song2);
-                   // MediaPlayer.Play
-                }
+                if (_currentLevel.ValidateToggle())
+                    if (Entity.State == EntityState.GOOD){
+                        Entity.State = EntityState.BAD;
+                         MediaPlayer.Play(song2);
+                    }
+                    else{ 
+                        Entity.State = EntityState.GOOD;
+                        MediaPlayer.Play(song);
+                    }
                 else
-                {
-                    Entity.State = EntityState.GOOD;
-                   
-                    MediaPlayer.Play(song);
-                }
+                    Alert = true;
+
             }
             // Reset 
             if ( keyboardState.IsKeyDown(Keys.R))
             {
                 resetGameWorld();
             }
+
+            if (keyboardState.IsKeyUp(Keys.C) && _toggleControlPressed)
+            {
+                MarioControl = !MarioControl;
+            }
             _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
             _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
+            _toggleControlPressed = keyboardState.IsKeyDown(Keys.C);
         }
     }
 }
