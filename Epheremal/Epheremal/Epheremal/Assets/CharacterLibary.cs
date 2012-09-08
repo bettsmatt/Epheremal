@@ -81,7 +81,16 @@ namespace Epheremal.Assets
              */
             else if (id == getIDFor(0, 23))
             {
-                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23));
+                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23),false);
+            }
+
+                            /* Bird / Block
+             * GOOD: flys around patroling +/-3 , kills
+             * BAD: turns into block 
+             */
+            else if (id == getIDFor(0, 26))
+            {
+                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23),true);
             }
 
             /* Shrom_Man

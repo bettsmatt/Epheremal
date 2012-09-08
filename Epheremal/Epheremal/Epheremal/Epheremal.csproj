@@ -115,6 +115,9 @@
     <Compile Include="Model\Behaviours\Behaviour.cs" />
     <Compile Include="Model\Behaviours\Bouncy.cs" />
     <Compile Include="Model\Behaviours\Collectable.cs" />
+    <Compile Include="Model\Behaviours\MovePatrolVert.cs" />
+    <Compile Include="Model\Behaviours\MoveDown.cs" />
+    <Compile Include="Model\Behaviours\MoveUp.cs" />
     <Compile Include="Model\Behaviours\Flies.cs" />
     <Compile Include="Model\Behaviours\Deadly.cs" />
     <Compile Include="Model\Behaviours\Ethreal.cs" />

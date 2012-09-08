@@ -136,7 +136,8 @@ namespace Epheremal.Model
                 c.PosX += c.XVel; c.PosY += c.YVel;
 
                 if (c.PosX < 0) c.PosX = 0;
-                if (c.PosX+c.GetBoundingRectangle().Width > GetLevelWidthInPixels()) c.PosX = GetLevelWidthInPixels()-c.GetBoundingRectangle().Width;
+                if (c.PosX+c.GetBoundingRectangle().Width > GetLevelWidthInPixels())
+                    c.PosX = GetLevelWidthInPixels()-c.GetBoundingRectangle().Width;
                 // If it is too slow set to 0
 
                 //if (c.YVel < 0.01 && c.YVel > -0.01) c.YVel = 0;
@@ -167,6 +168,7 @@ namespace Epheremal.Model
                     {
                         c.QueueInteractions(b.GetInteractionsFor(c));
                     }
+
                 }
                 c.PollInteractions();
             }
