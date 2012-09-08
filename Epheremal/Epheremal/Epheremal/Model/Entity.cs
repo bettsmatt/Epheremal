@@ -25,8 +25,8 @@ namespace Epheremal.Model
 
         public static EntityState State = EntityState.GOOD;
 
-        protected int _width = 20;
-        protected int _height = 20;
+        protected int _width = Block.BLOCK_WIDTH;
+        protected int _height = Block.BLOCK_WIDTH;
         protected Rectangle _bounds;
 
         internal Texture2D _texture;
