@@ -25,6 +25,7 @@ namespace Epheremal.Model.Interactions
             {
                 //can add checks here for entity types to determine the point or life value
                 ((Player)player).AddScore(100);
+                SoundEffects.sounds["pickupcoin"].Volume = 0.25f;
                 SoundEffects.sounds["pickupcoin"].Play();
                 new Die((Character)entity, player).Interact();
             }
