@@ -398,7 +398,7 @@ namespace Epheremal
                 // Move left
                 if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.LeftControl))
                 {
-                    if (xOffset > 0) xOffset -= 5;
+                    if (xOffset > 0 && (xOffset+Bounds.Width > Player.PosX+Player.GetBoundingRectangle().Width)) xOffset -= 5;
                     if (xOffset < 0) xOffset = 0;
                 }
                 else if (gamePadState.DPad.Left == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X < 0 || keyboardState.IsKeyDown(Keys.Left))
@@ -408,7 +408,7 @@ namespace Epheremal
                 // Move right
                 else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.LeftControl))
                 {
-                    if (xOffset < (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset += 5;
+                    if (xOffset < (_currentLevel.GetLevelWidthInPixels() - Bounds.Width) && (xOffset < Player.PosX)) xOffset += 5;
                     if (xOffset > (_currentLevel.GetLevelWidthInPixels() - Bounds.Width)) xOffset = (int)(_currentLevel.GetLevelWidthInPixels() - Bounds.Width);
                 }
                 else if (gamePadState.DPad.Right == ButtonState.Pressed || gamePadState.ThumbSticks.Left.X > 0 || keyboardState.IsKeyDown(Keys.Right))
@@ -423,7 +423,7 @@ namespace Epheremal
                 // Jump
                 if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.LeftControl))
                 {
-                    if (yOffset > 0) yOffset -= 5;
+                    if (yOffset > 0 && (yOffset + Bounds.Height > (Player.PosY+Player.GetBoundingRectangle().Height))) yOffset -= 5;
                     if (yOffset < 0) yOffset = 0;
                 }
                 else if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
@@ -435,7 +435,7 @@ namespace Epheremal
                 {
                     if (_currentLevel.GetLevelHeightInPixels() > Bounds.Height)
                     {
-                        if (yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset += 5;
+                        if (yOffset < (_currentLevel.GetLevelHeightInPixels() - Bounds.Height) && (yOffset < Player.PosY)) yOffset += 5;
                         if (yOffset > (_currentLevel.GetLevelHeightInPixels() - Bounds.Height)) yOffset = (int)(_currentLevel.GetLevelHeightInPixels() - Bounds.Height);
                     }
                 }
