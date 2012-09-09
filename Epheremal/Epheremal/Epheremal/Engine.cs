@@ -384,6 +384,7 @@ namespace Epheremal
                     }
                 }
                 spriteBatch.End();
+                getInput();
             }
 
 
@@ -427,6 +428,13 @@ namespace Epheremal
                 if ((keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)) ||
                      (GamePad.GetState(0).Buttons.Y == ButtonState.Pressed && lastGamePad.Buttons.Y == ButtonState.Released))
                     Exit();
+            }
+
+            if (gameState == GameState.ENDED)
+            {
+                if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)) ||
+                    (GamePad.GetState(0).Buttons.A == ButtonState.Pressed && lastGamePad.Buttons.A == ButtonState.Released))
+                    gameState = GameState.MENU;
             }
 
             /*
