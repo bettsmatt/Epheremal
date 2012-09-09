@@ -16,6 +16,8 @@ namespace Epheremal.Model.Interactions
         public override void Interact()
         {
             Interactor.KillFromCurrentLevel();
+            SoundEffects.sounds["enemydeath"].Volume = 0.25f;
+            SoundEffects.sounds["enemydeath"].Play();
         }
     }
 }

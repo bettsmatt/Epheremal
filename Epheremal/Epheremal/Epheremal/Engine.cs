@@ -122,14 +122,18 @@ namespace Epheremal
             /*
              * Add Levels
              */
+
             levels = new List<RawLevel>();
+            
+
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/mario.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/matt2.level"));
-            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
-            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/boss.level"));
             loadedLevel = false;
 
             /*
@@ -153,10 +157,11 @@ namespace Epheremal
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
-
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
             SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
-            //SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("song").CreateInstance());
+            SoundEffects.sounds.Add("playerdeath", Content.Load<SoundEffect>("playerdeath").CreateInstance());
+            SoundEffects.sounds.Add("enemydeath", Content.Load<SoundEffect>("enemydeath").CreateInstance());
+            SoundEffects.sounds.Add("bossdeath", Content.Load<SoundEffect>("bossdeath").CreateInstance());
 
             song = Content.Load<Song>("song");
             song2 = Content.Load<Song>("song2");

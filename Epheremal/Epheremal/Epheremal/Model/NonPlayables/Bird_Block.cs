@@ -24,7 +24,7 @@ namespace Epheremal.Model.NonPlayables
                                 {
                                     new Deadly(),
                                     new Flies(true),
-                                    new MovePatrolVert(30,1)
+                                    new MovePatrolVert(30 * (int)Block.multToMatchBlock, 1 * (int)Block.multToMatchBlock)
                                 });
             }
             else { 
@@ -33,7 +33,7 @@ namespace Epheremal.Model.NonPlayables
                                 {
                                     new Deadly(),
                                     new Flies(true),
-                                    new MovePatrol(30,30,1)
+                                    new MovePatrol( (int)Block.multToMatchBlock * 30,(int)Block.multToMatchBlock * 30,(int)Block.multToMatchBlock * 1)
                                 });
             }
             this.Behaviours.Add(EntityState.BAD,

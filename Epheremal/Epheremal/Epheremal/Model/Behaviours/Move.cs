@@ -8,7 +8,7 @@ namespace Epheremal.Model.Behaviours
 {
     abstract class Move : Behaviour
     {
-        protected double accelerationSpeed = 0.017;
+        protected double accelerationSpeed = 0.017 * Block.multToMatchBlock;
         public abstract void apply(Character character);
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {

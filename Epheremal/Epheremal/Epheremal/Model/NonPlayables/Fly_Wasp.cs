@@ -18,14 +18,14 @@ namespace Epheremal.Model.NonPlayables
                                 {
                                     new Harmless(),
                                     new Flies(true),
-                                    new MovePatrol(30,30,1)
+                                    new MovePatrol((int)Block.multToMatchBlock * 30,(int)Block.multToMatchBlock * 30,(int)Block.multToMatchBlock * 1)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
                                     new Flies(true),
                                     new Deadly(),
-                                    new MoveToward(1.25,150,true,true),
+                                    new MoveToward((int)Block.multToMatchBlock * 1.25,(int)Block.multToMatchBlock * 150,true,true),
                                 }); 
         }
 

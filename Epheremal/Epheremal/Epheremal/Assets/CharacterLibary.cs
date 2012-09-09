@@ -81,7 +81,7 @@ namespace Epheremal.Assets
              */
             else if (id == getIDFor(0, 23))
             {
-                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23),false);
+                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23), false);
             }
 
                             /* Bird / Block
@@ -90,7 +90,7 @@ namespace Epheremal.Assets
              */
             else if (id == getIDFor(0, 26))
             {
-                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23),true);
+                return new Bird_Block(tileMap, getIDFor(0, 23), getIDFor(2, 23), true);
             }
 
             /* Shrom_Man
@@ -107,10 +107,17 @@ namespace Epheremal.Assets
                 return new Coin(tileMap, getIDFor(0, 25), getIDFor(0, 25));
             }
 
-            else if (id == getIDFor(7, 19)) { 
+            else if (id == getIDFor(7, 19))
+            {
                 return new Door(tileMap, getIDFor(7, 19), getIDFor(7, 19));
             }
 
+            else if (id == getIDFor(7, 19))
+            {
+                return new Door(tileMap, getIDFor(7, 19), getIDFor(7, 19));
+            }
+
+            else if (id == getIDFor(12, 18)) return new Boss(tileMap, getIDFor(12, 18), getIDFor(12, 19), getIDFor(12, 20), getIDFor(12, 21), getIDFor(20, 18), getIDFor(20, 19), getIDFor(20, 20), getIDFor(20, 21));
 
             else
 

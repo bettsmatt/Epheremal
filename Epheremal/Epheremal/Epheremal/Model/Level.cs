@@ -249,6 +249,8 @@ namespace Epheremal.Model
                         c.PosX = x * Block.BLOCK_WIDTH;
                         c.PosY = y * Block.BLOCK_WIDTH;
 
+                        if (c is Boss) Debug.WriteLine(c.PosX + " , " + c.PosY);
+
                         _characters.AddFirst(c);
                         _entities.AddFirst(c);
                     }
@@ -266,7 +268,7 @@ namespace Epheremal.Model
         public bool ValidateToggle()
         {
             EntityState state = Entity.State == EntityState.GOOD ? EntityState.BAD : EntityState.GOOD;
-            foreach (Block b in _blocks)
+            foreach (Entity b in _entities)
             {
                 if (!b.Behaviours[state].Exists(e => e is Harmless)) continue;
                 if (b.GetBoundingRectangle().Intersects(Engine.Player.GetBoundingRectangle())) return false;
