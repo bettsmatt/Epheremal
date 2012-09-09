@@ -6,7 +6,7 @@ using Epheremal.Model.Interactions;
 
 namespace Epheremal.Model.Behaviours
 {
-    class Boosts : Behaviour
+    class BoostsLeft : Behaviour
     {
         public void apply(Character character)
         {
@@ -14,7 +14,9 @@ namespace Epheremal.Model.Behaviours
         }
         public Interaction GetAppropriateInteractionFor(Character interactor, Entity interactee)
         {
-            return new Interactions.Boost(interactor, interactee);
+            Boost b = new Interactions.Boost(interactor, interactee);
+            b.IsLeft(true);
+            return b;
         }
     }
 }
