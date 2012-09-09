@@ -13,6 +13,7 @@ using Epheremal.Assets;
 using Epheremal.Model.Levels;
 using System.Diagnostics;
 using Epheremal.Model.Interactions;
+using System.Threading;
 
 namespace Epheremal
 {
@@ -22,13 +23,14 @@ namespace Epheremal
     public class Engine : Microsoft.Xna.Framework.Game
     {
 
-        enum GameState { MENU, PLAYING }
+        enum GameState { MENU, PLAYING, ENDED }
         GameState gameState = GameState.MENU;
         
         /*
          * Menus
          */
         Texture2D splash;
+        Texture2D gameOver;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -48,7 +50,9 @@ namespace Epheremal
         private bool _toggleControlPressed;
 
         private int _transition;
-
+        private int _highScorePointCounter;
+        private int _highScoreLifeCounter;
+        private int _highScoreLifePenalty;
 
         public static bool Alert;
         private bool _renderCap;
@@ -64,6 +68,7 @@ namespace Epheremal
         AnimatedTexture animatedTexture;
 
         SpriteFont font;
+        SpriteFont headers;
 
         int frameRate = 0;
         int frameCounter = 0;
@@ -109,7 +114,7 @@ namespace Epheremal
 
             ContentManager manager = new ContentManager(this.Services, "Content");
             splash = manager.Load<Texture2D>("splash");
-
+            gameOver = manager.Load<Texture2D>("game_over_bg");
             _currentLevel = new Level(1);
 
             tileMap = LevelParser.ParseTileMap(this, "tilemap", 32);
@@ -170,6 +175,7 @@ namespace Epheremal
             MediaPlayer.IsRepeating = true;
 
             font = Content.Load<SpriteFont>("basicFont");
+            headers = Content.Load<SpriteFont>("headerFont");
         }
 
         /// <summary>
@@ -294,18 +300,22 @@ namespace Epheremal
 
             else
             {
+                //game over
                 currentLevel = 0;
-                setSplashScreen();
+                setEndGameScreen();                
             }
             
         }
 
+        private void setEndGameScreen()
+        {
+            _highScoreLifeCounter = Player.lives;
+            gameState = GameState.ENDED;
+        }
 
         private void setSplashScreen()
         {
-
             gameState = GameState.MENU;
-
 
         }
 
@@ -339,6 +349,40 @@ namespace Epheremal
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(splash, Bounds, Color.White);
+                spriteBatch.End();
+            }
+
+            if (gameState == GameState.ENDED)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(gameOver, Bounds, Color.White);
+                spriteBatch.DrawString(headers, "GAME OVER", new Vector2(Bounds.Width / 4, 75), Color.Black);
+                spriteBatch.DrawString(headers, "Score: " + _highScorePointCounter, new Vector2(Bounds.Width / 24, Bounds.Height/2), Color.White);
+                spriteBatch.DrawString(headers, "Lives Used: " + _highScoreLifeCounter, new Vector2(Bounds.Width / 24, 3*Bounds.Height/4), Color.White);
+                if (Player.score >= 5)
+                {
+                    _highScorePointCounter += 5; Player.score -= 5;
+                    SoundEffects.sounds["pickupcoin"].Volume = 0.25f;
+                    SoundEffects.sounds["pickupcoin"].Play();                    
+                    if (Player.score < 5)
+                    {
+                        _highScorePointCounter += Player.score;
+                        _highScoreLifeCounter = Player.lives;
+                    }
+                }
+                else if(_highScoreLifeCounter > 0)
+                {
+                    if (_highScoreLifePenalty == 0)
+                    {
+                        _highScoreLifeCounter--; _highScoreLifePenalty += 250;
+                    }
+                    else
+                    {
+                        _highScorePointCounter -= 5; _highScoreLifePenalty -= 5;
+                        SoundEffects.sounds["hurt"].Volume = 0.25f;
+                        SoundEffects.sounds["hurt"].Play();  
+                    }
+                }
                 spriteBatch.End();
             }
 
@@ -383,9 +427,7 @@ namespace Epheremal
                 if ((keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)) ||
                      (GamePad.GetState(0).Buttons.Y == ButtonState.Pressed && lastGamePad.Buttons.Y == ButtonState.Released))
                     Exit();
-
             }
-
 
             /*
              * Listen for game input 
