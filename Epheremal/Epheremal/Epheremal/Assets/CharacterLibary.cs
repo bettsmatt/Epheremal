@@ -111,6 +111,12 @@ namespace Epheremal.Assets
                 return new Door(tileMap, getIDFor(7, 19), getIDFor(7, 19));
             }
 
+            else if (id == getIDFor(7, 19))
+            {
+                return new Door(tileMap, getIDFor(7, 19), getIDFor(7, 19));
+            }
+
+
 
             else
 
