@@ -6,6 +6,7 @@ using Epheremal.Model.Levels;
 using Epheremal.Model.Behaviours;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Epheremal.Model.NonPlayables
 {
@@ -30,8 +31,9 @@ namespace Epheremal.Model.NonPlayables
             this.Behaviours.Add(EntityState.GOOD,
                                 new List<Behaviour>()
                                 {
-                                    new MovePatrol(3,3,1),
-                                    new Deadly()   
+                                    new MoveToward(1, 500, true, true),
+                                    new Deadly(),
+                                    new Flies(false)
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
@@ -67,19 +69,21 @@ namespace Epheremal.Model.NonPlayables
             int[] tile = goodTiles;
             if (Entity.State == EntityState.BAD) tile = badTiles;
 
-            int modifier = 1;
-            if (XVel < 0) modifier = 3;
+            int modifier = 0;
+            if (XVel > 0) modifier = 4;
 
 
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    sprites.Draw(this._tileMap.TileMapTexture, this.GetSmallBoundingRectangle(j, i), _tileMap.getRectForTile(tile[i] + (j)), tint);
+                    sprites.Draw(this._tileMap.TileMapTexture, this.GetSmallBoundingRectangle(j, i), _tileMap.getRectForTile(tile[i] + (j + modifier)), tint);
 
                 }
             }
 
+            //sprites.Draw(this._tileMap.TileMapTexture, this.GetBoundingRectangle(), _tileMap.getRectForTile(_tileIDGood), tint);
+                    
             /*
 
             int[] tile = { _tileIDGood, IDGood2, IDGood3, IDGood4 };
@@ -94,6 +98,5 @@ namespace Epheremal.Model.NonPlayables
             }*/
             return sprites;
         }
-
     }
 }
