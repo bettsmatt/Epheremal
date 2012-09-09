@@ -122,12 +122,11 @@ namespace Epheremal
             /*
              * Add Levels
              */
+
             levels = new List<RawLevel>();
-
-            //levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
-
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/mario.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/matt2.level"));
-
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
