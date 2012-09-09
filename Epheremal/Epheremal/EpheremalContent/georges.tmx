@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="30" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32">
-  <image source="repo/Epheremal/Epheremal/Epheremal/EpheremalContent/tilemap.png" width="1024" height="1024"/>
+  <image source="tilemap.png" width="1024" height="1024"/>
  </tileset>
  <layer name="Tile Layer 2" width="100" height="30">
   <data encoding="base64" compression="zlib">
@@ -10,12 +10,12 @@
  </layer>
  <layer name="Tile Layer 1" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmUtOwzAQhh32NBQBx+AlzsHrBhyAa7AE2nvw6hW6L1ABx2gLAtb8VRMpWE6csWfsBLr4pKqd/p74tz3JZKiUWss4KHxeEp5hRpkfL+AVvDUgVx1qbhzXIj0fNj8+wRf4bsD861Bz47gWDo0qT21+bCRKbYKtJP7861Bzq4qvu+455qPKU5sf/4WQ50CVp0s/7HNEwbe+mPywadYdcxV0QOpxfU+g7zhHMe5FfPeZyQ+bZtAaDy8Gjn5w5hmqvpj8sGmGrPG7GGPsOA5nnqHWYNPrx9wP1/OKk1BrMIYflLqy63FetZE27A/X86qKS3AFrkEP9APrlsW1wQ+J8+oW3IF78AAGgXXL4trgh8R5NQKPanE//QzGkXT1ON0PTroZ1O/y+tJRcvtjAqZgBt7BRyRdPU7SDw6k9kcHmulcF3TBOtMYZF0tjsuP4pr2eR7XtaTq+TY0d5KF/h7YZxqDqqvHcfnRK4zre74UtY6FzqtDaB4lC/0TcMo0BkXXFJf7UVyTVEz7wVVP1/LJq41Q9odrbZ3gP1Mwy/6r94L036l6LpoSGhz9yxB+6Ej0gprw7o8jhxh+SPSCODR9NThyiOFHSKT6IlL8dT+k+iJLP9yQ6ou0xY+bArGvbY5UXySEH2eW2LJnM4735Dl19h9lPKm+iLQfdZ670pL56hqQ9IOCVF9E2o86secC8yXth1RfpAl+5IwSMxcrv4nde2gbaebFDz+umw4=
+   eJztmUtOwzAQhh32NBQBx+AlzsHrBhyAa7AE2nvw6hW6L1ABx2gLAtb8VRMpWE6csWfsBLr4pKqd/p74tz3JZKiUWss4KHxeEp5hRpkfL+AVvDUgVx1qbhzXIj0fNj8+wRf4bsD861Bz47gWDo0qT21+bCRKbYKtJP7861Bzq4qvu+455qPKU5sf/4WQ50CVp0s/7HNEwbe+mPywadYdcxV0QOpxfU+g7zhHMe5FfPeZyQ+bZtAaDy8Gjn5w5hmqvpj8sGmGrPG7GGPsOA5nnqHWYNPrx9wP1/OKk1BrMIYflLqy63FetZE27A/X86qKS3AFrkEP9APrlsW1wQ+J8+oW3IF78AAGgXXL4trgh8R5NQKPanE//QzGkXT1ON0PTroZ1O/y+tJRcvtjAqZgBt7BRyRdPU7SDw6k9kcHmulcF3TBOtMYZF0tjsuP4pr2eR7XtaTq+TY0d5KF/h7YZxqDqqvHcfnRK4zre74UtY6FzqtDaB4lC/0TcMo0BkXXFJf7UVyTVEz7wVVP1/LJq41Q9odrbZ3gP1Mwy/6r94L036l6HJomDSoc/csQfuhI9IKa8O6PI4cYfkj0gjg0fTU4cojhR0ik+iJS/HU/pPoiSz/ckOqLtMWPmwKxr22OVF8khB9nltiyZzOO9+Q5dfYfZTypvoi0H3Weu9KS+eoakPSDglRfRNqPOrHnAvMl7YdUX6QJfuSMEjMXK7+J3XtoG2nmxQ+QXpMu
   </data>
  </layer>
  <layer name="Tile Layer 3" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2v0NgjAQh2EskzgKo/ifazAKozCKmxgTG07SDzBof6Xvk5AzpQmS9uS42HUA0I5r/3mgDg+3L0IL+YZWsNeB/xsDz/6tY4A6nitQNLAnZfAboeOsfaZa66zhpOuhZt1jDR3reb80uyX6a+XGSrq5Y6L1usdLH452Dvmhw68F9ZUG8kML66GF+qosX2/7SH4cJ/Yuk3vHsedZj7Ji+UF9pSGWH3exPkILavif1JYewzdzldjvqF5fTe9eio/28+T2zU3dY6i/kRrPnUsJ9apq2j8tewLvuSqu
+   eJzt2NEJgCAQgOHSSRqlUXprjUZxlEZpkwiRgkzJhzq9/wMxKpBIzzu7DgB0GaxvqNNmzoY6sOagBXMd+N5CPoCGsa9AopE5CahWQ+41sn+qF/7/au73gvXnuTxlxi95fnxjb+M9ZCO/AuKIX3IQp9Cq0vqmhrpIs2P/IG7JNrOGAPFxyhkfT0N/vXbm3bupvP7p/CN1LpI7MylF/SHXDqHjE4A=
   </data>
  </layer>
 </map>
