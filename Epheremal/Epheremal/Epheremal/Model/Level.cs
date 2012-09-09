@@ -249,6 +249,8 @@ namespace Epheremal.Model
                         c.PosX = x * Block.BLOCK_WIDTH;
                         c.PosY = y * Block.BLOCK_WIDTH;
 
+                        if (c is Boss) Debug.WriteLine(c.PosX + " , " + c.PosY);
+
                         _characters.AddFirst(c);
                         _entities.AddFirst(c);
                     }

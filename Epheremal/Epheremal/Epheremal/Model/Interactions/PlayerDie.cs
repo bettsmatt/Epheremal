@@ -28,6 +28,8 @@ namespace Epheremal.Model.Interactions
                 ((Player)player).isDead = true;
                 ((Player)player).lives++;
             }
+            SoundEffects.sounds["playerdeath"].Volume = 0.25f;
+            SoundEffects.sounds["playerdeath"].Play();
         }
     }
 }
