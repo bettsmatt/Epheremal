@@ -15,7 +15,7 @@ namespace Epheremal.Model
     public abstract class Character : Entity
     {
         public const double ABS_TERMINAL_VELOCITY_X = 5;
-        public const double ABS_TERMINAL_VELOCITY_Y = 5;
+        public const double ABS_TERMINAL_VELOCITY_Y = 10;
 
         // Absolute values from the top left corner of the map
         public double PosX { get; set; }
