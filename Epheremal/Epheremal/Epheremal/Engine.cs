@@ -82,7 +82,7 @@ namespace Epheremal
             animatedTexture = new AnimatedTexture(4, 10);
 
             // Set device frame rate to 60 fps.
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 60.0);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
             Window.AllowUserResizing = true; //allow resize.
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
 
@@ -118,6 +118,7 @@ namespace Epheremal
              * Add Levels
              */
             levels = new List<RawLevel>();
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
@@ -508,8 +509,22 @@ namespace Epheremal
 
                 if (keyboardState.IsKeyDown(Keys.M) && lastKeyBoard.IsKeyUp(Keys.M))
                 {
-
                     Music = !Music;
+                    if (Music)
+                    {
+                        try
+                        {
+                            MediaPlayer.Play(song);
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                        }
+                    }
+                    else
+                    {
+                        MediaPlayer.Stop();
+                    }
                 }
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
                 {
