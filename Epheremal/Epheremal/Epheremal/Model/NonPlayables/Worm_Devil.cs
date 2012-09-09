@@ -17,7 +17,6 @@ namespace Epheremal.Model.NonPlayables
                                 new List<Behaviour>()
                                 {
                                     new Harmless(),
-                                    new MoveToward(0.25,100,true,false),
                                 });
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()

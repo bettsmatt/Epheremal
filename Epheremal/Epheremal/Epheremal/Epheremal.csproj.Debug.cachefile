@@ -1,13 +1,17 @@
 Content\test.xnb
+Content\tilemap.xnb
+Content\splash.xnb
 Content\jump.xnb
 Content\hurt.xnb
-Content\tilemap.xnb
+Content\pickupcoin.xnb
 Content\basicFont.xnb
 Content\song.xnb
-Content\splash.xnb
 Content\song2.xnb
+<<<<<<< HEAD
+=======
 Content\pickupcoin.xnb
 Content\game_over_bg.xnb
 Content\headerFont.xnb
+>>>>>>> 620b16d871827df1b26a2677fcc6786f62eb1d1e
 Content\song.wma
 Content\song2.wma
