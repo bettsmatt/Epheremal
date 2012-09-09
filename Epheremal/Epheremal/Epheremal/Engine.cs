@@ -129,7 +129,7 @@ namespace Epheremal
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/mario.level"));
-            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
+            //levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/matt2.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level"));
@@ -366,12 +366,13 @@ namespace Epheremal
                 spriteBatch.DrawString(headers, "GAME OVER", new Vector2(Bounds.Width / 4, 75), Color.Black);
                 spriteBatch.DrawString(headers, "Score: " + _highScorePointCounter, new Vector2(Bounds.Width / 24, Bounds.Height/2), Color.White);
                 spriteBatch.DrawString(headers, "Lives Used: " + _highScoreLifeCounter, new Vector2(Bounds.Width / 24, 3*Bounds.Height/4), Color.White);
-                if (Player.score >= 5)
+                int decrement = 25;
+                if (Player.score >= decrement)
                 {
-                    _highScorePointCounter += 5; Player.score -= 5;
+                    _highScorePointCounter += decrement; Player.score -= decrement;
                     SoundEffects.sounds["pickupcoin"].Volume = 0.25f;
-                    SoundEffects.sounds["pickupcoin"].Play();                    
-                    if (Player.score < 5)
+                    SoundEffects.sounds["pickupcoin"].Play();
+                    if (Player.score < decrement)
                     {
                         _highScorePointCounter += Player.score;
                         _highScoreLifeCounter = Player.lives;
@@ -385,7 +386,7 @@ namespace Epheremal
                     }
                     else
                     {
-                        _highScorePointCounter -= 5; _highScoreLifePenalty -= 5;
+                        _highScorePointCounter -= decrement; _highScoreLifePenalty -= decrement;
                         SoundEffects.sounds["hurt"].Volume = 0.25f;
                         SoundEffects.sounds["hurt"].Play();  
                     }
