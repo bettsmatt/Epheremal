@@ -23,7 +23,7 @@ namespace Epheremal.Model.Interactions
 
         private void applyTo(Character Interactor, Entity Interactee)
         {
-            double dx = Interactor.GetX() - Interactee.GetX();
+            double dx = Interactor.GetBoundingRectangle().X - Interactee.GetBoundingRectangle().X;
             double dy = Interactor.GetY() - Interactee.GetY();
             double yVel = ((Character)Interactor).YVel;
             double xVel = ((Character)Interactor).XVel;

@@ -4,8 +4,14 @@ Content\hurt.xnb
 Content\tilemap.xnb
 Content\basicFont.xnb
 Content\song.xnb
+<<<<<<< HEAD
+Content\splash.xnb
+Content\song2.xnb
+Content\pickupcoin.xnb
+=======
 Content\pickupcoin.xnb
 Content\song2.xnb
 Content\splash.xnb
+>>>>>>> b472ee796d9b0729409776ff885ef2da2448789b
 Content\song.wma
 Content\song2.wma
