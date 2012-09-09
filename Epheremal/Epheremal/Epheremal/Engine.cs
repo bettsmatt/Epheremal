@@ -319,7 +319,7 @@ namespace Epheremal
             {
                 spriteBatch.Begin();
                 spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
-                if (_transition > 0)
+                /**if (_transition > 0)
                 {
                     Texture2D txtr = new Texture2D(GraphicsDevice, Bounds.Width, Bounds.Height);
                     Color[] buff = new Color[Bounds.Width * Bounds.Height];
@@ -328,7 +328,7 @@ namespace Epheremal
                     int fade = Entity.State == EntityState.GOOD ? 255 : 255;
                     spriteBatch.Draw(txtr, Bounds, new Color(fade, fade, fade, _transition));
                     _transition -= 30;
-                }
+                }**/
                 DrawText();
                 spriteBatch.End();
             }
