@@ -122,9 +122,14 @@ namespace Epheremal
             /*
              * Add Levels
              */
+
             levels = new List<RawLevel>();
+            
+
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/mario.level"));
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/georges.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/matt2.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/bounce.level"));
@@ -152,7 +157,6 @@ namespace Epheremal
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SoundEffects.sounds.Add("jump", Content.Load<SoundEffect>("jump").CreateInstance());
-
             SoundEffects.sounds.Add("hurt", Content.Load<SoundEffect>("hurt").CreateInstance());
             SoundEffects.sounds.Add("pickupcoin", Content.Load<SoundEffect>("pickupcoin").CreateInstance());
             SoundEffects.sounds.Add("playerdeath", Content.Load<SoundEffect>("playerdeath").CreateInstance());
@@ -387,6 +391,7 @@ namespace Epheremal
                     }
                 }
                 spriteBatch.End();
+                getInput();
             }
 
 
@@ -430,6 +435,13 @@ namespace Epheremal
                 if ((keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)) ||
                      (GamePad.GetState(0).Buttons.Y == ButtonState.Pressed && lastGamePad.Buttons.Y == ButtonState.Released))
                     Exit();
+            }
+
+            if (gameState == GameState.ENDED)
+            {
+                if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)) ||
+                    (GamePad.GetState(0).Buttons.A == ButtonState.Pressed && lastGamePad.Buttons.A == ButtonState.Released))
+                    gameState = GameState.MENU;
             }
 
             /*
@@ -560,6 +572,21 @@ namespace Epheremal
                 if (keyboardState.IsKeyDown(Keys.M) && lastKeyBoard.IsKeyUp(Keys.M))
                 {
                     Music = !Music;
+                    if (Music)
+                    {
+                        try
+                        {
+                            MediaPlayer.Play(song);
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            System.Diagnostics.Debug.WriteLine("don't steal music >:(");
+                        }
+                    }
+                    else
+                    {
+                        MediaPlayer.Stop();
+                    }
                 }
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
                 {
