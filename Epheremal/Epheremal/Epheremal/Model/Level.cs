@@ -233,7 +233,12 @@ namespace Epheremal.Model
                                 {EntityState.BAD, tileLibrary.get(blockIDBad)}
                         });
                     _blocks.AddLast(b);
-                    _entities.AddLast(b);
+
+                    if (!(b.Behaviours[EntityState.GOOD].Count == 0 && b.Behaviours[EntityState.BAD].Count == 0))
+  
+                        _entities.AddLast(b);
+
+
 
                     /*
                      * Check for characters
