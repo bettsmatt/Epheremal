@@ -277,7 +277,7 @@ namespace Epheremal
 
         private void reloadCurrentLevel()
         {
-            Player.lives--;
+            Player.lives++;
             startLevel(levels[currentLevel]);
         }
 
@@ -350,7 +350,7 @@ namespace Epheremal
 
             spriteBatch.DrawString(font, "Score: " + (Player.score + this._currentLevel.GetScore()), new Vector2(5, 5), Color.White);
             spriteBatch.DrawString(font, Player.lives + "", new Vector2(Engine.Bounds.Right - 180, 5), Color.White);
-            spriteBatch.DrawString(font, "Lives Remaining", new Vector2(Engine.Bounds.Right - 150, 5), Color.White);
+            spriteBatch.DrawString(font, "Lives Used", new Vector2(Engine.Bounds.Right - 150, 5), Color.White);
 
 
             frameCounter++;
