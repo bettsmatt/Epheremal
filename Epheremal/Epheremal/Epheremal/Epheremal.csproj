@@ -29,7 +29,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -163,6 +163,7 @@
     <Compile Include="Model\Interactions\Stick.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\NonPlayables\Bird_Block.cs" />
+    <Compile Include="Model\NonPlayables\Boss.cs" />
     <Compile Include="Model\NonPlayables\Coin.cs" />
     <Compile Include="Model\NonPlayables\Door.cs" />
     <Compile Include="Model\NonPlayables\Fly_Wasp.cs" />

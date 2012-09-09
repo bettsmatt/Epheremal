@@ -22,7 +22,7 @@ namespace Epheremal.Model.NonPlayables
             this.Behaviours.Add(EntityState.BAD,
                                 new List<Behaviour>()
                                 {
-                                    new MovePatrol(3,3,0.5f),
+                                    new MovePatrol((int)Block.multToMatchBlock * 3,(int)Block.multToMatchBlock * 3,(int)Block.multToMatchBlock * 0.5f),
                                     new Deadly()
                                 });
         }
