@@ -66,7 +66,7 @@ namespace Epheremal.Model.Interactions
                 else
                 {
                     Interactor.PosX -= Math.Max(xVel, minimumReboundVelocity);
-                    Interactor.XVel *= 0.5 * (Interactor.XAcc > 0 ? -1 : 1);
+                    Interactor.XVel *= 0.3 * (Interactor.XAcc > 0 ? -1 : 1);
                     Interactor.XAcc *= 0.3 * (this.Interactor.XAcc > 0 ? -1 : 1); ; //bounce a little 
                 }
                 if (SoundEffects.sounds["hurt"].State == SoundState.Stopped && Interactor is Player && Interactor.XVel >0.5)
@@ -84,7 +84,7 @@ namespace Epheremal.Model.Interactions
                 if (dy > 0)
                 {
                     Interactor.PosY -= Math.Min(yVel, -minimumReboundVelocity);
-                    Interactor.YVel *= 0.5 * (Interactor.YVel > 0 ? -1 : 1);
+                    Interactor.YVel *= 0.3 * (Interactor.YVel > 0 ? -1 : 1);
                     Interactor.YAcc = 0.3 * Interactor.YAcc * (Interactor.YAcc < 0 ? -1 : 1); //bounce a little
                 }
                 else

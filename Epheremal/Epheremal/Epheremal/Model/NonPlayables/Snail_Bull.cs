@@ -24,7 +24,7 @@ namespace Epheremal.Model.NonPlayables
                                 new List<Behaviour>()
                                 {
                                     new Deadly(),
-                                    new MoveToward(2,100,true,false),
+                                    new MoveToward(2,200,true,false),
                                 }); 
         }
 
