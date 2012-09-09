@@ -138,7 +138,7 @@ namespace Epheremal.Model
                 if (c.PosX < 0) c.PosX = 0;
                 if (c.PosX+c.GetBoundingRectangle().Width > GetLevelWidthInPixels())
                     c.PosX = GetLevelWidthInPixels()-c.GetBoundingRectangle().Width;
-                // If it is too slow set to 0
+                if (c.PosY < 0) c.PosY = 0;
 
                 //if (c.YVel < 0.01 && c.YVel > -0.01) c.YVel = 0;
                 //if (c.XVel < 0.01 && c.XVel > -0.01) c.XVel = 0;
