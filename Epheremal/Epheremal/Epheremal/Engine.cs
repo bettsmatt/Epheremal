@@ -514,18 +514,13 @@ namespace Epheremal
 
                 if (keyboardState.IsKeyDown(Keys.M) && lastKeyBoard.IsKeyUp(Keys.M))
                 {
-
                     Music = !Music;
                 }
                 if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyUp(Keys.LeftShift) && _toggleKeyPressed))
                 {
-
                     _toggleKeyPressed = keyboardState.IsKeyDown(Keys.LeftShift);
                     _toggleButtonPressed = gamePadState.Buttons.B == ButtonState.Pressed;
                     _toggleControlPressed = keyboardState.IsKeyDown(Keys.C);
-
-
-
                 }
 
                 lastKeyBoard = keyboardState;
