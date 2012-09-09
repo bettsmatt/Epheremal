@@ -55,7 +55,7 @@ namespace Epheremal
 
         bool loadedLevel = false;
         KeyboardState lastKeyBoard = Keyboard.GetState();
-
+        GamePadState lastGamePad = GamePad.GetState(0);
 
         TileMap tileMap;
         List<RawLevel> levels;
@@ -118,6 +118,7 @@ namespace Epheremal
              * Add Levels
              */
             levels = new List<RawLevel>();
+            levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/matt2.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/firstlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/secondlevel.level"));
             levels.Add(LevelParser.ParseTextFile("../../../../EpheremalContent/jump.level"));
@@ -319,7 +320,7 @@ namespace Epheremal
             {
                 spriteBatch.Begin();
                 spriteBatch = _currentLevel.RenderLevel(ref spriteBatch);
-                /**if (_transition > 0)
+                /*if (_transition > 0)
                 {
                     Texture2D txtr = new Texture2D(GraphicsDevice, Bounds.Width, Bounds.Height);
                     Color[] buff = new Color[Bounds.Width * Bounds.Height];
@@ -328,7 +329,8 @@ namespace Epheremal
                     int fade = Entity.State == EntityState.GOOD ? 255 : 255;
                     spriteBatch.Draw(txtr, Bounds, new Color(fade, fade, fade, _transition));
                     _transition -= 30;
-                }**/
+              }*/
+
                 DrawText();
                 spriteBatch.End();
             }
@@ -374,10 +376,12 @@ namespace Epheremal
 
             if (gameState == GameState.MENU)
             {
-                if (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space))
+                if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)) ||
+                    (GamePad.GetState(0).Buttons.A == ButtonState.Pressed && lastGamePad.Buttons.A == ButtonState.Released))
                     startLevel(levels[0]);
 
-                if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape))
+                if ((keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)) ||
+                     (GamePad.GetState(0).Buttons.Y == ButtonState.Pressed && lastGamePad.Buttons.Y == ButtonState.Released))
                     Exit();
 
             }
@@ -390,7 +394,8 @@ namespace Epheremal
             if (gameState == GameState.PLAYING)
             {
 
-                if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape))
+                if ((keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoard.IsKeyUp(Keys.Escape)) ||
+                    (GamePad.GetState(0).Buttons.Y == ButtonState.Pressed && lastGamePad.Buttons.Y == ButtonState.Released))
                 {
                     setSplashScreen();
                 }
@@ -426,7 +431,7 @@ namespace Epheremal
                     if (yOffset > 0 && (yOffset + Bounds.Height > (Player.PosY+Player.GetBoundingRectangle().Height))) yOffset -= 5;
                     if (yOffset < 0) yOffset = 0;
                 }
-                else if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || gamePadState.ThumbSticks.Left.Y > 0 || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
+                else if (gamePadState.DPad.Up == ButtonState.Pressed || gamePadState.Buttons.A == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Up) || (keyboardState.IsKeyDown(Keys.Space) && lastKeyBoard.IsKeyUp(Keys.Space)))
                 {
                     Player.jumping();
                 }
@@ -447,7 +452,8 @@ namespace Epheremal
 
                 // Change world state
 
-                if ((gamePadState.Buttons.B == ButtonState.Released && _toggleButtonPressed) || (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyBoard.IsKeyUp(Keys.LeftShift)))
+                if ((GamePad.GetState(0).Buttons.B == ButtonState.Pressed && lastGamePad.Buttons.B == ButtonState.Released) ||
+                    (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyBoard.IsKeyUp(Keys.LeftShift)))
                 {
                     if (_currentLevel.ValidateToggle())
                     {
@@ -523,7 +529,7 @@ namespace Epheremal
                 }
 
                 lastKeyBoard = keyboardState;
-
+                lastGamePad = gamePadState;
             }
 
         }
