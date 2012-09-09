@@ -26,7 +26,7 @@ namespace Epheremal.Model.Interactions
             if (player is Player && ((Player)player).isDead != true)
             {                
                 ((Player)player).isDead = true;
-                ((Player)player).lives--;
+                ((Player)player).lives++;
             }
         }
     }

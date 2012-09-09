@@ -20,7 +20,7 @@ namespace Epheremal.Model
         int oldDirection = 0; // 1 for right, 0 for still, -1 for left
 
         public int score;
-        public int lives = 3;
+        public int lives = 0;
 
 
         public Boolean isDead = false;

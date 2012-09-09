@@ -177,7 +177,7 @@ namespace Epheremal.Model
                 Character c = _toKill.Dequeue();
                 if (c is Player)
                 {
-                    ((Player)c).isDead = true; ((Player)c).lives--;
+                    ((Player)c).isDead = true; ((Player)c).lives++;
                 }
                 else
                 {
